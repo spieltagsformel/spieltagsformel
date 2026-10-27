@@ -1,0 +1,332 @@
+{
+ "saison": "2026-27",
+ "spieltag": 8,
+ "erstellt": "2026-10-27T19:36:38+00:00",
+ "quellen": [
+  {
+   "name": "OpenLigaDB",
+   "url": "https://www.openligadb.de",
+   "lizenz": "ODbL 1.0"
+  }
+ ],
+ "hinweise": [],
+ "tabelle_vor_spieltag": [
+  {
+   "platz": 1,
+   "team": "FC Bayern München",
+   "spiele": 7,
+   "punkte": 17,
+   "tore": 25,
+   "gegentore": 6
+  },
+  {
+   "platz": 2,
+   "team": "Borussia Dortmund",
+   "spiele": 7,
+   "punkte": 17,
+   "tore": 12,
+   "gegentore": 4
+  },
+  {
+   "platz": 3,
+   "team": "SC Freiburg",
+   "spiele": 7,
+   "punkte": 13,
+   "tore": 16,
+   "gegentore": 9
+  },
+  {
+   "platz": 4,
+   "team": "Bayer 04 Leverkusen",
+   "spiele": 7,
+   "punkte": 13,
+   "tore": 16,
+   "gegentore": 12
+  },
+  {
+   "platz": 5,
+   "team": "RB Leipzig",
+   "spiele": 7,
+   "punkte": 12,
+   "tore": 20,
+   "gegentore": 11
+  },
+  {
+   "platz": 6,
+   "team": "SV Werder Bremen",
+   "spiele": 7,
+   "punkte": 12,
+   "tore": 15,
+   "gegentore": 14
+  },
+  {
+   "platz": 7,
+   "team": "1. FSV Mainz 05",
+   "spiele": 7,
+   "punkte": 10,
+   "tore": 16,
+   "gegentore": 13
+  },
+  {
+   "platz": 8,
+   "team": "SV 07 Elversberg",
+   "spiele": 7,
+   "punkte": 10,
+   "tore": 12,
+   "gegentore": 15
+  },
+  {
+   "platz": 9,
+   "team": "FC Augsburg",
+   "spiele": 7,
+   "punkte": 9,
+   "tore": 17,
+   "gegentore": 13
+  },
+  {
+   "platz": 10,
+   "team": "TSG Hoffenheim",
+   "spiele": 7,
+   "punkte": 9,
+   "tore": 14,
+   "gegentore": 14
+  },
+  {
+   "platz": 11,
+   "team": "Hamburger SV",
+   "spiele": 7,
+   "punkte": 9,
+   "tore": 6,
+   "gegentore": 16
+  },
+  {
+   "platz": 12,
+   "team": "1. FC Köln",
+   "spiele": 7,
+   "punkte": 8,
+   "tore": 8,
+   "gegentore": 11
+  },
+  {
+   "platz": 13,
+   "team": "SC Paderborn 07",
+   "spiele": 7,
+   "punkte": 8,
+   "tore": 6,
+   "gegentore": 9
+  },
+  {
+   "platz": 14,
+   "team": "Eintracht Frankfurt",
+   "spiele": 7,
+   "punkte": 8,
+   "tore": 10,
+   "gegentore": 17
+  },
+  {
+   "platz": 15,
+   "team": "VfB Stuttgart",
+   "spiele": 7,
+   "punkte": 6,
+   "tore": 10,
+   "gegentore": 13
+  },
+  {
+   "platz": 16,
+   "team": "FC Schalke 04",
+   "spiele": 7,
+   "punkte": 6,
+   "tore": 4,
+   "gegentore": 7
+  },
+  {
+   "platz": 17,
+   "team": "1. FC Union Berlin",
+   "spiele": 7,
+   "punkte": 6,
+   "tore": 6,
+   "gegentore": 18
+  },
+  {
+   "platz": 18,
+   "team": "Borussia Mönchengladbach",
+   "spiele": 7,
+   "punkte": 3,
+   "tore": 11,
+   "gegentore": 22
+  }
+ ],
+ "spiele": [
+  {
+   "id": 83227,
+   "anstoss_utc": "2026-10-30T19:30:00Z",
+   "anstoss_lokal": "2026-10-30T20:30:00",
+   "heim": "SV 07 Elversberg",
+   "gast": "1. FSV Mainz 05",
+   "tv": null,
+   "platz_heim": 8,
+   "platz_gast": 7,
+   "form_heim": "NUNSN",
+   "form_gast": "NSNSN",
+   "vergleich": {
+    "tabellenplatz": "remis",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83220,
+   "anstoss_utc": "2026-10-31T14:30:00Z",
+   "anstoss_lokal": "2026-10-31T15:30:00",
+   "heim": "Bayer 04 Leverkusen",
+   "gast": "VfB Stuttgart",
+   "tv": null,
+   "platz_heim": 4,
+   "platz_gast": 15,
+   "form_heim": "USSSN",
+   "form_gast": "NNSNN",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83222,
+   "anstoss_utc": "2026-10-31T14:30:00Z",
+   "anstoss_lokal": "2026-10-31T15:30:00",
+   "heim": "FC Augsburg",
+   "gast": "SC Freiburg",
+   "tv": null,
+   "platz_heim": 9,
+   "platz_gast": 3,
+   "form_heim": "UNUNU",
+   "form_gast": "SUSNN",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83224,
+   "anstoss_utc": "2026-10-31T14:30:00Z",
+   "anstoss_lokal": "2026-10-31T15:30:00",
+   "heim": "Borussia Mönchengladbach",
+   "gast": "SC Paderborn 07",
+   "tv": null,
+   "platz_heim": 18,
+   "platz_gast": 13,
+   "form_heim": "NNNNS",
+   "form_gast": "NSNUS",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83225,
+   "anstoss_utc": "2026-10-31T14:30:00Z",
+   "anstoss_lokal": "2026-10-31T15:30:00",
+   "heim": "SV Werder Bremen",
+   "gast": "TSG Hoffenheim",
+   "tv": null,
+   "platz_heim": 6,
+   "platz_gast": 10,
+   "form_heim": "USUUS",
+   "form_gast": "SNNSS",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83226,
+   "anstoss_utc": "2026-10-31T14:30:00Z",
+   "anstoss_lokal": "2026-10-31T15:30:00",
+   "heim": "FC Schalke 04",
+   "gast": "RB Leipzig",
+   "tv": null,
+   "platz_heim": 16,
+   "platz_gast": 5,
+   "form_heim": "SUNNU",
+   "form_gast": "SNSNS",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83219,
+   "anstoss_utc": "2026-10-31T17:30:00Z",
+   "anstoss_lokal": "2026-10-31T18:30:00",
+   "heim": "FC Bayern München",
+   "gast": "Borussia Dortmund",
+   "tv": null,
+   "platz_heim": 1,
+   "platz_gast": 2,
+   "form_heim": "SSUSS",
+   "form_gast": "SSUUS",
+   "vergleich": {
+    "tabellenplatz": "remis",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83223,
+   "anstoss_utc": "2026-11-01T14:30:00Z",
+   "anstoss_lokal": "2026-11-01T15:30:00",
+   "heim": "1. FC Union Berlin",
+   "gast": "1. FC Köln",
+   "tv": null,
+   "platz_heim": 17,
+   "platz_gast": 12,
+   "form_heim": "NNSUU",
+   "form_gast": "UNSNU",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  },
+  {
+   "id": 83221,
+   "anstoss_utc": "2026-11-01T16:30:00Z",
+   "anstoss_lokal": "2026-11-01T17:30:00",
+   "heim": "Eintracht Frankfurt",
+   "gast": "Hamburger SV",
+   "tv": null,
+   "platz_heim": 14,
+   "platz_gast": 11,
+   "form_heim": "SUNSN",
+   "form_gast": "NSSSN",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": null,
+   "markt": null,
+   "ergebnis": null
+  }
+ ]
+}
