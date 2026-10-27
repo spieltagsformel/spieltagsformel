@@ -19,6 +19,20 @@ Phase 0 – Fundament. Datenpipeline, Modell und Website entstehen gerade.
 | `pipeline/` | Python-Skripte für Abruf, Bereinigung, Modell |
 | `.github/workflows/` | automatische Abläufe (GitHub Actions) |
 
+## Pipeline benutzen
+
+Voraussetzung: Python 3.10 oder neuer, keine weiteren Pakete nötig.
+
+```
+python -m unittest discover -s tests -t .        # Tests
+python -m pipeline.run abrufen --von 2019 --bis 2026   # Spiele laden und bereinigen
+python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag
+```
+
+Alternativ in GitHub: Actions → „Daten abrufen“ → „Run workflow“.
+
+Quellen und Lizenzen: siehe `DATENQUELLEN.md`.
+
 ## Hinweise
 
 - Kein Wett-Tipp-Dienst. Das 100-€-Experiment ist eine reine Rechnung.
