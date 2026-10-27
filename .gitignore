@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Geheimnisse nie einchecken
+*.key
+secrets*
+
+# Rohdaten Dritter erst nach Prüfung der Nutzungsbedingungen einchecken
+data/raw/*
+!data/raw/.gitkeep
+
+# System
+.DS_Store
+Thumbs.db
