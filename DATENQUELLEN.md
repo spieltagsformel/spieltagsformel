@@ -3,6 +3,7 @@
 | Quelle | Verwendung | Lizenz / Bedingungen |
 |---|---|---|
 | [OpenLigaDB](https://www.openligadb.de) | Spielplan, Ergebnisse, Teams (1. Bundesliga) | Open Database License (ODbL) 1.0 |
+| [The Odds API](https://the-odds-api.com) | Quoten vor Anpfiff | Kommerzielle Nutzung erlaubt, solange die Daten nicht das Hauptprodukt sind; keine Weitergabe als Rohdaten. Im Repo stehen deshalb nur daraus berechnete, margenbereinigte Wahrscheinlichkeiten, keine Quoten und keine Buchmachernamen. |
 
 Die Dateien in `data/clean/` und `data/spieltage/` enthalten Daten, die aus OpenLigaDB abgeleitet sind.
 

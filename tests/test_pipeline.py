@@ -1,3 +1,4 @@
+import json
 import os
 import tempfile
 import unittest
@@ -299,6 +300,62 @@ class DixonColesTests(unittest.TestCase):
 
     def test_unbekanntes_team_ist_durchschnitt(self):
         self.assertEqual(self.m.werte(999), (0.0, 0.0))
+
+
+
+# ---- Quoten (The Odds API, Antwort nachgebildet) ----
+from pipeline import quoten
+
+
+def ereignis(heim, gast, zeit, preise):
+    return {"id": "x", "sport_key": "soccer_germany_bundesliga", "commence_time": zeit, "home_team": heim, "away_team": gast,
+            "bookmakers": [{"key": f"b{i}", "title": f"B{i}", "markets": [{"key": "h2h", "outcomes": [
+                {"name": heim, "price": p[0]}, {"name": gast, "price": p[2]}, {"name": "Draw", "price": p[1]}]}]}
+                for i, p in enumerate(preise)]}
+
+
+class QuotenTests(unittest.TestCase):
+    def setUp(self):
+        self.spiele = [
+            {"id": 1, "heim": "FC Bayern München", "gast": "Borussia Dortmund", "anstoss_utc": "2026-10-31T17:30:00Z"},
+            {"id": 2, "heim": "Borussia Mönchengladbach", "gast": "SC Paderborn 07", "anstoss_utc": "2026-10-31T14:30:00Z"},
+            {"id": 3, "heim": "1. FC Köln", "gast": "1. FC Union Berlin", "anstoss_utc": "2026-11-01T14:30:00Z"},
+        ]
+        self.ereignisse = [
+            ereignis("Bayern Munich", "Borussia Dortmund", "2026-10-31T17:30:00Z", [(1.6, 4.2, 5.0), (1.65, 4.0, 4.8)]),
+            ereignis("Borussia Monchengladbach", "SC Paderborn", "2026-10-31T14:30:00Z", [(2.2, 3.4, 3.2)]),
+            ereignis("FC Koln", "Union Berlin", "2026-11-08T14:30:00Z", [(2.5, 3.3, 2.8)]),  # falscher Termin
+        ]
+
+    def test_zuordnung_ueber_namen_und_zeit(self):
+        z = quoten.zuordnen(self.ereignisse, self.spiele)
+        self.assertEqual(z[1]["home_team"], "Bayern Munich")
+        self.assertEqual(z[2]["home_team"], "Borussia Monchengladbach")
+        self.assertNotIn(3, z)
+
+    def test_keine_verwechslung_bei_gleicher_zeit(self):
+        spiele = [{"id": 9, "heim": "Borussia Dortmund", "gast": "FC Bayern München", "anstoss_utc": "2026-10-31T17:30:00Z"}]
+        self.assertEqual(quoten.zuordnen(self.ereignisse, spiele), {})
+
+    def test_margenbereinigung(self):
+        m = quoten.markt(self.ereignisse[1])
+        roh = [1 / 2.2, 1 / 3.4, 1 / 3.2]
+        self.assertAlmostEqual(m["p_heim"], roh[0] / sum(roh))
+        self.assertAlmostEqual(m["p_heim"] + m["p_remis"] + m["p_gast"], 1.0)
+        self.assertEqual(m["buchmacher"], 1)
+
+    def test_paket_enthaelt_keine_rohquoten(self):
+        paket = {"spiele": [dict(s) for s in self.spiele], "quellen": [], "hinweise": []}
+        n = quoten.ergaenze_paket(paket, self.ereignisse, "2026-10-30T10:00:00+00:00")
+        self.assertEqual(n, 2)
+        self.assertNotIn("quote_mittel", paket["spiele"][0]["markt"])
+        self.assertEqual(paket["spiele"][0]["markt"]["buchmacher"], 2)
+        self.assertTrue(any("keine Quoten" in h for h in paket["hinweise"]))
+        self.assertNotIn("B0", json.dumps(paket))
+
+    def test_ohne_schluessel_fehler(self):
+        with self.assertRaises(ValueError):
+            quoten.abrufen("")
 
 
 if __name__ == "__main__":

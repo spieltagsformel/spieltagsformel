@@ -29,6 +29,7 @@ python -m unittest discover -s tests -t .        # Tests
 python -m pipeline.run abrufen --von 2019 --bis 2026   # Spiele laden und bereinigen
 python -m pipeline.run fit --train-bis 2024 --mit-dc   # Elo- und Dixon-Coles-Parameter abstimmen (intern, schreibt data/modell/)
 python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag (inkl. Modell)
+ODDS_API_KEY=… python -m pipeline.run quoten --saison 2026   # Marktwahrscheinlichkeiten ergänzen (The Odds API, 1 Credit)
 ```
 
 Alternativ in GitHub: Actions → „Daten abrufen“ → „Run workflow“.
