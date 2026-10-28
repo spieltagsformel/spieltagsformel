@@ -149,5 +149,90 @@ class Qualitaet(unittest.TestCase):
         self.assertTrue(any("statt 306" in x for x in w))
 
 
+# ---- Elo-Modell und Metriken ----
+import math
+from pipeline import elo, metriken
+
+
+class EloTests(unittest.TestCase):
+    def test_wahrscheinlichkeiten_summe_eins(self):
+        for d in (-300, -50, 0, 80, 400):
+            p = elo.wahrscheinlichkeiten(1500 + d, 1500, elo.STANDARD)
+            self.assertAlmostEqual(sum(p), 1.0)
+            self.assertTrue(all(0 < x < 1 for x in p))
+
+    def test_heimvorteil_und_staerke(self):
+        gleich = elo.wahrscheinlichkeiten(1500, 1500, elo.STANDARD)
+        self.assertGreater(gleich[0], gleich[2])
+        staerker = elo.wahrscheinlichkeiten(1600, 1500, elo.STANDARD)
+        self.assertGreater(staerker[0], gleich[0])
+        self.assertLess(staerker[2], gleich[2])
+
+    def test_verhaeltnis_heim_gast_ist_r(self):
+        p = dict(elo.STANDARD, heimvorteil=0.0)
+        ph, pd, pa = elo.wahrscheinlichkeiten(1600, 1500, p)
+        self.assertAlmostEqual(ph / pa, 10 ** (100 / 400))
+
+    def test_remis_rate_bei_gleichstand(self):
+        p = dict(elo.STANDARD, heimvorteil=0.0, nu=0.74)
+        self.assertAlmostEqual(elo.wahrscheinlichkeiten(1500, 1500, p)[1], 0.74 / 2.74)
+
+    def test_torfaktor(self):
+        self.assertEqual(elo.tor_faktor(0), 1.0)
+        self.assertEqual(elo.tor_faktor(-1), 1.0)
+        self.assertEqual(elo.tor_faktor(2), 1.5)
+        self.assertAlmostEqual(elo.tor_faktor(4), 15 / 8)
+
+    def test_sieger_gewinnt_punkte_summe_null(self):
+        m = elo.EloModell()
+        m.verarbeite(spiel(1, 1, 1, 2, (3, 0)))
+        self.assertGreater(m.rating[1], 1500)
+        self.assertLess(m.rating[2], 1500)
+        self.assertAlmostEqual(m.rating[1] + m.rating[2], 3000)
+
+    def test_remis_gleich_starker_teams_aendert_nur_wegen_heimvorteil(self):
+        m = elo.EloModell()
+        m.verarbeite(spiel(1, 1, 1, 2, (1, 1)))
+        self.assertLess(m.rating[1], 1500)  # Heimteam hätte laut Modell gewinnen sollen
+
+    def test_neue_saison_regress_und_aufsteiger(self):
+        m = elo.EloModell({"regress": 0.5, "aufsteiger": 1400.0})
+        m.rating = {1: 1700.0}
+        m._erste_saison = True
+        m.neue_saison()
+        self.assertAlmostEqual(m.rating[1], 1600.0)
+        self.assertEqual(m.rating_von(99), 1400.0)
+
+    def test_lauf_nutzt_nur_vergangenheit(self):
+        s1 = [spiel(1, 1, 1, 2, (2, 0), utc="2026-08-01T10:00:00Z"), spiel(2, 2, 1, 2, (2, 0), utc="2026-08-08T10:00:00Z")]
+        prot = elo.EloModell().lauf({2026: s1})
+        self.assertAlmostEqual(prot[0]["p"][0], elo.wahrscheinlichkeiten(1500, 1500, elo.STANDARD)[0])
+        self.assertGreater(prot[1]["p"][0], prot[0]["p"][0])  # nach dem ersten Sieg ist Team 1 stärker eingeschätzt
+
+    def test_unbeendete_spiele_werden_ignoriert(self):
+        prot = elo.EloModell().lauf({2026: [spiel(1, 1, 1, 2)]})
+        self.assertEqual(prot, [])
+
+
+class MetrikTests(unittest.TestCase):
+    def test_rps(self):
+        self.assertAlmostEqual(metriken.rps((1, 0, 0), "heim"), 0.0)
+        self.assertAlmostEqual(metriken.rps((1 / 3, 1 / 3, 1 / 3), "heim"), 5 / 18)
+        self.assertAlmostEqual(metriken.rps((0, 0, 1), "heim"), 1.0)
+
+    def test_brier_und_logloss_und_treffer(self):
+        self.assertAlmostEqual(metriken.brier((1, 0, 0), "heim"), 0.0)
+        self.assertAlmostEqual(metriken.brier((1 / 3,) * 3, "remis"), 2 / 3)
+        self.assertAlmostEqual(metriken.logloss((0.5, 0.3, 0.2), "remis"), -math.log(0.3))
+        self.assertTrue(metriken.treffer((0.5, 0.3, 0.2), "heim"))
+        self.assertFalse(metriken.treffer((0.5, 0.3, 0.2), "gast"))
+
+    def test_paket_mit_modell(self):
+        s = saison_18([(2, 0)] * 9)
+        probs = {x["id"]: (0.5, 0.3, 0.2) for x in s if x["spieltag"] == 2}
+        p = paket.baue_paket(2026, 2, s, modell=probs, modell_version="elo-0.1")
+        self.assertEqual(p["spiele"][0]["modell"], {"version": "elo-0.1", "p_heim": 0.5, "p_remis": 0.3, "p_gast": 0.2})
+
+
 if __name__ == "__main__":
     unittest.main()

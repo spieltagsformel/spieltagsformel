@@ -1,0 +1,10 @@
+{
+ "version": "elo-0.1",
+ "parameter": {
+  "k": 15,
+  "heimvorteil": 65,
+  "regress": 0.1,
+  "aufsteiger": 1350,
+  "nu": 0.8
+ }
+}
