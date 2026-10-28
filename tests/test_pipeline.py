@@ -358,5 +358,75 @@ class QuotenTests(unittest.TestCase):
             quoten.abrufen("")
 
 
+
+# ---- Einfrieren und Nachbericht ----
+from pipeline import nachbericht
+
+
+def paketspiel(id_, heim, gast, ph, pr, pg, regel, markt=None, utc="2026-10-31T14:30:00Z"):
+    s = {"id": id_, "heim": heim, "gast": gast, "anstoss_utc": utc,
+         "modell": {"version": "elo-0.1", "p_heim": ph, "p_remis": pr, "p_gast": pg},
+         "vergleich": {"tabellenplatz": regel, "community": None}}
+    if markt:
+        s["markt"] = {"p_heim": markt[0], "p_remis": markt[1], "p_gast": markt[2], "buchmacher": 20}
+    return s
+
+
+class EinfrierenTests(unittest.TestCase):
+    def test_begonnene_spiele_bleiben(self):
+        alt = {"erstellt": "2026-10-30T10:00:00+00:00", "spiele": [
+            paketspiel(1, "A", "B", 0.5, 0.3, 0.2, "heim", utc="2026-10-30T19:30:00Z"),
+            paketspiel(2, "C", "D", 0.4, 0.3, 0.3, "heim", utc="2026-11-01T14:30:00Z")]}
+        neu = {"spiele": [paketspiel(1, "A", "B", 0.9, 0.05, 0.05, "gast", utc="2026-10-30T19:30:00Z"),
+                          paketspiel(2, "C", "D", 0.6, 0.2, 0.2, "gast", utc="2026-11-01T14:30:00Z")]}
+        out = paket.einfrieren(neu, alt, "2026-10-31T12:00:00+00:00")
+        self.assertEqual(out["spiele"][0]["modell"]["p_heim"], 0.5)   # schon angepfiffen: alter Wert
+        self.assertEqual(out["spiele"][0]["vergleich"]["tabellenplatz"], "heim")
+        self.assertEqual(out["spiele"][0]["eingefroren"], "2026-10-30T10:00:00+00:00")
+        self.assertEqual(out["spiele"][1]["modell"]["p_heim"], 0.6)   # noch nicht angepfiffen: neu
+
+    def test_bis_stichtag(self):
+        s = {2026: [spiel(1, 1, 1, 2, (2, 0), utc="2026-08-01T10:00:00Z"), spiel(2, 2, 1, 2, (3, 0), utc="2026-08-09T10:00:00Z")]}
+        k = paket.bis_stichtag(s, "2026-08-05T00:00:00Z")
+        self.assertTrue(k[2026][0]["beendet"])
+        self.assertFalse(k[2026][1]["beendet"])
+        self.assertTrue(s[2026][1]["beendet"])  # Original unverändert
+
+
+class NachberichtTests(unittest.TestCase):
+    def setUp(self):
+        self.paket = {"saison": "2026-27", "spieltag": 8, "spiele": [
+            paketspiel(1, "FC Bayern München", "Borussia Dortmund", 0.58, 0.25, 0.17, "remis", (0.70, 0.17, 0.13)),
+            paketspiel(2, "FC Schalke 04", "RB Leipzig", 0.20, 0.26, 0.54, "gast", (0.25, 0.24, 0.51)),
+            paketspiel(3, "1. FC Union Berlin", "1. FC Köln", 0.45, 0.28, 0.27, "gast", (0.37, 0.26, 0.37))]}
+        self.spiele = [spiel(1, 8, 40, 7, (1, 1)), spiel(2, 8, 9, 1635, (0, 2)), spiel(3, 8, 80, 65, (2, 0))]
+
+    def test_auswertung(self):
+        z = nachbericht.auswerten(self.paket, self.spiele)
+        self.assertEqual([x["ergebnis"] for x in z], ["remis", "gast", "heim"])
+        self.assertFalse(z[0]["formel"]["treffer"])
+        self.assertTrue(z[0]["regel_treffer"])
+        self.assertTrue(z[1]["formel"]["treffer"] and z[1]["markt"]["treffer"])
+        self.assertAlmostEqual(z[0]["formel"]["p_ergebnis"], 0.25)
+
+    def test_zusammenfassung_und_text(self):
+        z = nachbericht.auswerten(self.paket, self.spiele)
+        s = nachbericht.zusammenfassung(z)
+        self.assertEqual(s["formel"]["treffer"], 2)
+        self.assertEqual(s["markt"]["treffer"], 2)
+        self.assertEqual(s["regel"]["treffer"], 2)
+        self.assertEqual(s["daneben"]["id"], 1)  # Remis mit nur 25 %
+        t = nachbericht.text(self.paket, z, s)
+        self.assertIn("2 von 3", t)
+        self.assertIn("| Markt |", t)
+        self.assertIn("[AUS DER REDAKTION", t)
+        self.assertIn("keine Wettempfehlung".lower(), t.lower())
+        self.assertNotIn("Tipp", t)
+
+    def test_unbeendete_spiele_werden_ausgelassen(self):
+        spiele = [spiel(1, 8, 40, 7, (1, 1)), spiel(2, 8, 9, 1635), spiel(3, 8, 80, 65, (2, 0))]
+        self.assertEqual(len(nachbericht.auswerten(self.paket, spiele)), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

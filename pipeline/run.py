@@ -103,12 +103,15 @@ def cmd_paket(args):
         print("Alle Spiele der Saison sind beendet.")
         return
     saisons = lade_saisons(args.saison)
-    modell = elo.EloModell(lade_parameter())
-    modell.lauf(saisons)  # lernt aus allen beendeten Spielen bis jetzt
     spiele_tag = [s for s in spiele if s["spieltag"] == spieltag]
+    # Stichtag = erster Anstoß des Spieltags: das Modell kennt nur Spiele davor
+    stichtag = min((s["anstoss_utc"] for s in spiele_tag if s["anstoss_utc"]), default=None)
+    bekannt = paket.bis_stichtag(saisons, stichtag) if stichtag else saisons
+    modell = elo.EloModell(lade_parameter())
+    modell.lauf(bekannt)
     vorhersagen = {s["id"]: modell.vorhersage(s["heim_id"], s["gast_id"]) for s in spiele_tag}
     try:
-        dc_probs, dc_tore = dixon_coles_vorhersagen(saisons, args.saison, spiele_tag)
+        dc_probs, dc_tore = dixon_coles_vorhersagen(bekannt, args.saison, spiele_tag)
     except (ImportError, ValueError) as fehler:
         print(f"Hinweis: Dixon-Coles übersprungen ({fehler})")
         dc_probs, dc_tore = {}, {}
@@ -118,6 +121,11 @@ def cmd_paket(args):
     ordner = f"{SPIELTAGE}/{daten['saison']}"
     os.makedirs(ordner, exist_ok=True)
     pfad = f"{ordner}/{spieltag:02d}.json"
+    if os.path.exists(pfad):
+        from datetime import datetime, timezone
+        with open(pfad, encoding="utf-8") as f:
+            alt = json.load(f)
+        daten = paket.einfrieren(daten, alt, datetime.now(timezone.utc).isoformat(timespec="seconds"))
     with open(pfad, "w", encoding="utf-8") as f:
         json.dump(daten, f, ensure_ascii=False, indent=1)
     print(f"Datenpaket geschrieben: {pfad}")
@@ -153,6 +161,60 @@ def cmd_quoten(args):
     print(f"Quoten für {treffer} von {len(daten['spiele'])} Spielen eingetragen. Verbleibende Credits: {rest}")
 
 
+def cmd_nachbericht(args):
+    from . import nachbericht
+    try:
+        from grafik.namen import kurz
+    except ImportError:
+        kurz = lambda n: n
+    spiele = speicher.lese_csv(f"{CLEAN}/spiele_{args.saison}.csv")
+    saison_txt = f"{args.saison}-{str(args.saison + 1)[-2:]}"
+    ordner = f"{SPIELTAGE}/{saison_txt}"
+    vorhanden = sorted(int(d[:2]) for d in os.listdir(ordner) if d.endswith(".json")) if os.path.isdir(ordner) else []
+
+    def fertig(tag):
+        sp = [s for s in spiele if s["spieltag"] == tag]
+        return bool(sp) and all(s["beendet"] for s in sp)
+
+    if args.spieltag == "letzter":
+        kandidaten = [t for t in vorhanden if fertig(t)]
+        if not kandidaten:
+            print("Noch kein abgeschlossener Spieltag mit eingefrorenem Datenpaket.")
+            return
+        tag = kandidaten[-1]
+    else:
+        tag = int(args.spieltag)
+        if tag not in vorhanden or not fertig(tag):
+            print(f"Spieltag {tag}: Datenpaket fehlt oder Spiele noch nicht beendet.")
+            return
+
+    def lade(t):
+        with open(f"{ordner}/{t:02d}.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    daten = lade(tag)
+    zeilen = nachbericht.auswerten(daten, spiele)
+    zusammen = nachbericht.zusammenfassung(zeilen)
+    bis_jetzt = [nachbericht.auswerten(lade(t), spiele) for t in vorhanden if t <= tag and fertig(t)]
+    gesamt = nachbericht.bilanz(bis_jetzt)
+
+    os.makedirs(f"data/nachberichte/{saison_txt}", exist_ok=True)
+    with open(f"data/nachberichte/{saison_txt}/{tag:02d}.json", "w", encoding="utf-8") as f:
+        json.dump({"saison": daten["saison"], "spieltag": tag, "spiele": zeilen, "zusammenfassung": zusammen,
+                   "bilanz_seit_start": gesamt}, f, ensure_ascii=False, indent=1)
+    os.makedirs("entwuerfe", exist_ok=True)
+    pfad = f"entwuerfe/nachbericht-{saison_txt}-{tag:02d}.md"
+    if os.path.exists(pfad) and not args.neu:
+        print(f"Entwurf existiert schon ({pfad}), nicht überschrieben. Mit --neu neu erzeugen.")
+    else:
+        with open(pfad, "w", encoding="utf-8") as f:
+            f.write(nachbericht.text(daten, zeilen, zusammen, gesamt, kurz))
+        print(f"Entwurf geschrieben: {pfad}")
+    fz = zusammen["formel"]
+    print(f"Spieltag {tag}: Formel {fz['treffer']}/{fz['n']}, Tabellen-Regel {zusammen['regel']['treffer']}/{zusammen['regel']['n']}"
+          + (f", Markt {zusammen['markt']['treffer']}/{zusammen['markt']['n']}" if zusammen["markt"] else ""))
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="pipeline")
     sub = p.add_subparsers(dest="befehl", required=True)
@@ -172,6 +234,11 @@ def main(argv=None):
     q.add_argument("--saison", type=int, required=True)
     q.add_argument("--spieltag", default="auto")
     q.set_defaults(func=cmd_quoten)
+    n = sub.add_parser("nachbericht", help="Abrechnung eines beendeten Spieltags + Textentwurf")
+    n.add_argument("--saison", type=int, required=True)
+    n.add_argument("--spieltag", default="letzter", help="Zahl oder 'letzter'")
+    n.add_argument("--neu", action="store_true", help="vorhandenen Entwurf überschreiben")
+    n.set_defaults(func=cmd_nachbericht)
     args = p.parse_args(argv)
     args.func(args)
 

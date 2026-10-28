@@ -30,6 +30,7 @@ python -m pipeline.run abrufen --von 2019 --bis 2026   # Spiele laden und berein
 python -m pipeline.run fit --train-bis 2024 --mit-dc   # Elo- und Dixon-Coles-Parameter abstimmen (intern, schreibt data/modell/)
 python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag (inkl. Modell)
 ODDS_API_KEY=… python -m pipeline.run quoten --saison 2026   # Marktwahrscheinlichkeiten ergänzen (The Odds API, 1 Credit)
+python -m pipeline.run nachbericht --saison 2026   # Abrechnung des letzten beendeten Spieltags + Textentwurf in entwuerfe/
 ```
 
 Alternativ in GitHub: Actions → „Daten abrufen“ → „Run workflow“.
@@ -41,6 +42,14 @@ Quellen und Lizenzen: siehe `DATENQUELLEN.md`.
 - Kein Wett-Tipp-Dienst. Das 100-€-Experiment ist eine reine Rechnung.
 - Datenquellen werden in jedem Beitrag genannt. OpenLigaDB-Daten stehen unter der ODbL.
 - Lizenz: noch offen, bis dahin alle Rechte vorbehalten.
+
+## Prognosen einfrieren
+
+Das Modell rechnet jeden Spieltag nur mit Spielen, die vor dem ersten Anstoß dieses Spieltags beendet waren. Wird ein Datenpaket später neu gebaut, bleiben die Werte aller schon angepfiffenen Spiele unverändert (Feld `eingefroren`). Die Git-Historie belegt, wann jede Prognose entstanden ist.
+
+## Nachbericht
+
+`python -m pipeline.run nachbericht` vergleicht Formel, Markt und Tabellen-Regel mit den Ergebnissen (Treffer, RPS), findet die größte Fehlprognose und schreibt einen Entwurf nach `entwuerfe/nachbericht-<saison>-<spieltag>.md`. Platzhalter `[AUS DER REDAKTION: …]` füllt die Redaktion. Ein vorhandener Entwurf wird nicht überschrieben (außer mit `--neu`).
 
 ## Grafiken
 
