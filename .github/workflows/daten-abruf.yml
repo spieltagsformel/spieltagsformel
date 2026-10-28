@@ -1,13 +1,20 @@
 name: Daten abrufen
 
-# Manuell startbar: Actions -> "Daten abrufen" -> "Run workflow"
+# Läuft automatisch nach Zeitplan (Zeiten in UTC) und ist weiterhin manuell startbar:
+# Actions -> "Daten abrufen" -> "Run workflow"
 on:
+  schedule:
+    - cron: "17 5 * * *"      # täglich 06:17 MEZ: Ergebnisse, Datenpaket, Nachbericht
+    - cron: "47 16 * * 5"     # Fr 17:47 MEZ: Quoten kurz vor dem Freitagsspiel
+    - cron: "47 12 * * 6"     # Sa 13:47 MEZ: Quoten vor 15:30
+    - cron: "47 15 * * 6"     # Sa 16:47 MEZ: Quoten vor 18:30
+    - cron: "47 12 * * 0"     # So 13:47 MEZ: Quoten vor den Sonntagsspielen
   workflow_dispatch:
     inputs:
       saison:
-        description: "Startjahr der aktuellen Saison (2026 = Saison 2026/27)"
-        default: "2026"
-        required: true
+        description: "Startjahr der Saison (leer = automatisch, z. B. 2026 = Saison 2026/27)"
+        default: ""
+        required: false
       von:
         description: "Erstes Startjahr, das geladen wird (leer = nur die Vorsaison; für den Verlauf z. B. 2019)"
         default: ""
@@ -16,6 +23,11 @@ on:
 permissions:
   contents: write
 
+# Nie zwei Läufe gleichzeitig (sonst kollidieren die Commits)
+concurrency:
+  group: daten-abruf
+  cancel-in-progress: false
+
 jobs:
   abruf:
     runs-on: ubuntu-latest
@@ -23,6 +35,14 @@ jobs:
       SAISON: ${{ github.event.inputs.saison }}
       VON: ${{ github.event.inputs.von }}
     steps:
+      - name: Saison bestimmen
+        run: |
+          if [ -z "$SAISON" ]; then
+            J=$(date -u +%Y); M=$(date -u +%-m)
+            if [ "$M" -ge 7 ]; then SAISON=$J; else SAISON=$((J - 1)); fi
+          fi
+          echo "SAISON=$SAISON" >> "$GITHUB_ENV"
+          echo "Saison: $SAISON"
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
