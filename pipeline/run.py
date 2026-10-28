@@ -125,6 +125,34 @@ def cmd_paket(args):
         print("  " + h)
 
 
+def cmd_quoten(args):
+    from datetime import datetime, timezone
+    from . import quoten
+    pfad_tag = args.spieltag
+    spiele = speicher.lese_csv(f"{CLEAN}/spiele_{args.saison}.csv")
+    spieltag = paket.naechster_spieltag(spiele) if pfad_tag == "auto" else int(pfad_tag)
+    saison_txt = f"{args.saison}-{str(args.saison + 1)[-2:]}"
+    pfad = f"{SPIELTAGE}/{saison_txt}/{spieltag:02d}.json"
+    if not os.path.exists(pfad):
+        print(f"Kein Datenpaket {pfad} – zuerst 'paket' ausführen.")
+        return
+    schluessel = os.environ.get("ODDS_API_KEY", "")
+    if not schluessel:
+        print("Hinweis: ODDS_API_KEY nicht gesetzt, Quoten übersprungen.")
+        return
+    ereignisse, rest = quoten.abrufen(schluessel)
+    jetzt = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    os.makedirs(RAW, exist_ok=True)
+    with open(f"{RAW}/quoten_{jetzt[:13].replace(':', '')}.json", "w", encoding="utf-8") as f:
+        json.dump(ereignisse, f)  # Rohdaten nur lokal (data/raw ist von Git ausgeschlossen)
+    with open(pfad, encoding="utf-8") as f:
+        daten = json.load(f)
+    treffer = quoten.ergaenze_paket(daten, ereignisse, jetzt)
+    with open(pfad, "w", encoding="utf-8") as f:
+        json.dump(daten, f, ensure_ascii=False, indent=1)
+    print(f"Quoten für {treffer} von {len(daten['spiele'])} Spielen eingetragen. Verbleibende Credits: {rest}")
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="pipeline")
     sub = p.add_subparsers(dest="befehl", required=True)
@@ -140,6 +168,10 @@ def main(argv=None):
     c.add_argument("--train-bis", type=int, required=True, help="letzte Trainingssaison, z. B. 2024")
     c.add_argument("--mit-dc", action="store_true", help="zusätzlich Dixon-Coles abstimmen")
     c.set_defaults(func=cmd_fit)
+    q = sub.add_parser("quoten", help="Marktwahrscheinlichkeiten ins Datenpaket eintragen (braucht ODDS_API_KEY)")
+    q.add_argument("--saison", type=int, required=True)
+    q.add_argument("--spieltag", default="auto")
+    q.set_defaults(func=cmd_quoten)
     args = p.parse_args(argv)
     args.func(args)
 

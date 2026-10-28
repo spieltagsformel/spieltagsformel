@@ -37,6 +37,10 @@ jobs:
           python -m pipeline.run abrufen --von "$VON" --bis "$SAISON"
       - name: Datenpaket für den nächsten Spieltag bauen
         run: python -m pipeline.run paket --saison "$SAISON" --spieltag auto
+      - name: Quoten eintragen (falls ODDS_API_KEY gesetzt)
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m pipeline.run quoten --saison "$SAISON" --spieltag auto
       - name: Grafiken erzeugen
         run: |
           python -m grafik.run spieltag

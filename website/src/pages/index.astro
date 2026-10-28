@@ -39,6 +39,7 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
                 <span>{anstoss(s.anstoss_utc)}</span>
                 {s.erwartete_tore && <span>Erwartete Tore <b>{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</b></span>}
                 {m && <span>Formel <b>{prozent(m.p_heim)}</b> · {prozent(m.p_remis)} · <b>{prozent(m.p_gast)}</b> %</span>}
+                {s.markt && <span>Markt {prozent(s.markt.p_heim)} · {prozent(s.markt.p_remis)} · {prozent(s.markt.p_gast)} %</span>}
                 <span>Tabellen-Regel: {REGEL_TEXT[s.vergleich.tabellenplatz]}</span>
                 {s.ergebnis && <span>Ergebnis <b>{s.ergebnis.heim}:{s.ergebnis.gast}</b></span>}
               </div>
@@ -46,7 +47,7 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
           );
         })}
       </ol>
-      <p class="quelle">Formel = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent, Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quelle: OpenLigaDB (ODbL), eigene Berechnung.</p>
+      <p class="quelle">Formel und Markt = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent (Markt: Durchschnitt der Buchmacher, ohne Marge). Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quelle: OpenLigaDB (ODbL), eigene Berechnung.</p>
       {paket.hinweise.length > 0 && (
         <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
       )}
