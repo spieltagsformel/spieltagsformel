@@ -49,6 +49,7 @@ const menue = [
     <footer class="fuss">
       <div class="rahmen">
         <nav aria-label="Rechtliches">
+          <a href="/kontakt">Kontakt</a>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
         </nav>
@@ -56,5 +57,21 @@ const menue = [
           Spieldaten: <a href="https://www.openligadb.de">OpenLigaDB</a> (ODbL).</p>
       </div>
     </footer>
+    <script is:inline>
+      // Anonyme Zählung: Seitenaufruf und Klicks auf externe Links. Keine Cookies, keine Kennungen.
+      (function () {
+        if (!navigator.sendBeacon || location.hostname === "localhost") return;
+        var senden = function (pfad, daten) {
+          try { navigator.sendBeacon(pfad, new Blob([JSON.stringify(daten)], { type: "text/plain" })); } catch (e) {}
+        };
+        senden("/api/aufruf", { seite: location.pathname, quelle: document.referrer || "" });
+        document.addEventListener("click", function (e) {
+          var a = e.target.closest && e.target.closest("a[href]");
+          if (!a) return;
+          var u = new URL(a.href, location.href);
+          if (u.hostname !== location.hostname) senden("/api/klick", { seite: location.pathname, ziel: u.href });
+        });
+      })();
+    </script>
   </body>
 </html>
