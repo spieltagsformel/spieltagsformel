@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "spieltagsformel",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Nur /api/* läuft durch den Worker, alles andere sind statische Dateien
+    "run_worker_first": ["/api/*"]
+  },
+  // Kontaktformular: Mails gehen nur an diese bestätigte Adresse (Cloudflare Email Routing)
+  "send_email": [
+    { "name": "KONTAKT", "destination_address": "spieltagsformel@gmail.com" }
+  ],
+  // Anonyme Zählung von Seitenaufrufen und Link-Klicks (keine IP-Adressen, keine Cookies)
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "spieltagsformel",
+      "database_id": "488a9288-2379-4c65-a38c-da8a6dfb99fc"
+    }
+  ],
+  "vars": {
+    "ABSENDER": "kontakt@spieltagsformel.de"
+  },
+  "observability": { "enabled": true }
+}

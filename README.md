@@ -52,4 +52,14 @@ npm run dev     # lokale Vorschau
 npm run build   # fertige Seite in website/dist
 ```
 
-Einstellungen für Cloudflare: Stammverzeichnis `website`, Build-Befehl `npm run build`, Ausgabeordner `dist`, Node-Version 22 (siehe `website/.nvmrc`).
+Die Seite läuft als Cloudflare Worker mit statischen Dateien (`website/wrangler.jsonc`). Der Worker übernimmt nur `/api/*`:
+
+| Pfad | Zweck |
+|---|---|
+| `POST /api/kontakt` | Kontaktformular → E-Mail an spieltagsformel@gmail.com (Cloudflare Email Routing) |
+| `POST /api/aufruf` | anonyme Zählung von Seitenaufrufen (Tag, Seite, Herkunfts-Domain) |
+| `POST /api/klick` | anonyme Zählung von Klicks auf externe Links (Tag, Seite, Domain + Pfad) |
+
+Keine Cookies, keine IP-Adressen, keine Kennungen. Tabellen: `website/worker/schema.sql` (D1-Datenbank `spieltagsformel`).
+
+Einstellungen für Workers Builds: Stammverzeichnis `website`, Build-Befehl `npm run build`, Deploy-Befehl `npx wrangler deploy`, Node-Version 22 (siehe `website/.nvmrc`).

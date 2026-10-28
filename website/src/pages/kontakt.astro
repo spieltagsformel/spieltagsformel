@@ -1,0 +1,42 @@
+---
+import Basis from "../layouts/Basis.astro";
+---
+<Basis titel="Kontakt" beschreibung="Schreib der Spieltagsformel: Fragen, Hinweise auf Fehler, Ideen.">
+  <h1>Kontakt</h1>
+  <p class="leise">Fragen, ein Fehler in unseren Zahlen oder eine Idee? Schreib uns. Wir antworten in der Regel innerhalb weniger Tage.</p>
+
+  <div class="kasten hinweis klein" id="fehler" hidden>
+    <p><b>Das hat nicht geklappt.</b> <span id="fehler-text">Bitte prüfe deine E-Mail-Adresse und schreib mindestens ein paar Worte.</span></p>
+  </div>
+
+  <form class="formular" method="post" action="/api/kontakt">
+    <label>Name <span class="leise">(optional)</span>
+      <input name="name" type="text" maxlength="100" autocomplete="name" />
+    </label>
+    <label>E-Mail
+      <input name="email" type="email" required maxlength="200" autocomplete="email" />
+    </label>
+    <label>Betreff <span class="leise">(optional)</span>
+      <input name="betreff" type="text" maxlength="150" />
+    </label>
+    <label>Nachricht
+      <textarea name="nachricht" required minlength="10" maxlength="5000" rows="7"></textarea>
+    </label>
+    <!-- Spam-Schutz: dieses Feld bleibt für Menschen unsichtbar und leer -->
+    <label class="versteckt" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="t" id="t" />
+    <p class="klein leise">Wir nutzen deine Angaben nur, um dir zu antworten. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+    <button type="submit">Nachricht senden</button>
+  </form>
+
+  <p class="klein leise">Alternativ per E-Mail: <a href="mailto:spieltagsformel@gmail.com">spieltagsformel@gmail.com</a></p>
+
+  <script is:inline>
+    document.getElementById("t").value = String(Date.now());
+    const f = new URLSearchParams(location.search).get("fehler");
+    if (f) {
+      document.getElementById("fehler").hidden = false;
+      if (f === "2") document.getElementById("fehler-text").textContent = "Die Nachricht konnte gerade nicht verschickt werden. Bitte versuch es später noch einmal oder schreib uns direkt per E-Mail.";
+    }
+  </script>
+</Basis>

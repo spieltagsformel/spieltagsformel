@@ -118,3 +118,15 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
 .fuss a { color: var(--text-leise); }
 
 .platzhalter { background: #fff3cd; color: #111111; padding: 0 0.25rem; border-radius: 3px; }
+
+/* Formular */
+.formular { display: grid; gap: 1rem; max-width: 34rem; margin: 1.5rem 0; }
+.formular label { display: grid; gap: 0.35rem; font-weight: 600; font-size: 0.9375rem; }
+.formular input, .formular textarea { font: inherit; font-weight: 400; color: var(--text); background: var(--grund);
+  border: 1px solid var(--linie); border-radius: 6px; padding: 0.6rem 0.75rem; }
+.formular input:focus, .formular textarea:focus { outline: 2px solid var(--akzent); outline-offset: 1px; border-color: transparent; }
+.formular button { justify-self: start; font: inherit; font-weight: 600; color: var(--auf-akzent); background: var(--akzent-flaeche);
+  border: 0; border-radius: 6px; padding: 0.7rem 1.2rem; cursor: pointer; }
+.formular button:hover { filter: brightness(1.08); }
+.formular p { margin: 0; }
+.versteckt { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
