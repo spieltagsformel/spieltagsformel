@@ -1,0 +1,27 @@
+---
+import Basis from "../layouts/Basis.astro";
+---
+<Basis titel="Das Modell" beschreibung="Wie die Spieltagsformel rechnet, womit wir sie vergleichen und wie wir die Prognosen messen.">
+  <h1>Das Modell</h1>
+  <p class="leise">Kurz gesagt: Jedes Team hat eine Stärke, die sich nach jedem Spiel verändert. Daraus berechnen wir für jedes Spiel die Wahrscheinlichkeiten für Heimsieg, Remis und Auswärtssieg.</p>
+
+  <h2>So rechnet die Formel</h2>
+  <p><b>Hauptmodell: Elo (Version 0.1).</b> Siege gegen starke Gegner bringen viele Punkte, Niederlagen gegen schwache kosten viele. Der Heimvorteil ist eingerechnet, deutliche Siege zählen etwas mehr. Zu Beginn jeder Saison rücken alle Teams ein Stück zur Mitte, Aufsteiger starten etwas niedriger.</p>
+  <p><b>Vergleichsmodell: Dixon-Coles (Version 0.2).</b> Ein Poisson-Modell, das Tore statt Ergebnisse vorhersagt. Daraus stammen die erwarteten Tore. Es läuft mit, bis es das Hauptmodell nachweislich schlägt.</p>
+
+  <h2>Womit wir sie vergleichen</h2>
+  <ul>
+    <li><b>Tabellenplatz-Regel:</b> Der besser Platzierte gewinnt. Liegen beide Teams nur einen Platz auseinander, gilt Remis. Grundlage ist die Tabelle vor dem Spieltag. Diese Regel ist festgeschrieben und wird nicht nachträglich verändert.</li>
+    <li><b>Community-Ranking:</b> Vor jedem Spieltag stimmt unsere Community über alle neun Spiele ab.</li>
+    <li><b>Markt:</b> Durchschnittliche Quoten kurz vor Anpfiff, ohne Buchmacher-Marge umgerechnet in Wahrscheinlichkeiten.</li>
+  </ul>
+
+  <h2>Wie wir messen</h2>
+  <p>Jede Prognose wird vor Anpfiff mit Zeitstempel im öffentlichen Repository gespeichert und danach nicht mehr verändert. Gemessen wird mit der Trefferquote und mit dem Ranked Probability Score (RPS), der auch bewertet, wie sicher sich ein Modell war.</p>
+  <div class="kasten hinweis">
+    <p><b>Ehrlich gesagt:</b> Wir starten ohne Rückrechnung auf vergangene Saisons. Die Bilanz der Formel entsteht live, Spieltag für Spieltag – mit allen Treffern und allen Fehlern.</p>
+  </div>
+
+  <h2>Modell-Logbuch</h2>
+  <p class="leise">Hier dokumentieren wir jede Änderung am Modell. <span class="platzhalter">[AUS DER REDAKTION: erster Eintrag zum Start]</span></p>
+</Basis>

@@ -40,3 +40,16 @@ Quellen und Lizenzen: siehe `DATENQUELLEN.md`.
 - Kein Wett-Tipp-Dienst. Das 100-€-Experiment ist eine reine Rechnung.
 - Datenquellen werden in jedem Beitrag genannt. OpenLigaDB-Daten stehen unter der ODbL.
 - Lizenz: noch offen, bis dahin alle Rechte vorbehalten.
+
+## Website
+
+Statische Website mit [Astro](https://astro.build) im Ordner `website/`. Sie liest beim Bauen die Datenpakete aus `data/spieltage/`.
+
+```
+cd website
+npm install
+npm run dev     # lokale Vorschau
+npm run build   # fertige Seite in website/dist
+```
+
+Einstellungen für Cloudflare: Stammverzeichnis `website`, Build-Befehl `npm run build`, Ausgabeordner `dist`, Node-Version 22 (siehe `website/.nvmrc`).
