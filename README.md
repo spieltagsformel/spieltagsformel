@@ -41,6 +41,17 @@ Quellen und Lizenzen: siehe `DATENQUELLEN.md`.
 - Datenquellen werden in jedem Beitrag genannt. OpenLigaDB-Daten stehen unter der ODbL.
 - Lizenz: noch offen, bis dahin alle Rechte vorbehalten.
 
+## Grafiken
+
+Grafiken im Datenblatt-Stil mit matplotlib (`grafik/`), je als Post (4:5) und Story (9:16):
+
+```
+python -m grafik.run spieltag                  # „Die Formel sagt …“ für das neueste Datenpaket
+python -m grafik.run staerke --saison 2026     # Stärke der Teams (Elo relativ zum Ligaschnitt)
+```
+
+Die Bilder landen in `grafik/ausgabe/`. Der Workflow „Daten abrufen“ erzeugt sie automatisch mit. Jede neue Grafikart muss vor dem Einsatz mindestens 9 von 10 Merkmalen aus `grafik/QUALITAET.md` erfüllen.
+
 ## Website
 
 Statische Website mit [Astro](https://astro.build) im Ordner `website/`. Sie liest beim Bauen die Datenpakete aus `data/spieltage/`.
