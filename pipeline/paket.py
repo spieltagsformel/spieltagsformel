@@ -77,3 +77,35 @@ def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None, m
         ],
         "spiele": spielliste,
     }
+
+
+EINGEFRORENE_FELDER = ("modell", "weitere_modelle", "erwartete_tore", "markt", "vergleich",
+                       "platz_heim", "platz_gast", "form_heim", "form_gast")
+
+
+def einfrieren(neu, alt, jetzt_iso):
+    """Übernimmt für Spiele, die schon angepfiffen sind (oder bereits eingefroren waren), alle
+    Prognosewerte aus dem alten Paket. So ändert ein späterer Neubau nie eine Prognose nachträglich."""
+    if not alt:
+        return neu
+    alte = {s["id"]: s for s in alt.get("spiele", [])}
+    for s in neu["spiele"]:
+        a = alte.get(s["id"])
+        if not a:
+            continue
+        begonnen = bool(a.get("anstoss_utc")) and a["anstoss_utc"].replace("Z", "+00:00") <= jetzt_iso
+        if a.get("eingefroren") or begonnen:
+            for f in EINGEFRORENE_FELDER:
+                if f in a:
+                    s[f] = a[f]
+            s["eingefroren"] = a.get("eingefroren") or alt.get("erstellt")
+    return neu
+
+
+def bis_stichtag(saisons, stichtag_iso):
+    """Kopie der Saisons, in der nur Spiele vor dem Stichtag als beendet gelten (kein Blick nach vorn)."""
+    kopie = {}
+    for jahr, spiele in saisons.items():
+        kopie[jahr] = [s if (s["anstoss_utc"] and s["anstoss_utc"] < stichtag_iso)
+                       else dict(s, beendet=False, tore_heim=None, tore_gast=None) for s in spiele]
+    return kopie

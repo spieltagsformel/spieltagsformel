@@ -107,6 +107,11 @@ def ergaenze_paket(paket, ereignisse, abruf_zeit):
     zuordnung = zuordnen(ereignisse, paket["spiele"])
     treffer = 0
     for s in paket["spiele"]:
+        # Nach Anpfiff oder bei eingefrorenen Spielen keine Quoten mehr ändern
+        if s.get("eingefroren") or (s.get("anstoss_utc") and s["anstoss_utc"].replace("Z", "+00:00") <= abruf_zeit):
+            if s.get("markt"):
+                treffer += 1
+            continue
         e = zuordnung.get(s["id"])
         mk = markt(e) if e else None
         if mk:
