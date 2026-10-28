@@ -8,6 +8,10 @@ on:
         description: "Startjahr der aktuellen Saison (2026 = Saison 2026/27)"
         default: "2026"
         required: true
+      von:
+        description: "Erstes Startjahr, das geladen wird (leer = nur die Vorsaison; für den Verlauf z. B. 2019)"
+        default: ""
+        required: false
 
 permissions:
   contents: write
@@ -15,6 +19,9 @@ permissions:
 jobs:
   abruf:
     runs-on: ubuntu-latest
+    env:
+      SAISON: ${{ github.event.inputs.saison }}
+      VON: ${{ github.event.inputs.von }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -22,12 +29,12 @@ jobs:
           python-version: "3.12"
       - name: Tests
         run: python -m unittest discover -s tests -t .
-      - name: Daten abrufen (Vorsaison bis aktuelle Saison)
+      - name: Daten abrufen
         run: |
-          SAISON=${{ github.event.inputs.saison }}
-          python -m pipeline.run abrufen --von $((SAISON - 1)) --bis $SAISON
+          VON=${VON:-$((SAISON - 1))}
+          python -m pipeline.run abrufen --von "$VON" --bis "$SAISON"
       - name: Datenpaket für den nächsten Spieltag bauen
-        run: python -m pipeline.run paket --saison ${{ github.event.inputs.saison }} --spieltag auto
+        run: python -m pipeline.run paket --saison "$SAISON" --spieltag auto
       - name: Ergebnis einchecken
         run: |
           git config user.name "spieltagsformel-bot"
