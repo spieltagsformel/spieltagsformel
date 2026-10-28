@@ -234,5 +234,72 @@ class MetrikTests(unittest.TestCase):
         self.assertEqual(p["spiele"][0]["modell"], {"version": "elo-0.1", "p_heim": 0.5, "p_remis": 0.3, "p_gast": 0.2})
 
 
+
+# ---- Dixon-Coles v0.2 ----
+try:
+    import numpy as np
+    from scipy.optimize import check_grad
+    from pipeline import dixon_coles
+    HAT_NUMPY = True
+except ImportError:  # pragma: no cover
+    HAT_NUMPY = False
+
+
+def runde_saison(jahr=2025, stark=1):
+    teams = list(range(1, 19))
+    tage = []
+    t = teams[:]
+    for r in range(17):
+        tage.append([(t[i], t[17 - i]) for i in range(9)])
+        t = [t[0]] + [t[-1]] + t[1:-1]
+    tage += [[(g, h) for h, g in tag] for tag in tage]
+    spiele = []
+    for n, paare in enumerate(tage, start=1):
+        for k, (h, g) in enumerate(paare):
+            if stark in (h, g):
+                tore = (3, 0) if h == stark else (0, 3)
+            else:
+                tore = ((h + n) % 3, (g + k) % 2)
+            monat, tag = 8 + (n - 1) // 4, 1 + ((n - 1) % 4) * 7
+            jahr_n = jahr + (1 if monat > 12 else 0)
+            monat = monat - 12 if monat > 12 else monat
+            spiele.append(spiel(jahr * 1000 + n * 10 + k, n, h, g, tore, utc=f"{jahr_n}-{monat:02d}-{tag:02d}T13:30:00Z"))
+    return spiele
+
+
+@unittest.skipUnless(HAT_NUMPY, "numpy/scipy nicht installiert")
+class DixonColesTests(unittest.TestCase):
+    def setUp(self):
+        self.spiele = runde_saison()
+        self.m = dixon_coles.DixonColes().anpassen(self.spiele, "2026-06-01T00:00:00Z")
+
+    def test_wahrscheinlichkeiten(self):
+        p = self.m.vorhersage(1, 2)
+        self.assertAlmostEqual(sum(p), 1.0, places=6)
+        self.assertGreater(p[0], 0.6)  # Team 1 gewinnt in den Daten immer
+        q = self.m.vorhersage(2, 1)
+        self.assertGreater(q[2], q[0])
+
+    def test_matrix_und_tore(self):
+        mat = self.m.ergebnis_matrix(3, 4)
+        self.assertAlmostEqual(float(mat.sum()), 1.0, places=9)
+        lh, lg = self.m.erwartete_tore(1, 2)
+        self.assertGreater(lh, lg)
+
+    def test_gradient(self):
+        th = self.m.theta + np.random.default_rng(0).normal(0, 0.05, len(self.m.theta))
+        th[-1] = -0.05
+        f = lambda t: self.m._ziel(t)[0]
+        g = lambda t: self.m._ziel(t)[1]
+        self.assertLess(check_grad(f, g, th), 1e-3)
+
+    def test_nur_vergangenheit(self):
+        with self.assertRaises(ValueError):
+            dixon_coles.DixonColes().anpassen(self.spiele, "2025-08-01T00:00:00Z")
+
+    def test_unbekanntes_team_ist_durchschnitt(self):
+        self.assertEqual(self.m.werte(999), (0.0, 0.0))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -16,8 +16,11 @@ def naechster_spieltag(spiele):
     return min(offen) if offen else None
 
 
-def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None, modell=None, modell_version=None):
-    """saison = Startjahr (2026 für 2026/27). modell = {Spiel-ID: (p_heim, p_remis, p_gast)} oder None."""
+def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None, modell=None, modell_version=None,
+               weitere_modelle=None, erwartete_tore=None):
+    """saison = Startjahr (2026 für 2026/27). modell = {Spiel-ID: (p_heim, p_remis, p_gast)} oder None
+    (Hauptmodell). weitere_modelle = {Version: {Spiel-ID: (p_heim, p_remis, p_gast)}} zum Vergleich.
+    erwartete_tore = {Spiel-ID: (heim, gast)}."""
     dieser = [s for s in spiele if s["spieltag"] == spieltag]
     if not dieser:
         raise ValueError(f"Kein Spieltag {spieltag} in den Daten der Saison {saison}")
@@ -51,6 +54,11 @@ def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None, m
             "modell": ({"version": modell_version, "p_heim": round(modell[s["id"]][0], 4),
                         "p_remis": round(modell[s["id"]][1], 4), "p_gast": round(modell[s["id"]][2], 4)}
                        if modell and s["id"] in modell else None),
+            "weitere_modelle": {v: {"p_heim": round(w[s["id"]][0], 4), "p_remis": round(w[s["id"]][1], 4),
+                                    "p_gast": round(w[s["id"]][2], 4)}
+                                for v, w in (weitere_modelle or {}).items() if s["id"] in w},
+            "erwartete_tore": ({"heim": round(erwartete_tore[s["id"]][0], 2), "gast": round(erwartete_tore[s["id"]][1], 2)}
+                               if erwartete_tore and s["id"] in erwartete_tore else None),
             "markt": None,
             "ergebnis": {"heim": s["tore_heim"], "gast": s["tore_gast"]} if s["beendet"] else None,
         })

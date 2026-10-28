@@ -58,8 +58,7 @@ def lade_saisons(bis):
     return saisons
 
 
-def lade_parameter():
-    pfad = "data/modell/elo_params.json"
+def lade_parameter(pfad="data/modell/elo_params.json"):
     if os.path.exists(pfad):
         with open(pfad, encoding="utf-8") as f:
             return json.load(f)["parameter"]
@@ -70,6 +69,29 @@ def cmd_fit(args):
     saisons = lade_saisons(args.train_bis + 1)
     b = fit.lauf(saisons, args.train_bis)
     print(json.dumps(b, indent=1, ensure_ascii=False))
+    if args.mit_dc:
+        b2 = fit.lauf_dc(saisons, args.train_bis, elo_params=lade_parameter())
+        print(json.dumps(b2, indent=1, ensure_ascii=False))
+
+
+def dixon_coles_vorhersagen(saisons, saison, spiele_tag):
+    """Dixon-Coles v0.2 für einen Spieltag: Wahrscheinlichkeiten und erwartete Tore."""
+    from . import dixon_coles
+    params = lade_parameter("data/modell/dc_params.json")
+    alle = [s for j in sorted(saisons) for s in saisons[j]]
+    zeiten = [s["anstoss_utc"] for s in spiele_tag if s["anstoss_utc"]]
+    if not zeiten:
+        return {}, {}
+    m = dixon_coles.DixonColes(params)
+    vorwerte = {}
+    if saison - 1 in saisons:
+        erster = min(s["anstoss_utc"] for s in saisons[saison] if s["spieltag"] == 1 and s["anstoss_utc"])
+        m.anpassen(alle, erster)
+        vorwerte = dixon_coles.absteiger_vorwerte(m, saisons[saison - 1], saisons[saison])
+    m.anpassen(alle, min(zeiten), vorwerte)
+    probs = {s["id"]: m.vorhersage(s["heim_id"], s["gast_id"]) for s in spiele_tag}
+    tore = {s["id"]: m.erwartete_tore(s["heim_id"], s["gast_id"]) for s in spiele_tag}
+    return probs, tore
 
 
 def cmd_paket(args):
@@ -83,10 +105,16 @@ def cmd_paket(args):
     saisons = lade_saisons(args.saison)
     modell = elo.EloModell(lade_parameter())
     modell.lauf(saisons)  # lernt aus allen beendeten Spielen bis jetzt
-    vorhersagen = {s["id"]: modell.vorhersage(s["heim_id"], s["gast_id"])
-                   for s in spiele if s["spieltag"] == spieltag}
+    spiele_tag = [s for s in spiele if s["spieltag"] == spieltag]
+    vorhersagen = {s["id"]: modell.vorhersage(s["heim_id"], s["gast_id"]) for s in spiele_tag}
+    try:
+        dc_probs, dc_tore = dixon_coles_vorhersagen(saisons, args.saison, spiele_tag)
+    except (ImportError, ValueError) as fehler:
+        print(f"Hinweis: Dixon-Coles übersprungen ({fehler})")
+        dc_probs, dc_tore = {}, {}
     daten = paket.baue_paket(args.saison, spieltag, spiele, vorsaison, modell=vorhersagen,
-                             modell_version=elo.VERSION)
+                             modell_version=elo.VERSION, weitere_modelle={"dc-0.2": dc_probs} if dc_probs else None,
+                             erwartete_tore=dc_tore)
     ordner = f"{SPIELTAGE}/{daten['saison']}"
     os.makedirs(ordner, exist_ok=True)
     pfad = f"{ordner}/{spieltag:02d}.json"
@@ -110,6 +138,7 @@ def main(argv=None):
     b.set_defaults(func=cmd_paket)
     c = sub.add_parser("fit", help="Elo-Parameter abstimmen (intern)")
     c.add_argument("--train-bis", type=int, required=True, help="letzte Trainingssaison, z. B. 2024")
+    c.add_argument("--mit-dc", action="store_true", help="zusätzlich Dixon-Coles abstimmen")
     c.set_defaults(func=cmd_fit)
     args = p.parse_args(argv)
     args.func(args)
