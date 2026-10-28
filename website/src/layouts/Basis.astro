@@ -1,0 +1,60 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  titel: string;
+  beschreibung?: string;
+}
+const { titel, beschreibung = "Bundesliga in Zahlen: Unsere Formel sagt jeden Spieltag voraus – vor Anpfiff eingefroren, danach ehrlich abgerechnet." } = Astro.props;
+const seitentitel = titel === "Spieltagsformel" ? "Spieltagsformel – Bundesliga in Zahlen" : `${titel} · Spieltagsformel`;
+const pfad = Astro.url.pathname.replace(/\/$/, "") || "/";
+const menue = [
+  { href: "/", text: "Spieltag" },
+  { href: "/modell", text: "Modell" },
+  { href: "/100-euro-experiment", text: "100-€-Experiment" },
+];
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seitentitel}</title>
+    <meta name="description" content={beschreibung} />
+    <!-- Bis zum Launch nicht in Suchmaschinen aufnehmen -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#111111" />
+  </head>
+  <body>
+    <header class="kopf">
+      <div class="rahmen">
+        <a class="logo" href="/" aria-label="Spieltagsformel – Startseite">
+          <img class="hell" src="/logo/spieltagsformel-logo-hell.svg" alt="Spieltagsformel" width="175" height="40" />
+          <img class="dunkel" src="/logo/spieltagsformel-logo-dunkel.svg" alt="Spieltagsformel" width="175" height="40" />
+        </a>
+        <nav class="nav" aria-label="Hauptmenü">
+          {menue.map((m) => (
+            <a href={m.href} aria-current={pfad === m.href ? "page" : undefined}>{m.text}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main class="rahmen">
+      <slot />
+    </main>
+    <footer class="fuss">
+      <div class="rahmen">
+        <nav aria-label="Rechtliches">
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
+        </nav>
+        <p>Spieltagsformel ist ein unabhängiges Datenprojekt. Keine Wettempfehlungen, keine Werbung für Sportwetten.
+          Spieldaten: <a href="https://www.openligadb.de">OpenLigaDB</a> (ODbL).</p>
+      </div>
+    </footer>
+  </body>
+</html>

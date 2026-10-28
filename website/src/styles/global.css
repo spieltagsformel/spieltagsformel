@@ -1,0 +1,109 @@
+/* Spieltagsformel – Styleguide v1 (Farbwelt „Datenblatt“) */
+@font-face { font-family: "Inter"; src: url("/fonts/Inter-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("/fonts/Inter-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("/fonts/Inter-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+:root {
+  --grund: #ffffff;
+  --grund-2: #f4f5f7;
+  --linie: #e3e3e3;
+  --text: #111111;
+  --text-leise: #5a5a5a;
+  --akzent: #2f5bff;
+  --akzent-flaeche: #2f5bff;
+  --auf-akzent: #ffffff;
+  --koralle-text: #c8323a;
+  --flaeche-invers: #111111;
+  --auf-invers: #ffffff;
+  --heim: #2f5bff;
+  --remis: #111111;
+  --gast: #ff5a5f;
+  --markt: #5a5a5a;
+  --schrift: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --breite: 46rem;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grund: #111111;
+    --grund-2: #1b1b1d;
+    --linie: #34343a;
+    --text: #f5f5f5;
+    --text-leise: #b5b5b5;
+    --akzent: #7d97ff;
+    --koralle-text: #ff8a8e;
+    --flaeche-invers: #f5f5f5;
+    --auf-invers: #111111;
+    --remis: #bdbdbd;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--text);
+  font-family: var(--schrift);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+a { color: var(--akzent); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.01em; }
+h1 { font-weight: 800; font-size: clamp(2rem, 6vw, 2.75rem); margin: 0 0 0.5rem; }
+h2 { font-weight: 800; font-size: 1.5rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-weight: 600; font-size: 1.125rem; margin: 1.5rem 0 0.5rem; }
+p { margin: 0 0 1rem; }
+.zahl, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.leise { color: var(--text-leise); }
+.klein { font-size: 0.875rem; }
+
+.rahmen { max-width: var(--breite); margin: 0 auto; padding: 0 1rem; }
+
+/* Kopf */
+.kopf { border-bottom: 1px solid var(--linie); }
+.kopf .rahmen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.logo img { display: block; height: 40px; width: auto; }
+.logo .dunkel { display: none; }
+@media (prefers-color-scheme: dark) { .logo .hell { display: none; } .logo .dunkel { display: block; } }
+.nav { display: flex; gap: 1.25rem; flex-wrap: wrap; font-weight: 600; font-size: 0.9375rem; }
+.nav a { color: var(--text); text-decoration: none; }
+.nav a[aria-current="page"], .nav a:hover { color: var(--akzent); }
+
+main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
+
+/* Kasten */
+.kasten { background: var(--grund-2); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.kasten > :last-child { margin-bottom: 0; }
+.hinweis { border-left: 4px solid var(--akzent); }
+
+/* Prognose-Liste */
+.spiele { list-style: none; margin: 1rem 0; padding: 0; }
+.spiel { border-top: 1px solid var(--linie); padding: 1rem 0; }
+.spiel:last-child { border-bottom: 1px solid var(--linie); }
+.spiel-kopf { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
+.paarung { font-weight: 600; font-size: 1.0625rem; }
+.anstoss { font-size: 0.875rem; color: var(--text-leise); }
+.balken { display: flex; height: 28px; border-radius: 4px; overflow: hidden; margin: 0.5rem 0 0.35rem; }
+.balken span { display: flex; align-items: center; padding: 0 0.4rem; font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; min-width: 0; white-space: nowrap; overflow: hidden; }
+.balken .h { background: var(--heim); color: #ffffff; }
+.balken .x { background: var(--remis); color: var(--grund); }
+.balken .a { background: var(--gast); color: #111111; justify-content: flex-end; }
+.legende { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.8125rem; color: var(--text-leise); }
+.punkt { display: inline-block; width: 0.65rem; height: 0.65rem; border-radius: 2px; margin-right: 0.3rem; vertical-align: -0.05rem; }
+.details { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-leise); }
+.details b { color: var(--text); font-weight: 600; }
+
+.quelle { font-size: 0.8125rem; color: var(--text-leise); margin-top: 1rem; }
+
+/* Fuß */
+.fuss { border-top: 1px solid var(--linie); padding: 1.5rem 0 2rem; font-size: 0.875rem; color: var(--text-leise); }
+.fuss nav { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.fuss a { color: var(--text-leise); }
+
+.platzhalter { background: #fff3cd; color: #111111; padding: 0 0.25rem; border-radius: 3px; }
