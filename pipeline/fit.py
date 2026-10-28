@@ -64,3 +64,45 @@ def lauf(saisons, train_bis, ausgabe="data/modell/elo_params.json"):
     with open(ausgabe.replace(".json", "_bericht.json"), "w", encoding="utf-8") as f:
         json.dump(bericht, f, indent=1, ensure_ascii=False)
     return bericht
+
+
+# ---------- Dixon-Coles v0.2 ----------
+GITTER_DC = {"xi": [0.001, 0.002, 0.003, 0.005], "ridge": [1.0, 3.0, 6.0, 10.0, 20.0]}
+
+
+def lauf_dc(saisons, train_bis, ausgabe="data/modell/dc_params.json", elo_params=None):
+    """Wählt xi und ridge auf den Saisons nach der ersten bis train_bis (Spieltag für Spieltag,
+    nur Vergangenheit) und prüft auf der folgenden Saison, im Vergleich mit Elo auf denselben Spielen."""
+    from . import dixon_coles
+    jahre = sorted(saisons)
+    train_von, test = jahre[0] + 1, train_bis + 1
+    ergebnisse = []
+    for xi in GITTER_DC["xi"]:
+        for ridge in GITTER_DC["ridge"]:
+            prot = dixon_coles.walk_forward(saisons, {"xi": xi, "ridge": ridge}, von=train_von, bis=train_bis)
+            ergebnisse.append((metriken.zusammenfassung(prot), {"xi": xi, "ridge": ridge}))
+    z_train, params = min(ergebnisse, key=lambda e: e[0]["rps"])
+    prot_test = dixon_coles.walk_forward(saisons, params, von=test, bis=test)
+    elo_prot = [x for x in EloModell(elo_params).lauf(saisons) if x["saison"] == test]
+    ids = {x["id"] for x in prot_test}
+    elo_gleich = [x for x in elo_prot if x["id"] in ids]
+    mittel = [dict(x, p=tuple((a + b) / 2 for a, b in zip(x["p"], y["p"])))
+              for x, y in zip(sorted(prot_test, key=lambda x: x["id"]), sorted(elo_gleich, key=lambda x: x["id"]))]
+    bericht = {
+        "training": [train_von, train_bis], "test": test, "parameter": params,
+        "gitter": [{"parameter": p, "rps": z["rps"]} for z, p in ergebnisse],
+        "training_ergebnis": z_train,
+        "test_dixon_coles": metriken.zusammenfassung(prot_test),
+        "test_elo": metriken.zusammenfassung(elo_gleich),
+        "test_mittel_aus_beiden": metriken.zusammenfassung(mittel),
+        "remis_als_favorit": {
+            "dixon_coles": sum(1 for x in prot_test if max(range(3), key=lambda i: x["p"][i]) == 1) / len(prot_test),
+            "elo": sum(1 for x in elo_gleich if max(range(3), key=lambda i: x["p"][i]) == 1) / len(elo_gleich),
+        },
+    }
+    os.makedirs(os.path.dirname(ausgabe), exist_ok=True)
+    with open(ausgabe, "w", encoding="utf-8") as f:
+        json.dump({"version": dixon_coles.VERSION, "parameter": params}, f, indent=1)
+    with open(ausgabe.replace(".json", "_bericht.json"), "w", encoding="utf-8") as f:
+        json.dump(bericht, f, indent=1, ensure_ascii=False)
+    return bericht

@@ -1,7 +1,7 @@
 {
  "saison": "2026-27",
  "spieltag": 8,
- "erstellt": "2026-10-28T15:39:46+00:00",
+ "erstellt": "2026-10-28T15:47:14+00:00",
  "quellen": [
   {
    "name": "OpenLigaDB",
@@ -178,6 +178,17 @@
     "p_remis": 0.2822,
     "p_gast": 0.4253
    },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.3801,
+     "p_remis": 0.2397,
+     "p_gast": 0.3803
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.63,
+    "gast": 1.63
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -201,6 +212,17 @@
     "p_heim": 0.5123,
     "p_remis": 0.2683,
     "p_gast": 0.2195
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.5177,
+     "p_remis": 0.2177,
+     "p_gast": 0.2646
+    }
+   },
+   "erwartete_tore": {
+    "heim": 2.09,
+    "gast": 1.46
    },
    "markt": null,
    "ergebnis": null
@@ -226,6 +248,17 @@
     "p_remis": 0.2857,
     "p_gast": 0.3603
    },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.416,
+     "p_remis": 0.2433,
+     "p_gast": 0.3407
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.67,
+    "gast": 1.49
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -249,6 +282,17 @@
     "p_heim": 0.4043,
     "p_remis": 0.284,
     "p_gast": 0.3117
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.4747,
+     "p_remis": 0.2613,
+     "p_gast": 0.264
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.56,
+    "gast": 1.11
    },
    "markt": null,
    "ergebnis": null
@@ -274,6 +318,17 @@
     "p_remis": 0.2857,
     "p_gast": 0.3638
    },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.4141,
+     "p_remis": 0.2327,
+     "p_gast": 0.3532
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.78,
+    "gast": 1.64
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -297,6 +352,17 @@
     "p_heim": 0.201,
     "p_remis": 0.2627,
     "p_gast": 0.5364
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.2593,
+     "p_remis": 0.2714,
+     "p_gast": 0.4693
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.03,
+    "gast": 1.48
    },
    "markt": null,
    "ergebnis": null
@@ -322,6 +388,17 @@
     "p_remis": 0.2503,
     "p_gast": 0.1685
    },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.639,
+     "p_remis": 0.1873,
+     "p_gast": 0.1738
+    }
+   },
+   "erwartete_tore": {
+    "heim": 2.46,
+    "gast": 1.24
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -346,6 +423,17 @@
     "p_remis": 0.2787,
     "p_gast": 0.2676
    },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.4284,
+     "p_remis": 0.2593,
+     "p_gast": 0.3123
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.53,
+    "gast": 1.28
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -369,6 +457,17 @@
     "p_heim": 0.5569,
     "p_remis": 0.2573,
     "p_gast": 0.1858
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.5406,
+     "p_remis": 0.226,
+     "p_gast": 0.2334
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.97,
+    "gast": 1.24
    },
    "markt": null,
    "ergebnis": null

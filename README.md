@@ -22,12 +22,12 @@ Phase 0 – Fundament. Datenpipeline, Modell und Website entstehen gerade.
 
 ## Pipeline benutzen
 
-Voraussetzung: Python 3.10 oder neuer, keine weiteren Pakete nötig.
+Voraussetzung: Python 3.10 oder neuer und `pip install -r requirements.txt` (numpy, scipy für das Dixon-Coles-Modell).
 
 ```
 python -m unittest discover -s tests -t .        # Tests
 python -m pipeline.run abrufen --von 2019 --bis 2026   # Spiele laden und bereinigen
-python -m pipeline.run fit --train-bis 2024    # Elo-Parameter abstimmen (intern, schreibt data/modell/)
+python -m pipeline.run fit --train-bis 2024 --mit-dc   # Elo- und Dixon-Coles-Parameter abstimmen (intern, schreibt data/modell/)
 python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag (inkl. Modell)
 ```
 

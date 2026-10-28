@@ -1,0 +1,7 @@
+{
+ "version": "dc-0.2",
+ "parameter": {
+  "xi": 0.003,
+  "ridge": 6.0
+ }
+}
