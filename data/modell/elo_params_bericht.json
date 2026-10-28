@@ -1,0 +1,48 @@
+{
+ "einlaufen": 2019,
+ "training": [
+  2020,
+  2024
+ ],
+ "test": 2025,
+ "parameter": {
+  "k": 15,
+  "heimvorteil": 65,
+  "regress": 0.1,
+  "aufsteiger": 1350,
+  "nu": 0.8
+ },
+ "training_ergebnis": {
+  "n": 1530,
+  "rps": 0.20427713348829635,
+  "brier": 0.5962820426978276,
+  "logloss": 0.998322068149638,
+  "trefferquote": 0.5078431372549019
+ },
+ "test_ergebnis": {
+  "n": 306,
+  "rps": 0.1940806291589914,
+  "brier": 0.5714898194089965,
+  "logloss": 0.9638629919840445,
+  "trefferquote": 0.5490196078431373
+ },
+ "test_mit_standardwerten": {
+  "n": 306,
+  "rps": 0.19563652610242782,
+  "brier": 0.5747484368123962,
+  "logloss": 0.9689130342076371,
+  "trefferquote": 0.5424836601307189
+ },
+ "test_nur_haeufigkeiten": {
+  "n": 306,
+  "rps": 0.2313526848647956,
+  "brier": 0.6477918749199025,
+  "logloss": 1.0706242358281848,
+  "trefferquote": 0.43790849673202614
+ },
+ "haeufigkeiten_training": {
+  "heim": 0.4372549019607843,
+  "remis": 0.2529411764705882,
+  "gast": 0.30980392156862746
+ }
+}

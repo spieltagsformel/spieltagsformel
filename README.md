@@ -17,6 +17,7 @@ Phase 0 – Fundament. Datenpipeline, Modell und Website entstehen gerade.
 | `data/manuell/` | von Hand gepflegte Angaben (z. B. Ausfälle) |
 | `data/spieltage/` | Spieltags-Datenpakete (JSON) und eingefrorene Prognosen |
 | `pipeline/` | Python-Skripte für Abruf, Bereinigung, Modell |
+| `data/modell/` | abgestimmte Modellparameter |
 | `.github/workflows/` | automatische Abläufe (GitHub Actions) |
 
 ## Pipeline benutzen
@@ -26,7 +27,8 @@ Voraussetzung: Python 3.10 oder neuer, keine weiteren Pakete nötig.
 ```
 python -m unittest discover -s tests -t .        # Tests
 python -m pipeline.run abrufen --von 2019 --bis 2026   # Spiele laden und bereinigen
-python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag
+python -m pipeline.run fit --train-bis 2024    # Elo-Parameter abstimmen (intern, schreibt data/modell/)
+python -m pipeline.run paket --saison 2026 --spieltag auto   # Datenpaket für den nächsten Spieltag (inkl. Modell)
 ```
 
 Alternativ in GitHub: Actions → „Daten abrufen“ → „Run workflow“.

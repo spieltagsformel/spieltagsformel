@@ -10,7 +10,10 @@ import os
 import sys
 import time
 
-from . import openligadb, paket, speicher
+import glob
+import re
+
+from . import elo, fit, openligadb, paket, speicher
 
 RAW = "data/raw"
 CLEAN = "data/clean"
@@ -45,6 +48,30 @@ def cmd_abrufen(args):
             print(f"  {i}: {n}")
 
 
+def lade_saisons(bis):
+    """Alle bereinigten Saisons bis einschließlich `bis` als {Startjahr: Spiele}."""
+    saisons = {}
+    for pfad in glob.glob(f"{CLEAN}/spiele_*.csv"):
+        jahr = int(re.search(r"spiele_(\d{4})\.csv$", pfad).group(1))
+        if jahr <= bis:
+            saisons[jahr] = speicher.lese_csv(pfad)
+    return saisons
+
+
+def lade_parameter():
+    pfad = "data/modell/elo_params.json"
+    if os.path.exists(pfad):
+        with open(pfad, encoding="utf-8") as f:
+            return json.load(f)["parameter"]
+    return None
+
+
+def cmd_fit(args):
+    saisons = lade_saisons(args.train_bis + 1)
+    b = fit.lauf(saisons, args.train_bis)
+    print(json.dumps(b, indent=1, ensure_ascii=False))
+
+
 def cmd_paket(args):
     spiele = speicher.lese_csv(f"{CLEAN}/spiele_{args.saison}.csv")
     vor = f"{CLEAN}/spiele_{args.saison - 1}.csv"
@@ -53,7 +80,13 @@ def cmd_paket(args):
     if spieltag is None:
         print("Alle Spiele der Saison sind beendet.")
         return
-    daten = paket.baue_paket(args.saison, spieltag, spiele, vorsaison)
+    saisons = lade_saisons(args.saison)
+    modell = elo.EloModell(lade_parameter())
+    modell.lauf(saisons)  # lernt aus allen beendeten Spielen bis jetzt
+    vorhersagen = {s["id"]: modell.vorhersage(s["heim_id"], s["gast_id"])
+                   for s in spiele if s["spieltag"] == spieltag}
+    daten = paket.baue_paket(args.saison, spieltag, spiele, vorsaison, modell=vorhersagen,
+                             modell_version=elo.VERSION)
     ordner = f"{SPIELTAGE}/{daten['saison']}"
     os.makedirs(ordner, exist_ok=True)
     pfad = f"{ordner}/{spieltag:02d}.json"
@@ -75,6 +108,9 @@ def main(argv=None):
     b.add_argument("--saison", type=int, required=True)
     b.add_argument("--spieltag", default="auto", help="Zahl oder 'auto' (nächster offener Spieltag)")
     b.set_defaults(func=cmd_paket)
+    c = sub.add_parser("fit", help="Elo-Parameter abstimmen (intern)")
+    c.add_argument("--train-bis", type=int, required=True, help="letzte Trainingssaison, z. B. 2024")
+    c.set_defaults(func=cmd_fit)
     args = p.parse_args(argv)
     args.func(args)
 

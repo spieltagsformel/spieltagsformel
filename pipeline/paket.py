@@ -16,8 +16,8 @@ def naechster_spieltag(spiele):
     return min(offen) if offen else None
 
 
-def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None):
-    """saison = Startjahr (2026 für 2026/27)."""
+def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None, modell=None, modell_version=None):
+    """saison = Startjahr (2026 für 2026/27). modell = {Spiel-ID: (p_heim, p_remis, p_gast)} oder None."""
     dieser = [s for s in spiele if s["spieltag"] == spieltag]
     if not dieser:
         raise ValueError(f"Kein Spieltag {spieltag} in den Daten der Saison {saison}")
@@ -48,7 +48,9 @@ def baue_paket(saison, spieltag, spiele, spiele_vorsaison=None, erstellt=None):
             "form_heim": form(spiele, s["heim_id"], spieltag),
             "form_gast": form(spiele, s["gast_id"], spieltag),
             "vergleich": {"tabellenplatz": tabellenplatz_regel(ph, pg), "community": None},
-            "modell": None,
+            "modell": ({"version": modell_version, "p_heim": round(modell[s["id"]][0], 4),
+                        "p_remis": round(modell[s["id"]][1], 4), "p_gast": round(modell[s["id"]][2], 4)}
+                       if modell and s["id"] in modell else None),
             "markt": None,
             "ergebnis": {"heim": s["tore_heim"], "gast": s["tore_gast"]} if s["beendet"] else None,
         })

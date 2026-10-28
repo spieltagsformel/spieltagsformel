@@ -1,7 +1,7 @@
 {
  "saison": "2026-27",
  "spieltag": 8,
- "erstellt": "2026-10-28T15:30:53+00:00",
+ "erstellt": "2026-10-28T15:39:46+00:00",
  "quellen": [
   {
    "name": "OpenLigaDB",
@@ -172,7 +172,12 @@
     "tabellenplatz": "remis",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.2925,
+    "p_remis": 0.2822,
+    "p_gast": 0.4253
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -191,7 +196,12 @@
     "tabellenplatz": "heim",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5123,
+    "p_remis": 0.2683,
+    "p_gast": 0.2195
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -210,7 +220,12 @@
     "tabellenplatz": "gast",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.354,
+    "p_remis": 0.2857,
+    "p_gast": 0.3603
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -229,7 +244,12 @@
     "tabellenplatz": "gast",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.4043,
+    "p_remis": 0.284,
+    "p_gast": 0.3117
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -248,7 +268,12 @@
     "tabellenplatz": "heim",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.3505,
+    "p_remis": 0.2857,
+    "p_gast": 0.3638
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -267,7 +292,12 @@
     "tabellenplatz": "gast",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.201,
+    "p_remis": 0.2627,
+    "p_gast": 0.5364
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -286,7 +316,12 @@
     "tabellenplatz": "remis",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5812,
+    "p_remis": 0.2503,
+    "p_gast": 0.1685
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -305,7 +340,12 @@
     "tabellenplatz": "gast",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.4536,
+    "p_remis": 0.2787,
+    "p_gast": 0.2676
+   },
    "markt": null,
    "ergebnis": null
   },
@@ -324,7 +364,12 @@
     "tabellenplatz": "gast",
     "community": null
    },
-   "modell": null,
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5569,
+    "p_remis": 0.2573,
+    "p_gast": 0.1858
+   },
    "markt": null,
    "ergebnis": null
   }
