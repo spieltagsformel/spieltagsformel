@@ -82,22 +82,33 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
 .kasten > :last-child { margin-bottom: 0; }
 .hinweis { border-left: 4px solid var(--akzent); }
 
-/* Prognose-Liste */
-.spiele { list-style: none; margin: 1rem 0; padding: 0; }
-.spiel { border-top: 1px solid var(--linie); padding: 1rem 0; }
+/* Spieltag: Kräfteverhältnis (Entwurf B) */
+.spiele { list-style: none; margin: 1.25rem 0; padding: 0; }
+.spiel { display: grid; grid-template-columns: 9.5rem 1fr 9.5rem; align-items: center; gap: 0.5rem 1.25rem;
+  padding: 1.25rem 0; border-top: 1px solid var(--linie); }
 .spiel:last-child { border-bottom: 1px solid var(--linie); }
-.spiel-kopf { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
-.paarung { font-weight: 600; font-size: 1.0625rem; }
-.anstoss { font-size: 0.875rem; color: var(--text-leise); }
-.balken { display: flex; height: 28px; border-radius: 4px; overflow: hidden; margin: 0.5rem 0 0.35rem; }
-.balken span { display: flex; align-items: center; padding: 0 0.4rem; font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; min-width: 0; white-space: nowrap; overflow: hidden; }
-.balken .h { background: var(--heim); color: #ffffff; }
-.balken .x { background: var(--remis); color: var(--grund); }
-.balken .a { background: var(--gast); color: #111111; justify-content: flex-end; }
-.legende { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.8125rem; color: var(--text-leise); }
-.punkt { display: inline-block; width: 0.65rem; height: 0.65rem; border-radius: 2px; margin-right: 0.3rem; vertical-align: -0.05rem; }
-.details { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-leise); }
-.details b { color: var(--text); font-weight: 600; }
+.team { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; line-height: 1.2; }
+.team.gast { text-align: right; }
+.team small { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.75rem; letter-spacing: 0;
+  color: var(--text-leise); margin-top: 0.2rem; }
+.skala { position: relative; height: 4rem; }
+.skala .achse { position: absolute; top: 1.85rem; left: 0; right: 0; height: 2px; background: var(--linie); }
+.skala .mitte { position: absolute; top: 1.3rem; left: 50%; width: 2px; height: 1.2rem; margin-left: -1px; background: var(--text-leise); opacity: 0.45; }
+.skala .zone { position: absolute; top: 1.85rem; height: 2px; background: var(--akzent); }
+.skala .punkt-gross { position: absolute; top: 1.2rem; width: 1.4rem; height: 1.4rem; margin-left: -0.7rem; border-radius: 50%;
+  background: var(--akzent-flaeche); box-shadow: 0 0 0 4px var(--grund); }
+.skala .label { position: absolute; top: 2.85rem; transform: translateX(-50%); font-size: 0.8125rem; font-weight: 600; white-space: nowrap; }
+.skala .rand { position: absolute; top: 0; font-family: var(--mono); font-size: 0.6875rem; color: var(--text-leise); }
+.skala .rand.links { left: 0; } .skala .rand.rechts { right: 0; }
+.meta { grid-column: 1 / -1; display: flex; justify-content: center; gap: 0.4rem 1.25rem; flex-wrap: wrap;
+  font-size: 0.8125rem; color: var(--text-leise); }
+.meta b { color: var(--text); font-family: var(--mono); font-weight: 700; }
+@media (max-width: 640px) {
+  .spiel { grid-template-columns: 1fr 1fr; }
+  .team { font-size: 1.0625rem; }
+  .skala { grid-column: 1 / -1; grid-row: 2; }
+  .meta { justify-content: flex-start; }
+}
 
 .quelle { font-size: 0.8125rem; color: var(--text-leise); margin-top: 1rem; }
 

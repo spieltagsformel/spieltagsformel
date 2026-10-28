@@ -1,6 +1,6 @@
 ---
 import Basis from "../layouts/Basis.astro";
-import { neuestesPaket, anstoss, prozent, REGEL_TEXT } from "../lib/daten.js";
+import { neuestesPaket, anstoss, prozent, komma, skala, kurz, REGEL_TEXT } from "../lib/daten.js";
 
 const paket = neuestesPaket();
 const stand = paket ? new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", dateStyle: "medium", timeStyle: "short" }).format(new Date(paket.erstellt)) : null;
@@ -13,44 +13,40 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
   {paket ? (
     <section aria-labelledby="spieltag">
       <h2 id="spieltag">{paket.spieltag}. Spieltag {saisonText}: Die Formel sagt …</h2>
-      <div class="legende" aria-hidden="true">
-        <span><span class="punkt" style="background:var(--heim)"></span>Heimsieg</span>
-        <span><span class="punkt" style="background:var(--remis)"></span>Remis</span>
-        <span><span class="punkt" style="background:var(--gast)"></span>Auswärtssieg</span>
-      </div>
+      <p class="leise klein">Der Punkt zeigt, zu welcher Seite die Formel tendiert. In der Mitte ist das Spiel offen.</p>
       <ol class="spiele">
         {paket.spiele.map((s) => {
           const m = s.modell;
+          const k = m ? skala(s) : null;
           return (
             <li class="spiel">
-              <div class="spiel-kopf">
-                <span class="paarung">{s.heim} – {s.gast}</span>
-                <span class="anstoss">{anstoss(s.anstoss_utc)}</span>
-              </div>
-              {m ? (
-                <>
-                  <div class="balken" role="img"
-                    aria-label={`Heimsieg ${prozent(m.p_heim)} Prozent, Remis ${prozent(m.p_remis)} Prozent, Auswärtssieg ${prozent(m.p_gast)} Prozent`}>
-                    <span class="h" style={`width:${m.p_heim * 100}%`}>{prozent(m.p_heim)} %</span>
-                    <span class="x" style={`width:${m.p_remis * 100}%`}>{prozent(m.p_remis)} %</span>
-                    <span class="a" style={`width:${m.p_gast * 100}%`}>{prozent(m.p_gast)} %</span>
-                  </div>
-                  <div class="details">
-                    {s.erwartete_tore && (
-                      <span>Erwartete Tore <b class="zahl">{s.erwartete_tore.heim.toFixed(1)} : {s.erwartete_tore.gast.toFixed(1)}</b></span>
-                    )}
-                    <span>Tabellenplatz-Regel <b>{REGEL_TEXT[s.vergleich.tabellenplatz]}</b> <span class="zahl">({s.platz_heim}. gegen {s.platz_gast}.)</span></span>
-                    {s.ergebnis && <span>Ergebnis <b class="zahl">{s.ergebnis.heim}:{s.ergebnis.gast}</b></span>}
-                  </div>
-                </>
+              <div class="team" title={s.heim}>{kurz(s.heim)}<small>{s.platz_heim}. · Form {s.form_heim || "–"}</small></div>
+              {k ? (
+                <div class="skala" role="img" aria-label={`${k.label}. Heimsieg ${prozent(m.p_heim)} Prozent, Remis ${prozent(m.p_remis)} Prozent, Auswärtssieg ${prozent(m.p_gast)} Prozent`}>
+                  <span class="rand links" aria-hidden="true">← stärker</span>
+                  <span class="rand rechts" aria-hidden="true">stärker →</span>
+                  <span class="achse"></span>
+                  <span class="mitte"></span>
+                  <span class="zone" style={`left:${k.zoneLinks}%;width:${k.zoneBreite}%`}></span>
+                  <span class="punkt-gross" style={`left:${k.pos}%`}></span>
+                  <span class="label" style={`left:${Math.max(14, Math.min(86, k.pos))}%`}>{k.label}</span>
+                </div>
               ) : (
-                <p class="leise klein">Noch keine Modellprognose.</p>
+                <div class="skala leise klein">Noch keine Prognose</div>
               )}
+              <div class="team gast" title={s.gast}>{kurz(s.gast)}<small>{s.platz_gast}. · Form {s.form_gast || "–"}</small></div>
+              <div class="meta">
+                <span>{anstoss(s.anstoss_utc)}</span>
+                {s.erwartete_tore && <span>Erwartete Tore <b>{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</b></span>}
+                {m && <span>Formel <b>{prozent(m.p_heim)}</b> · {prozent(m.p_remis)} · <b>{prozent(m.p_gast)}</b> %</span>}
+                <span>Tabellen-Regel: {REGEL_TEXT[s.vergleich.tabellenplatz]}</span>
+                {s.ergebnis && <span>Ergebnis <b>{s.ergebnis.heim}:{s.ergebnis.gast}</b></span>}
+              </div>
             </li>
           );
         })}
       </ol>
-      <p class="quelle">Wahrscheinlichkeiten unseres Modells ({paket.spiele[0]?.modell?.version ?? "–"}), keine Wettempfehlung. Stand: {stand} Uhr. Quelle: OpenLigaDB (ODbL), eigene Berechnung.</p>
+      <p class="quelle">Formel = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent, Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quelle: OpenLigaDB (ODbL), eigene Berechnung.</p>
       {paket.hinweise.length > 0 && (
         <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
       )}
