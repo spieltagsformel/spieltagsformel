@@ -47,7 +47,7 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
           );
         })}
       </ol>
-      <p class="quelle">Formel und Markt = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent (Markt: Durchschnitt der Buchmacher, ohne Marge). Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quelle: OpenLigaDB (ODbL), eigene Berechnung.</p>
+      <p class="quelle">Formel und Markt = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent (Markt: Durchschnitt der Buchmacher, ohne Marge). Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quellen: OpenLigaDB (ODbL), The Odds API (Quoten), eigene Berechnung.</p>
       {paket.hinweise.length > 0 && (
         <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
       )}
