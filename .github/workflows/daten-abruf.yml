@@ -71,7 +71,10 @@ jobs:
         run: |
           git config user.name "spieltagsformel-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/clean data/spieltage data/nachberichte entwuerfe grafik/ausgabe
+          # Nur Ordner hinzufügen, die es gibt (Nachbericht-Entwürfe entstehen erst nach dem ersten beendeten Spieltag)
+          for ordner in data/clean data/spieltage data/nachberichte entwuerfe grafik/ausgabe; do
+            if [ -e "$ordner" ]; then git add "$ordner"; fi
+          done
           git diff --cached --quiet && echo "Keine Änderungen" && exit 0
           git commit -m "Daten aktualisiert"
           git push
