@@ -42,6 +42,11 @@ function linkZiel(wert) {
   }
 }
 
+// UTM-Werte: nur kurze, einfache Kennungen (Buchstaben, Ziffern, _ . -), sonst leer
+function utmWert(wert) {
+  return typeof wert === "string" && /^[A-Za-z0-9_.-]{1,40}$/.test(wert) ? wert.toLowerCase() : "";
+}
+
 async function zaehle(env, sql, werte) {
   if (!env.DB) return;
   await env.DB.prepare(sql).bind(...werte).run();
@@ -103,6 +108,14 @@ async function aufruf(request, env) {
   await zaehle(env,
     "INSERT INTO aufrufe (tag, seite, quelle, anzahl) VALUES (?, ?, ?, 1) ON CONFLICT (tag, seite, quelle) DO UPDATE SET anzahl = anzahl + 1",
     [heute(), seite, quelle]);
+  // Kampagnen-Kennzeichnung (z. B. aus dem Newsletter): nur Summen pro Tag, Seite und Kennung
+  const utm = daten.utm && typeof daten.utm === "object" ? daten.utm : {};
+  const [us, um, uc] = [utmWert(utm.s), utmWert(utm.m), utmWert(utm.c)];
+  if (us || um || uc) {
+    await zaehle(env,
+      "INSERT INTO kampagnen (tag, seite, utm_source, utm_medium, utm_campaign, anzahl) VALUES (?, ?, ?, ?, ?, 1) ON CONFLICT (tag, seite, utm_source, utm_medium, utm_campaign) DO UPDATE SET anzahl = anzahl + 1",
+      [heute(), seite, us, um, uc]);
+  }
   return new Response(null, { status: 204 });
 }
 

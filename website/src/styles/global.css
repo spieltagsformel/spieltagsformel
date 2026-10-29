@@ -130,3 +130,8 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
 .formular button:hover { filter: brightness(1.08); }
 .formular p { margin: 0; }
 .versteckt { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Newsletter */
+.knopf { display: inline-block; font-weight: 600; color: var(--auf-akzent); background: var(--akzent-flaeche);
+  border-radius: 6px; padding: 0.7rem 1.2rem; text-decoration: none; }
+.knopf:hover { filter: brightness(1.08); text-decoration: none; }
