@@ -1,5 +1,6 @@
 ---
 import Basis from "../layouts/Basis.astro";
+import NewsletterBox from "../components/NewsletterBox.astro";
 ---
 <Basis titel="Das 100-€-Experiment" beschreibung="Ein rechnerisches Experiment ohne echtes Geld: Was wäre, wenn man der Formel folgen würde?">
   <h1>Das 100-€-Experiment</h1>
@@ -21,4 +22,6 @@ import Basis from "../layouts/Basis.astro";
 
   <h2>Kontostand</h2>
   <p class="leise">Das Experiment startet mit dem ersten Spieltag nach der Winterpause. Ab dann steht hier jede Woche der aktuelle Kontostand.</p>
+
+  <NewsletterBox text="Den Kontostand bekommst du jeden Mittwoch per E-Mail, dazu eine Zahl der Woche und das Logbuch der Formel. Kostenlos und jederzeit abbestellbar." />
 </Basis>

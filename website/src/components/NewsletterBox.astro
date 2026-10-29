@@ -1,0 +1,14 @@
+---
+import { KIT_URL } from "../lib/newsletter.js";
+
+interface Props {
+  text?: string;
+}
+const { text = "Der Kontostand des 100-€-Experiments, eine Zahl der Woche und das Logbuch der Formel. In etwa vier Minuten gelesen, kostenlos, jederzeit abbestellbar." } = Astro.props;
+---
+<aside class="kasten newsletter" aria-labelledby="nl-titel">
+  <h3 id="nl-titel" style="margin-top:0">Nachspielzeit – jeden Mittwoch</h3>
+  <p>{text}</p>
+  <p><a class="knopf" href={KIT_URL} rel="noopener">Kostenlos abonnieren</a></p>
+  <p class="klein leise">Du kommst auf eine Seite unseres Versanddienstleisters Kit (USA) und bekommst zuerst eine E-Mail zur Bestätigung. Wir messen, welche Links in den Ausgaben angeklickt werden (nur als Statistik). Mehr in der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+</aside>

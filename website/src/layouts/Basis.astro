@@ -49,6 +49,7 @@ const menue = [
     <footer class="fuss">
       <div class="rahmen">
         <nav aria-label="Rechtliches">
+          <a href="/newsletter">Newsletter</a>
           <a href="/kontakt">Kontakt</a>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
@@ -64,7 +65,9 @@ const menue = [
         var senden = function (pfad, daten) {
           try { navigator.sendBeacon(pfad, new Blob([JSON.stringify(daten)], { type: "text/plain" })); } catch (e) {}
         };
-        senden("/api/aufruf", { seite: location.pathname, quelle: document.referrer || "" });
+        var p = new URLSearchParams(location.search);
+        var utm = { s: p.get("utm_source") || "", m: p.get("utm_medium") || "", c: p.get("utm_campaign") || "" };
+        senden("/api/aufruf", { seite: location.pathname, quelle: document.referrer || "", utm: utm });
         document.addEventListener("click", function (e) {
           var a = e.target.closest && e.target.closest("a[href]");
           if (!a) return;

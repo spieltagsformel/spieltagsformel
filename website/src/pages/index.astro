@@ -1,5 +1,6 @@
 ---
 import Basis from "../layouts/Basis.astro";
+import NewsletterBox from "../components/NewsletterBox.astro";
 import { neuestesPaket, anstoss, prozent, komma, skala, kurz, REGEL_TEXT } from "../lib/daten.js";
 
 const paket = neuestesPaket();
@@ -60,4 +61,6 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
     <h3 style="margin-top:0">Wie messen wir die Formel?</h3>
     <p>Jede Prognose wird vor Anpfiff mit Zeitstempel gespeichert. Danach vergleichen wir sie mit einer einfachen Regel (der besser Platzierte gewinnt), mit der Einschätzung unserer Community und mit dem Markt. <a href="/modell">Mehr zum Modell</a></p>
   </div>
+
+  <NewsletterBox />
 </Basis>
