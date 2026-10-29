@@ -66,14 +66,16 @@ async function kontakt(request, env) {
     return weiter(url, "/kontakt?fehler=1");
   }
   const feld = (n) => String(form.get(n) ?? "").trim();
+  // Zeilenumbrüche in Einzeilern entfernen (Betreff, Name, E-Mail landen in E-Mail-Kopfzeilen)
+  const einzeilig = (n) => feld(n).replace(/[\r\n]+/g, " ");
   // Spam-Schutz: verstecktes Feld muss leer sein, Formular nicht schneller als 3 Sekunden ausgefüllt
   if (feld("website") !== "") return weiter(url, "/kontakt/danke");
   const start = Number(feld("t"));
   if (start && Date.now() - start < 3000) return weiter(url, "/kontakt/danke");
 
-  const name = feld("name").slice(0, MAX.name);
-  const email = feld("email").slice(0, MAX.email);
-  const betreff = feld("betreff").slice(0, MAX.betreff) || "Nachricht über das Kontaktformular";
+  const name = einzeilig("name").slice(0, MAX.name);
+  const email = einzeilig("email").slice(0, MAX.email);
+  const betreff = einzeilig("betreff").slice(0, MAX.betreff) || "Nachricht über das Kontaktformular";
   const nachricht = feld("nachricht").slice(0, MAX.nachricht);
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!emailOk || nachricht.length < 10) return weiter(url, "/kontakt?fehler=1");
