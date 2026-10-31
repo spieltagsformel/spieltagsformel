@@ -1,7 +1,7 @@
 {
  "saison": "2026-27",
  "spieltag": 8,
- "erstellt": "2026-10-31T13:30:23+00:00",
+ "erstellt": "2026-10-31T16:14:24+00:00",
  "quellen": [
   {
    "name": "OpenLigaDB",
@@ -245,7 +245,8 @@
     "buchmacher": 22,
     "abruf": "2026-10-31T13:30:24+00:00"
    },
-   "ergebnis": null
+   "ergebnis": null,
+   "eingefroren": "2026-10-31T13:30:23+00:00"
   },
   {
    "id": 83222,
@@ -286,7 +287,8 @@
     "buchmacher": 22,
     "abruf": "2026-10-31T13:30:24+00:00"
    },
-   "ergebnis": null
+   "ergebnis": null,
+   "eingefroren": "2026-10-31T13:30:23+00:00"
   },
   {
    "id": 83224,
@@ -327,7 +329,8 @@
     "buchmacher": 22,
     "abruf": "2026-10-31T13:30:24+00:00"
    },
-   "ergebnis": null
+   "ergebnis": null,
+   "eingefroren": "2026-10-31T13:30:23+00:00"
   },
   {
    "id": 83225,
@@ -368,7 +371,8 @@
     "buchmacher": 22,
     "abruf": "2026-10-31T13:30:24+00:00"
    },
-   "ergebnis": null
+   "ergebnis": null,
+   "eingefroren": "2026-10-31T13:30:23+00:00"
   },
   {
    "id": 83226,
@@ -409,7 +413,8 @@
     "buchmacher": 22,
     "abruf": "2026-10-31T13:30:24+00:00"
    },
-   "ergebnis": null
+   "ergebnis": null,
+   "eingefroren": "2026-10-31T13:30:23+00:00"
   },
   {
    "id": 83219,
@@ -444,11 +449,11 @@
     "gast": 1.24
    },
    "markt": {
-    "p_heim": 0.7219,
-    "p_remis": 0.1612,
-    "p_gast": 0.117,
+    "p_heim": 0.7195,
+    "p_remis": 0.1605,
+    "p_gast": 0.12,
     "buchmacher": 22,
-    "abruf": "2026-10-31T13:30:24+00:00"
+    "abruf": "2026-10-31T16:14:24+00:00"
    },
    "ergebnis": null
   },
@@ -485,11 +490,11 @@
     "gast": 1.28
    },
    "markt": {
-    "p_heim": 0.3606,
-    "p_remis": 0.2641,
-    "p_gast": 0.3753,
+    "p_heim": 0.3605,
+    "p_remis": 0.2644,
+    "p_gast": 0.3751,
     "buchmacher": 22,
-    "abruf": "2026-10-31T13:30:24+00:00"
+    "abruf": "2026-10-31T16:14:24+00:00"
    },
    "ergebnis": null
   },
@@ -526,11 +531,11 @@
     "gast": 1.24
    },
    "markt": {
-    "p_heim": 0.6082,
-    "p_remis": 0.2062,
-    "p_gast": 0.1856,
+    "p_heim": 0.6089,
+    "p_remis": 0.2059,
+    "p_gast": 0.1852,
     "buchmacher": 22,
-    "abruf": "2026-10-31T13:30:24+00:00"
+    "abruf": "2026-10-31T16:14:24+00:00"
    },
    "ergebnis": null
   }
