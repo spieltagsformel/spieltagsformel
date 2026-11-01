@@ -1,7 +1,7 @@
 {
  "saison": "2026-27",
  "spieltag": 8,
- "erstellt": "2026-11-01T05:56:51+00:00",
+ "erstellt": "2026-11-01T13:32:55+00:00",
  "quellen": [
   {
    "name": "OpenLigaDB",
@@ -509,11 +509,11 @@
     "gast": 1.28
    },
    "markt": {
-    "p_heim": 0.3544,
-    "p_remis": 0.2702,
-    "p_gast": 0.3754,
-    "buchmacher": 23,
-    "abruf": "2026-11-01T05:56:52+00:00"
+    "p_heim": 0.3534,
+    "p_remis": 0.2706,
+    "p_gast": 0.376,
+    "buchmacher": 22,
+    "abruf": "2026-11-01T13:32:55+00:00"
    },
    "ergebnis": null
   },
@@ -550,11 +550,11 @@
     "gast": 1.24
    },
    "markt": {
-    "p_heim": 0.6183,
-    "p_remis": 0.2037,
-    "p_gast": 0.178,
-    "buchmacher": 23,
-    "abruf": "2026-11-01T05:56:52+00:00"
+    "p_heim": 0.6215,
+    "p_remis": 0.2029,
+    "p_gast": 0.1756,
+    "buchmacher": 22,
+    "abruf": "2026-11-01T13:32:55+00:00"
    },
    "ergebnis": null
   }
