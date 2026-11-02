@@ -69,8 +69,8 @@ id,saison,spieltag,anstoss_utc,anstoss_lokal,heim_id,heim,gast_id,gast,beendet,t
 83225,2026,8,2026-10-31T14:30:00Z,2026-10-31T15:30:00,134,SV Werder Bremen,175,TSG Hoffenheim,True,2,0,0,0
 83226,2026,8,2026-10-31T14:30:00Z,2026-10-31T15:30:00,9,FC Schalke 04,1635,RB Leipzig,True,0,2,0,0
 83219,2026,8,2026-10-31T17:30:00Z,2026-10-31T18:30:00,40,FC Bayern München,7,Borussia Dortmund,True,2,2,1,0
-83223,2026,8,2026-11-01T14:30:00Z,2026-11-01T15:30:00,80,1. FC Union Berlin,65,1. FC Köln,False,,,,
-83221,2026,8,2026-11-01T16:30:00Z,2026-11-01T17:30:00,91,Eintracht Frankfurt,100,Hamburger SV,False,,,,
+83223,2026,8,2026-11-01T14:30:00Z,2026-11-01T15:30:00,80,1. FC Union Berlin,65,1. FC Köln,True,1,1,1,0
+83221,2026,8,2026-11-01T16:30:00Z,2026-11-01T17:30:00,91,Eintracht Frankfurt,100,Hamburger SV,True,3,1,1,1
 83234,2026,9,2026-11-06T19:30:00Z,2026-11-06T20:30:00,100,Hamburger SV,87,Borussia Mönchengladbach,False,,,,
 83228,2026,9,2026-11-07T14:30:00Z,2026-11-07T15:30:00,7,Borussia Dortmund,198,SV 07 Elversberg,False,,,,
 83229,2026,9,2026-11-07T14:30:00Z,2026-11-07T15:30:00,1635,RB Leipzig,95,FC Augsburg,False,,,,

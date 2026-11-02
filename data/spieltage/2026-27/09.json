@@ -1,0 +1,534 @@
+{
+ "saison": "2026-27",
+ "spieltag": 9,
+ "erstellt": "2026-11-02T06:16:11+00:00",
+ "quellen": [
+  {
+   "name": "OpenLigaDB",
+   "url": "https://www.openligadb.de",
+   "lizenz": "ODbL 1.0"
+  },
+  {
+   "name": "The Odds API (margenbereinigte Durchschnittsquoten)",
+   "url": "https://the-odds-api.com"
+  }
+ ],
+ "hinweise": [],
+ "tabelle_vor_spieltag": [
+  {
+   "platz": 1,
+   "team": "FC Bayern München",
+   "spiele": 8,
+   "punkte": 18,
+   "tore": 27,
+   "gegentore": 8
+  },
+  {
+   "platz": 2,
+   "team": "Borussia Dortmund",
+   "spiele": 8,
+   "punkte": 18,
+   "tore": 14,
+   "gegentore": 6
+  },
+  {
+   "platz": 3,
+   "team": "SC Freiburg",
+   "spiele": 8,
+   "punkte": 16,
+   "tore": 18,
+   "gegentore": 10
+  },
+  {
+   "platz": 4,
+   "team": "RB Leipzig",
+   "spiele": 8,
+   "punkte": 15,
+   "tore": 22,
+   "gegentore": 11
+  },
+  {
+   "platz": 5,
+   "team": "SV Werder Bremen",
+   "spiele": 8,
+   "punkte": 15,
+   "tore": 17,
+   "gegentore": 14
+  },
+  {
+   "platz": 6,
+   "team": "Bayer 04 Leverkusen",
+   "spiele": 8,
+   "punkte": 13,
+   "tore": 18,
+   "gegentore": 16
+  },
+  {
+   "platz": 7,
+   "team": "SV 07 Elversberg",
+   "spiele": 8,
+   "punkte": 13,
+   "tore": 16,
+   "gegentore": 16
+  },
+  {
+   "platz": 8,
+   "team": "Eintracht Frankfurt",
+   "spiele": 8,
+   "punkte": 11,
+   "tore": 13,
+   "gegentore": 18
+  },
+  {
+   "platz": 9,
+   "team": "1. FSV Mainz 05",
+   "spiele": 8,
+   "punkte": 10,
+   "tore": 17,
+   "gegentore": 17
+  },
+  {
+   "platz": 10,
+   "team": "FC Augsburg",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 18,
+   "gegentore": 15
+  },
+  {
+   "platz": 11,
+   "team": "VfB Stuttgart",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 14,
+   "gegentore": 15
+  },
+  {
+   "platz": 12,
+   "team": "TSG Hoffenheim",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 14,
+   "gegentore": 16
+  },
+  {
+   "platz": 13,
+   "team": "1. FC Köln",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 9,
+   "gegentore": 12
+  },
+  {
+   "platz": 14,
+   "team": "SC Paderborn 07",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 6,
+   "gegentore": 9
+  },
+  {
+   "platz": 15,
+   "team": "Hamburger SV",
+   "spiele": 8,
+   "punkte": 9,
+   "tore": 7,
+   "gegentore": 19
+  },
+  {
+   "platz": 16,
+   "team": "1. FC Union Berlin",
+   "spiele": 8,
+   "punkte": 7,
+   "tore": 7,
+   "gegentore": 19
+  },
+  {
+   "platz": 17,
+   "team": "FC Schalke 04",
+   "spiele": 8,
+   "punkte": 6,
+   "tore": 4,
+   "gegentore": 9
+  },
+  {
+   "platz": 18,
+   "team": "Borussia Mönchengladbach",
+   "spiele": 8,
+   "punkte": 4,
+   "tore": 11,
+   "gegentore": 22
+  }
+ ],
+ "spiele": [
+  {
+   "id": 83234,
+   "anstoss_utc": "2026-11-06T19:30:00Z",
+   "anstoss_lokal": "2026-11-06T20:30:00",
+   "heim": "Hamburger SV",
+   "gast": "Borussia Mönchengladbach",
+   "tv": null,
+   "platz_heim": 15,
+   "platz_gast": 18,
+   "form_heim": "SSSNN",
+   "form_gast": "NNNSU",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.3909,
+    "p_remis": 0.2848,
+    "p_gast": 0.3242
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.422,
+     "p_remis": 0.2582,
+     "p_gast": 0.3198
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.57,
+    "gast": 1.34
+   },
+   "markt": {
+    "p_heim": 0.3995,
+    "p_remis": 0.2549,
+    "p_gast": 0.3456,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83228,
+   "anstoss_utc": "2026-11-07T14:30:00Z",
+   "anstoss_lokal": "2026-11-07T15:30:00",
+   "heim": "Borussia Dortmund",
+   "gast": "SV 07 Elversberg",
+   "tv": null,
+   "platz_heim": 2,
+   "platz_gast": 7,
+   "form_heim": "SUUSU",
+   "form_gast": "UNSNS",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.7378,
+    "p_remis": 0.1876,
+    "p_gast": 0.0745
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.6819,
+     "p_remis": 0.1829,
+     "p_gast": 0.1351
+    }
+   },
+   "erwartete_tore": {
+    "heim": 2.43,
+    "gast": 1.01
+   },
+   "markt": {
+    "p_heim": 0.7372,
+    "p_remis": 0.1522,
+    "p_gast": 0.1106,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83229,
+   "anstoss_utc": "2026-11-07T14:30:00Z",
+   "anstoss_lokal": "2026-11-07T15:30:00",
+   "heim": "RB Leipzig",
+   "gast": "FC Augsburg",
+   "tv": null,
+   "platz_heim": 4,
+   "platz_gast": 10,
+   "form_heim": "NSNSS",
+   "form_gast": "NUNUN",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.6067,
+    "p_remis": 0.2422,
+    "p_gast": 0.1511
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.6224,
+     "p_remis": 0.1994,
+     "p_gast": 0.1782
+    }
+   },
+   "erwartete_tore": {
+    "heim": 2.31,
+    "gast": 1.18
+   },
+   "markt": {
+    "p_heim": 0.6438,
+    "p_remis": 0.1813,
+    "p_gast": 0.1749,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83233,
+   "anstoss_utc": "2026-11-07T14:30:00Z",
+   "anstoss_lokal": "2026-11-07T15:30:00",
+   "heim": "1. FSV Mainz 05",
+   "gast": "FC Bayern München",
+   "tv": null,
+   "platz_heim": 9,
+   "platz_gast": 1,
+   "form_heim": "SNSNN",
+   "form_gast": "SUSSU",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.1113,
+    "p_remis": 0.2185,
+    "p_gast": 0.6702
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.1676,
+     "p_remis": 0.1737,
+     "p_gast": 0.6587
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.37,
+    "gast": 2.73
+   },
+   "markt": {
+    "p_heim": 0.1749,
+    "p_remis": 0.168,
+    "p_gast": 0.6571,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83236,
+   "anstoss_utc": "2026-11-07T14:30:00Z",
+   "anstoss_lokal": "2026-11-07T15:30:00",
+   "heim": "SC Paderborn 07",
+   "gast": "Eintracht Frankfurt",
+   "tv": null,
+   "platz_heim": 14,
+   "platz_gast": 8,
+   "form_heim": "SNUSU",
+   "form_gast": "UNSNS",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.3356,
+    "p_remis": 0.2853,
+    "p_gast": 0.3791
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.3631,
+     "p_remis": 0.2741,
+     "p_gast": 0.3628
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.33,
+    "gast": 1.33
+   },
+   "markt": {
+    "p_heim": 0.3221,
+    "p_remis": 0.2453,
+    "p_gast": 0.4326,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83230,
+   "anstoss_utc": "2026-11-07T17:30:00Z",
+   "anstoss_lokal": "2026-11-07T18:30:00",
+   "heim": "VfB Stuttgart",
+   "gast": "SV Werder Bremen",
+   "tv": null,
+   "platz_heim": 11,
+   "platz_gast": 5,
+   "form_heim": "NSNNS",
+   "form_gast": "SUUSS",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5732,
+    "p_remis": 0.2527,
+    "p_gast": 0.1741
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.5975,
+     "p_remis": 0.207,
+     "p_gast": 0.1955
+    }
+   },
+   "erwartete_tore": {
+    "heim": 2.23,
+    "gast": 1.22
+   },
+   "markt": {
+    "p_heim": 0.6231,
+    "p_remis": 0.1918,
+    "p_gast": 0.1851,
+    "buchmacher": 22,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83235,
+   "anstoss_utc": "2026-11-08T14:30:00Z",
+   "anstoss_lokal": "2026-11-08T15:30:00",
+   "heim": "1. FC Köln",
+   "gast": "Bayer 04 Leverkusen",
+   "tv": null,
+   "platz_heim": 13,
+   "platz_gast": 6,
+   "form_heim": "NSNUU",
+   "form_gast": "SSSNN",
+   "vergleich": {
+    "tabellenplatz": "gast",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.1812,
+    "p_remis": 0.2556,
+    "p_gast": 0.5632
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.2892,
+     "p_remis": 0.2365,
+     "p_gast": 0.4743
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.41,
+    "gast": 1.85
+   },
+   "markt": {
+    "p_heim": 0.2268,
+    "p_remis": 0.2204,
+    "p_gast": 0.5528,
+    "buchmacher": 20,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83232,
+   "anstoss_utc": "2026-11-08T16:30:00Z",
+   "anstoss_lokal": "2026-11-08T17:30:00",
+   "heim": "SC Freiburg",
+   "gast": "1. FC Union Berlin",
+   "tv": null,
+   "platz_heim": 3,
+   "platz_gast": 16,
+   "form_heim": "USNNS",
+   "form_gast": "NSUUU",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5508,
+    "p_remis": 0.259,
+    "p_gast": 0.1902
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.5855,
+     "p_remis": 0.2253,
+     "p_gast": 0.1892
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.98,
+    "gast": 1.05
+   },
+   "markt": {
+    "p_heim": 0.6292,
+    "p_remis": 0.2089,
+    "p_gast": 0.1619,
+    "buchmacher": 20,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  },
+  {
+   "id": 83231,
+   "anstoss_utc": "2026-11-08T18:30:00Z",
+   "anstoss_lokal": "2026-11-08T19:30:00",
+   "heim": "TSG Hoffenheim",
+   "gast": "FC Schalke 04",
+   "tv": null,
+   "platz_heim": 12,
+   "platz_gast": 17,
+   "form_heim": "NNSSN",
+   "form_gast": "UNNUN",
+   "vergleich": {
+    "tabellenplatz": "heim",
+    "community": null
+   },
+   "modell": {
+    "version": "elo-0.1",
+    "p_heim": 0.5601,
+    "p_remis": 0.2565,
+    "p_gast": 0.1835
+   },
+   "weitere_modelle": {
+    "dc-0.2": {
+     "p_heim": 0.5543,
+     "p_remis": 0.2516,
+     "p_gast": 0.1942
+    }
+   },
+   "erwartete_tore": {
+    "heim": 1.7,
+    "gast": 0.91
+   },
+   "markt": {
+    "p_heim": 0.5806,
+    "p_remis": 0.2159,
+    "p_gast": 0.2035,
+    "buchmacher": 20,
+    "abruf": "2026-11-02T06:16:11+00:00"
+   },
+   "ergebnis": null
+  }
+ ]
+}
