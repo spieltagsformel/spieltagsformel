@@ -430,3 +430,47 @@ class NachberichtTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Vorbericht(unittest.TestCase):
+    def paket(self):
+        def sp(i, heim, gast, lokal, p, markt=None, regel="heim"):
+            return {"id": i, "heim": heim, "gast": gast, "anstoss_utc": lokal + "Z", "anstoss_lokal": lokal,
+                    "platz_heim": 1, "platz_gast": 2, "form_heim": "SSSSS", "form_gast": "NNNNN",
+                    "vergleich": {"tabellenplatz": regel, "community": None},
+                    "modell": {"p_heim": p[0], "p_remis": p[1], "p_gast": p[2]},
+                    "markt": {"p_heim": markt[0], "p_remis": markt[1], "p_gast": markt[2]} if markt else None,
+                    "erwartete_tore": {"heim": 1.5, "gast": 1.1}}
+        return {"saison": "2026-27", "spieltag": 9, "spiele": [
+            sp(2, "A", "B", "2026-11-07T15:30:00", (0.36, 0.29, 0.35), (0.50, 0.25, 0.25)),
+            sp(1, "C", "D", "2026-11-06T20:30:00", (0.70, 0.20, 0.10)),
+            sp(3, "E", "F", "2026-11-08T17:30:00", (0.30, 0.30, 0.40), regel="gast"),
+        ]}
+
+    def test_tipp_und_knapp(self):
+        from pipeline import vorbericht
+        self.assertEqual(vorbericht.tipp((0.36, 0.29, 0.35)), ("heim", True))
+        self.assertEqual(vorbericht.tipp((0.70, 0.20, 0.10)), ("heim", False))
+
+    def test_gruppierung_nach_tagen(self):
+        from pipeline import vorbericht
+        tage = vorbericht.gruppiert(self.paket()["spiele"])
+        self.assertEqual([t[0] for t in tage], ["Freitag, 6. November", "Samstag, 7. November", "Sonntag, 8. November"])
+        self.assertEqual(tage[1][1][0][0], "15:30 Uhr")
+
+    def test_text_enthaelt_pflichtteile(self):
+        from pipeline import vorbericht
+        t = vorbericht.text(self.paket())
+        self.assertIn("Freitagsspiel", t)
+        self.assertIn("(knapp)", t)
+        self.assertIn("Formel gegen Markt", t)
+        self.assertIn("18+", t)
+        self.assertIn("[PRÜFEN:", t)
+        self.assertLess(t.index("Freitag, 6. November"), t.index("Samstag, 7. November"))
+
+    def test_bearbeitungsschutz(self):
+        from pipeline import vorbericht
+        roh = vorbericht.mit_marker("Hallo\n")
+        self.assertTrue(vorbericht.unbearbeitet(roh))
+        self.assertFalse(vorbericht.unbearbeitet(roh + "geändert"))
+        self.assertFalse(vorbericht.unbearbeitet("ohne Marker"))

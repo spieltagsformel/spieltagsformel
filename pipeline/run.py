@@ -215,6 +215,44 @@ def cmd_nachbericht(args):
           + (f", Markt {zusammen['markt']['treffer']}/{zusammen['markt']['n']}" if zusammen["markt"] else ""))
 
 
+def cmd_vorbericht(args):
+    from datetime import datetime, timezone
+    from . import vorbericht
+    try:
+        from grafik.namen import kurz
+    except ImportError:
+        kurz = lambda n: n
+    spiele = speicher.lese_csv(f"{CLEAN}/spiele_{args.saison}.csv")
+    tag = paket.naechster_spieltag(spiele) if args.spieltag == "auto" else int(args.spieltag)
+    if tag is None:
+        print("Kein offener Spieltag.")
+        return
+    saison_txt = f"{args.saison}-{str(args.saison + 1)[-2:]}"
+    quelle = f"{SPIELTAGE}/{saison_txt}/{tag:02d}.json"
+    if not os.path.exists(quelle):
+        print(f"Kein Datenpaket {quelle} – zuerst 'paket' ausführen.")
+        return
+    with open(quelle, encoding="utf-8") as f:
+        daten = json.load(f)
+    jetzt = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    begonnen = any(s["anstoss_utc"] and s["anstoss_utc"] <= jetzt for s in daten["spiele"])
+    os.makedirs("entwuerfe", exist_ok=True)
+    pfad = f"entwuerfe/vorbericht-{saison_txt}-{tag:02d}.md"
+    if begonnen and not args.neu:
+        print(f"Spieltag {tag} hat begonnen – Vorbericht bleibt unverändert.")
+        return
+    if os.path.exists(pfad) and not args.neu:
+        with open(pfad, encoding="utf-8") as f:
+            alt = f.read()
+        if not vorbericht.unbearbeitet(alt):
+            print(f"Entwurf {pfad} wurde bearbeitet – nicht überschrieben (mit --neu erzwingen).")
+            return
+    inhalt = vorbericht.mit_marker(vorbericht.text(daten, kurz))
+    with open(pfad, "w", encoding="utf-8") as f:
+        f.write(inhalt)
+    print(f"Vorbericht-Entwurf geschrieben: {pfad}")
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="pipeline")
     sub = p.add_subparsers(dest="befehl", required=True)
@@ -239,6 +277,11 @@ def main(argv=None):
     n.add_argument("--spieltag", default="letzter", help="Zahl oder 'letzter'")
     n.add_argument("--neu", action="store_true", help="vorhandenen Entwurf überschreiben")
     n.set_defaults(func=cmd_nachbericht)
+    v = sub.add_parser("vorbericht", help="Textentwurf für den nächsten Spieltag (bis zum ersten Anpfiff aktuell gehalten)")
+    v.add_argument("--saison", type=int, required=True)
+    v.add_argument("--spieltag", default="auto", help="Zahl oder 'auto'")
+    v.add_argument("--neu", action="store_true", help="auch bearbeitete oder begonnene Entwürfe überschreiben")
+    v.set_defaults(func=cmd_vorbericht)
     args = p.parse_args(argv)
     args.func(args)
 

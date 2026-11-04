@@ -84,3 +84,7 @@ Die Seite läuft als Cloudflare Worker mit statischen Dateien (`website/wrangler
 Keine Cookies, keine IP-Adressen, keine Kennungen. Tabellen: `website/worker/schema.sql` (D1-Datenbank `spieltagsformel`).
 
 Einstellungen für Workers Builds: Stammverzeichnis `website`, Build-Befehl `npm run build`, Deploy-Befehl `npx wrangler deploy`, Node-Version 22 (siehe `website/.nvmrc`).
+
+## Vorbericht-Entwurf
+
+`python -m pipeline.run vorbericht --saison 2026` schreibt `entwuerfe/vorbericht-<saison>-<nr>.md` für den nächsten Spieltag: alle Spiele nach Tagen und Anstoßzeiten, Formel vs. Markt vs. Tabellen-Regel, erwartete Tore, Form, TV-Hinweis (immer [PRÜFEN]) und Platzhalter [AUS DER REDAKTION]. Der Workflow aktualisiert den Entwurf täglich bis zum ersten Anpfiff – aber nur, solange er unbearbeitet ist (Kennung in der ersten Zeile). Wer den Entwurf bearbeitet, verliert also nichts. `--neu` erzwingt eine Neufassung.
