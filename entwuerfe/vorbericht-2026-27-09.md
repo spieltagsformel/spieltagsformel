@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=a3e542d2a2b2a749 -->
+<!-- vorbericht-auto sha=802843ef5e0af11d -->
 # Die Formel sagt: Dortmund vorn, Paderborn – Frankfurt offen
 
 *Vorbericht zum 9. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -17,7 +17,7 @@ Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne 
 
 - **Freiburg – Union:** Formel 55 % · 26 % · 19 %, Markt 63 % · 21 % · 16 %
 - **Mainz – Bayern:** Formel 11 % · 22 % · 67 %, Markt 13 % · 15 % · 72 %
-- **Leipzig – Augsburg:** Formel 61 % · 24 % · 15 %, Markt 65 % · 18 % · 17 %
+- **Köln – Leverkusen:** Formel 18 % · 26 % · 56 %, Markt 25 % · 23 % · 52 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
 
@@ -34,7 +34,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** HSV Platz 15 (Form SSSNN) gegen Gladbach Platz 18 (Form NNNSU)
 - **Erwartete Tore:** 1,6 : 1,3
 - **Formel:** 39 % · 28 % · 32 % → Heimsieg
-- **Markt:** 40 % · 27 % · 33 % → Heimsieg
+- **Markt:** 40 % · 28 % · 32 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Freitagsspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -100,7 +100,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Stuttgart Platz 11 (Form NSNNS) gegen Bremen Platz 5 (Form SUUSS)
 - **Erwartete Tore:** 2,2 : 1,2
 - **Formel:** 57 % · 25 % · 17 % → Heimsieg
-- **Markt:** 58 % · 21 % · 21 % → Heimsieg
+- **Markt:** 57 % · 21 % · 22 % → Heimsieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Topspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -116,7 +116,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Köln Platz 13 (Form NSNUU) gegen Leverkusen Platz 6 (Form SSSNN)
 - **Erwartete Tore:** 1,4 : 1,9
 - **Formel:** 18 % · 26 % · 56 % → Auswärtssieg
-- **Markt:** 24 % · 23 % · 53 % → Auswärtssieg
+- **Markt:** 25 % · 23 % · 52 % → Auswärtssieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -144,7 +144,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Hoffenheim Platz 12 (Form NNSSN) gegen Schalke Platz 17 (Form UNNUN)
 - **Erwartete Tore:** 1,7 : 0,9
 - **Formel:** 56 % · 26 % · 18 % → Heimsieg
-- **Markt:** 59 % · 21 % · 20 % → Heimsieg
+- **Markt:** 58 % · 22 % · 20 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
