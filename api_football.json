@@ -1,0 +1,26 @@
+{
+ "status": {
+  "fehler": [],
+  "tarif": "Free",
+  "abrufe_heute": {
+   "current": 0,
+   "limit_day": 100
+  }
+ },
+ "liga": {
+  "fehler": {
+   "plan": "Free plans do not have access to this season, try from 2022 to 2024."
+  },
+  "saison": null
+ },
+ "ausfaelle": {
+  "fehler": {
+   "plan": "Free plans do not have access to this season, try from 2022 to 2024."
+  },
+  "anzahl": 0,
+  "teams": 0,
+  "felder": [],
+  "beispiel_gruende": [],
+  "spiele_bis": null
+ }
+}
