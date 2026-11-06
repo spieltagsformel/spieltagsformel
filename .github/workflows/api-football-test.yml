@@ -1,0 +1,35 @@
+name: API-Football prüfen
+
+# Manuell starten: Actions -> "API-Football prüfen" -> "Run workflow".
+# Schreibt nur eine Zusammenfassung (keinen Schlüssel) in den Zweig "pruefung-ergebnisse".
+on:
+  workflow_dispatch:
+    inputs:
+      saison:
+        description: "Startjahr der Saison"
+        default: "2026"
+
+permissions:
+  contents: write
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Zugang prüfen
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: python -m pipeline.run apifootball-test --saison "${{ github.event.inputs.saison }}" > "$RUNNER_TEMP/api_football.json"
+      - name: Ergebnis ablegen
+        run: |
+          git config user.name "spieltagsformel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --orphan pruefung-ergebnisse
+          cp "$RUNNER_TEMP/api_football.json" api_football.json
+          git add api_football.json
+          git commit -m "API-Football-Prüfung $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f origin HEAD:pruefung-ergebnisse

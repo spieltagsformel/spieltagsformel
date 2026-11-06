@@ -253,6 +253,15 @@ def cmd_vorbericht(args):
     print(f"Vorbericht-Entwurf geschrieben: {pfad}")
 
 
+def cmd_apifootball_test(args):
+    from . import apifootball
+    schluessel = os.environ.get("API_FOOTBALL_KEY", "")
+    if not schluessel:
+        print(json.dumps({"fehler": "API_FOOTBALL_KEY nicht gesetzt"}))
+        return
+    print(json.dumps(apifootball.pruefen(schluessel, args.saison), ensure_ascii=False, indent=1))
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="pipeline")
     sub = p.add_subparsers(dest="befehl", required=True)
@@ -282,6 +291,9 @@ def main(argv=None):
     v.add_argument("--spieltag", default="auto", help="Zahl oder 'auto'")
     v.add_argument("--neu", action="store_true", help="auch bearbeitete oder begonnene Entwürfe überschreiben")
     v.set_defaults(func=cmd_vorbericht)
+    t = sub.add_parser("apifootball-test", help="API-Football-Zugang prüfen (3 Abrufe, nur Zusammenfassung)")
+    t.add_argument("--saison", type=int, required=True)
+    t.set_defaults(func=cmd_apifootball_test)
     args = p.parse_args(argv)
     args.func(args)
 
