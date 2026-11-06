@@ -1,7 +1,7 @@
 {
  "saison": "2026-27",
  "spieltag": 9,
- "erstellt": "2026-11-05T06:14:32+00:00",
+ "erstellt": "2026-11-06T06:14:13+00:00",
  "quellen": [
   {
    "name": "OpenLigaDB",
@@ -194,11 +194,11 @@
     "gast": 1.34
    },
    "markt": {
-    "p_heim": 0.3947,
-    "p_remis": 0.26,
-    "p_gast": 0.3453,
+    "p_heim": 0.4008,
+    "p_remis": 0.2652,
+    "p_gast": 0.3341,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -235,11 +235,11 @@
     "gast": 1.01
    },
    "markt": {
-    "p_heim": 0.7343,
-    "p_remis": 0.1548,
-    "p_gast": 0.1109,
+    "p_heim": 0.7316,
+    "p_remis": 0.1567,
+    "p_gast": 0.1117,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -276,11 +276,11 @@
     "gast": 1.18
    },
    "markt": {
-    "p_heim": 0.6492,
-    "p_remis": 0.1801,
-    "p_gast": 0.1707,
+    "p_heim": 0.65,
+    "p_remis": 0.1804,
+    "p_gast": 0.1696,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -317,11 +317,11 @@
     "gast": 2.73
    },
    "markt": {
-    "p_heim": 0.1371,
-    "p_remis": 0.1527,
-    "p_gast": 0.7102,
+    "p_heim": 0.1322,
+    "p_remis": 0.1505,
+    "p_gast": 0.7173,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -358,11 +358,11 @@
     "gast": 1.33
    },
    "markt": {
-    "p_heim": 0.3161,
+    "p_heim": 0.3129,
     "p_remis": 0.2469,
-    "p_gast": 0.437,
+    "p_gast": 0.4402,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -399,11 +399,11 @@
     "gast": 1.22
    },
    "markt": {
-    "p_heim": 0.5966,
-    "p_remis": 0.2013,
-    "p_gast": 0.2021,
+    "p_heim": 0.5787,
+    "p_remis": 0.2077,
+    "p_gast": 0.2136,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -440,11 +440,11 @@
     "gast": 1.85
    },
    "markt": {
-    "p_heim": 0.2359,
-    "p_remis": 0.2258,
-    "p_gast": 0.5383,
+    "p_heim": 0.2385,
+    "p_remis": 0.2278,
+    "p_gast": 0.5337,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -481,11 +481,11 @@
     "gast": 1.05
    },
    "markt": {
-    "p_heim": 0.6305,
-    "p_remis": 0.2109,
-    "p_gast": 0.1586,
+    "p_heim": 0.634,
+    "p_remis": 0.2091,
+    "p_gast": 0.1569,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   },
@@ -522,11 +522,11 @@
     "gast": 0.91
    },
    "markt": {
-    "p_heim": 0.5865,
-    "p_remis": 0.2151,
-    "p_gast": 0.1984,
+    "p_heim": 0.589,
+    "p_remis": 0.2149,
+    "p_gast": 0.1961,
     "buchmacher": 23,
-    "abruf": "2026-11-05T06:14:32+00:00"
+    "abruf": "2026-11-06T06:14:13+00:00"
    },
    "ergebnis": null
   }
