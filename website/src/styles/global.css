@@ -110,6 +110,38 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
   .meta { justify-content: flex-start; }
 }
 
+/* Spieltag v2: Gliederung nach Tagen und Anstoßzeiten */
+.spieltag-tag { margin-top: 2rem; }
+.spieltag-tag .tag { font-weight: 800; font-size: 1.25rem; margin: 0 0 0.25rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--text); }
+.uhrzeit { font-family: var(--mono); font-weight: 700; font-size: 0.9375rem; margin: 1rem 0 0; }
+.anstoss .spiele { margin: 0.25rem 0 0; }
+.anstoss .spiel:last-child { border-bottom: 0; }
+
+/* Team-Spalte: Vereinsform, Name, Tabellenplatz und Form */
+.team { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+.team.gast { align-items: flex-end; }
+.vereinsform { display: block; width: 2rem; height: auto; }
+.vereinsform .umriss { stroke: var(--text); stroke-opacity: 0.35; stroke-width: 1; }
+.team-daten { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-weight: 400; font-size: 0.75rem;
+  letter-spacing: 0; color: var(--text-leise); line-height: 1.5; }
+.team-daten b { color: var(--text); font-weight: 700; }
+
+/* Steckbrief unter der Skala */
+.steckbrief { grid-column: 1 / -1; display: grid; grid-template-columns: max-content max-content; justify-content: center;
+  gap: 0.15rem 1.25rem; margin: 0.25rem 0 0; font-size: 0.8125rem; }
+.steckbrief dt { color: var(--text-leise); }
+.steckbrief dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; }
+.steckbrief dd.wort { font-family: var(--schrift); font-weight: 600; }
+
+/* Einblenden beim Scrollen (nur mit JavaScript und ohne „Bewegung reduzieren“) */
+@media (prefers-reduced-motion: no-preference) {
+  .anim .spiel.einblenden { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .anim .spiel.einblenden.sichtbar { opacity: 1; transform: none; }
+}
+@media (max-width: 640px) {
+  .steckbrief { justify-content: start; grid-template-columns: 1fr max-content; }
+}
+
 .quelle { font-size: 0.8125rem; color: var(--text-leise); margin-top: 1rem; }
 
 /* Fuß */

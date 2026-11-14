@@ -1,0 +1,31 @@
+---
+// Grundform (Kreis, Oval, Rechteck, Schild) in Vereinsfarben als Längsstreifen.
+// Bewusst kein Wappen, kein Logo – nur Form + Farben (siehe src/lib/vereinsfarben.js).
+import { verein } from "../lib/vereinsfarben.js";
+
+interface Props {
+  name: string;
+  id: string; // eindeutig auf der Seite (für den Zuschnitt)
+}
+const { name, id } = Astro.props;
+const { form, farben } = verein(name);
+
+const B = 40;
+const H = 46;
+const UMRISS = {
+  kreis: `M20 3a20 20 0 1 1 0 40a20 20 0 1 1 0-40z`,
+  oval: `M20 1c10 0 16 10 16 22s-6 22-16 22S4 35 4 23 10 1 20 1z`,
+  rechteck: `M4 5h32v36H4z`,
+  schild: `M3 3h34v18c0 12-7 19-17 23C10 40 3 33 3 21z`,
+};
+const pfad = UMRISS[form] ?? UMRISS.schild;
+const breite = B / farben.length;
+const clip = `vf-${id}`;
+---
+<svg class="vereinsform" viewBox={`0 0 ${B} ${H}`} width={B} height={H} aria-hidden="true" focusable="false">
+  <defs><clipPath id={clip}><path d={pfad} /></clipPath></defs>
+  <g clip-path={`url(#${clip})`}>
+    {farben.map((f, i) => <rect x={i * breite} y="0" width={breite + 0.5} height={H} fill={f} />)}
+  </g>
+  <path d={pfad} class="umriss" fill="none" />
+</svg>
