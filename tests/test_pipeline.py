@@ -474,3 +474,17 @@ class Vorbericht(unittest.TestCase):
         self.assertTrue(vorbericht.unbearbeitet(roh))
         self.assertFalse(vorbericht.unbearbeitet(roh + "geändert"))
         self.assertFalse(vorbericht.unbearbeitet("ohne Marker"))
+
+
+class NachberichtKnapp(unittest.TestCase):
+    def test_knapper_rps_wird_als_gleichauf_beschrieben(self):
+        from pipeline import nachbericht
+        paket = {"saison": "2026-27", "spieltag": 9, "spiele": [
+            {"id": 1, "heim": "A", "gast": "B", "vergleich": {"tabellenplatz": "heim"},
+             "modell": {"p_heim": 0.5, "p_remis": 0.3, "p_gast": 0.2},
+             "markt": {"p_heim": 0.52, "p_remis": 0.28, "p_gast": 0.2}}]}
+        ergebnisse = [{"id": 1, "beendet": True, "tore_heim": 1, "tore_gast": 0}]
+        zeilen = nachbericht.auswerten(paket, ergebnisse)
+        t = nachbericht.text(paket, zeilen, nachbericht.zusammenfassung(zeilen))
+        self.assertIn("praktisch ein Unentschieden", t)
+        self.assertIn("Ein einzelner Spieltag sagt wenig", t)
