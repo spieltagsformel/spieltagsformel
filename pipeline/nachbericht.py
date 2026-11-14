@@ -114,9 +114,14 @@ def text(paket, zeilen, z, bilanz=None, kurz=lambda n: n):
     # Genauigkeit über die Wahrscheinlichkeiten
     if m and f.get("rps") is not None and m.get("rps") is not None:
         besser = "die Formel" if f["rps"] < m["rps"] else "der Markt"
+        if abs(f["rps"] - m["rps"]) < 0.02:
+            urteil = f"Das ist praktisch ein Unentschieden – hauchdünn vorn: {besser}."
+        else:
+            urteil = f"Näher dran war damit {besser}."
         teile += ["## Wer lag näher dran?", "",
                   f"Die Trefferquote erzählt nur die halbe Geschichte. Der Ranked Probability Score (RPS) bewertet auch, wie sicher sich jemand war – kleiner ist besser. "
-                  f"Diesmal: Formel **{_k(f['rps'])}**, Markt **{_k(m['rps'])}**. Näher dran war damit {besser}.", ""]
+                  f"Diesmal: Formel **{_k(f['rps'])}**, Markt **{_k(m['rps'])}**. {urteil} "
+                  "Ein einzelner Spieltag sagt wenig – aussagekräftig ist erst die Bilanz über viele Spieltage.", ""]
 
     # Größte Fehlprognose
     if d:
