@@ -4,10 +4,11 @@ name: Daten abrufen
 # Actions -> "Daten abrufen" -> "Run workflow"
 on:
   schedule:
-    # Bewusst ruhiger Takt (seit 14.11.2026, nach der Konto-Sperre): 8 Läufe pro Woche statt 11.
+    # Bewusst ruhiger Takt (seit 14.11.2026, nach der Konto-Sperre): 9 Läufe pro Woche statt 11.
     # Die Formel-Werte stehen ab dem ersten Anpfiff ohnehin fest; nur die Marktquoten werden seltener aufgefrischt.
     - cron: "17 5 * * *"      # täglich 06:17 MEZ: Ergebnisse, Datenpaket, Quoten, Vor- und Nachbericht
     - cron: "47 12 * * 6"     # Sa 13:47 MEZ: Quoten vor den Samstagsspielen
+    - cron: "13 20 * * 0"     # So 21:13 MEZ: Ergebnisse der Sonntagsspiele → Nachbericht für den Sonntags-Autopiloten (21:45)
   workflow_dispatch:
     inputs:
       saison:
