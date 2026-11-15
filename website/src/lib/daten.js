@@ -37,6 +37,37 @@ export function anstoss(isoUtc) {
   return FORMAT.format(new Date(isoUtc)) + " Uhr";
 }
 
+const TAG = new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", weekday: "long", day: "numeric", month: "long" });
+const UHR = new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", hour: "2-digit", minute: "2-digit" });
+
+/**
+ * Spiele chronologisch nach Tagen und Anstoßzeiten (Europe/Berlin):
+ * [{ tag: "Freitag, 20. November", zeiten: [{ uhr: "20:30 Uhr", spiele: [...] }] }]
+ * Spiele ohne Anstoßzeit stehen am Ende unter „Termin noch offen“.
+ */
+export function nachTagen(spiele) {
+  const mit = spiele.filter((s) => s.anstoss_utc).sort((a, b) => a.anstoss_utc.localeCompare(b.anstoss_utc) || a.heim.localeCompare(b.heim));
+  const ohne = spiele.filter((s) => !s.anstoss_utc);
+  const tage = [];
+  for (const s of mit) {
+    const d = new Date(s.anstoss_utc);
+    const tag = TAG.format(d);
+    const uhr = UHR.format(d) + " Uhr";
+    let t = tage[tage.length - 1];
+    if (!t || t.tag !== tag) tage.push((t = { tag, zeiten: [] }));
+    let z = t.zeiten[t.zeiten.length - 1];
+    if (!z || z.uhr !== uhr) t.zeiten.push((z = { uhr, spiele: [] }));
+    z.spiele.push(s);
+  }
+  if (ohne.length) tage.push({ tag: "Termin noch offen", zeiten: [{ uhr: "", spiele: ohne }] });
+  return tage;
+}
+
+/** „20 % · 25 % · 55 %“ (Heimsieg · Remis · Auswärtssieg). */
+export function drei(p) {
+  return [p.p_heim, p.p_remis, p.p_gast].map((x) => `${prozent(x)} %`).join(" · ");
+}
+
 export function prozent(p) {
   return Math.round(p * 100);
 }

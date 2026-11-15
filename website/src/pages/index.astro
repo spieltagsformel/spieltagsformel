@@ -1,11 +1,13 @@
 ---
 import Basis from "../layouts/Basis.astro";
 import NewsletterBox from "../components/NewsletterBox.astro";
-import { neuestesPaket, anstoss, prozent, komma, skala, kurz, REGEL_TEXT } from "../lib/daten.js";
+import Vereinsform from "../components/Vereinsform.astro";
+import { neuestesPaket, nachTagen, drei, komma, skala, kurz, prozent, REGEL_TEXT } from "../lib/daten.js";
 
 const paket = neuestesPaket();
 const stand = paket ? new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", dateStyle: "medium", timeStyle: "short" }).format(new Date(paket.erstellt)) : null;
 const saisonText = paket ? paket.saison.replace("-", "/") : "";
+const tage = paket ? nachTagen(paket.spiele) : [];
 ---
 <Basis titel="Spieltagsformel">
   <h1>Bundesliga in Zahlen</h1>
@@ -14,41 +16,66 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
   {paket ? (
     <section aria-labelledby="spieltag">
       <h2 id="spieltag">{paket.spieltag}. Spieltag {saisonText}: Die Formel sagt …</h2>
-      <p class="leise klein">Der Punkt zeigt, zu welcher Seite die Formel tendiert. In der Mitte ist das Spiel offen.</p>
-      <ol class="spiele">
-        {paket.spiele.map((s) => {
-          const m = s.modell;
-          const k = m ? skala(s) : null;
-          return (
-            <li class="spiel">
-              <div class="team" title={s.heim}>{kurz(s.heim)}<small>{s.platz_heim}. · Form {s.form_heim || "–"}</small></div>
-              {k ? (
-                <div class="skala" role="img" aria-label={`${k.label}. Heimsieg ${prozent(m.p_heim)} Prozent, Remis ${prozent(m.p_remis)} Prozent, Auswärtssieg ${prozent(m.p_gast)} Prozent`}>
-                  <span class="rand links" aria-hidden="true">← stärker</span>
-                  <span class="rand rechts" aria-hidden="true">stärker →</span>
-                  <span class="achse"></span>
-                  <span class="mitte"></span>
-                  <span class="zone" style={`left:${k.zoneLinks}%;width:${k.zoneBreite}%`}></span>
-                  <span class="punkt-gross" style={`left:${k.pos}%`}></span>
-                  <span class="label" style={`left:${Math.max(14, Math.min(86, k.pos))}%`}>{k.label}</span>
-                </div>
-              ) : (
-                <div class="skala leise klein">Noch keine Prognose</div>
-              )}
-              <div class="team gast" title={s.gast}>{kurz(s.gast)}<small>{s.platz_gast}. · Form {s.form_gast || "–"}</small></div>
-              <div class="meta">
-                <span>{anstoss(s.anstoss_utc)}</span>
-                {s.erwartete_tore && <span>Erwartete Tore <b>{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</b></span>}
-                {m && <span>Formel <b>{prozent(m.p_heim)}</b> · {prozent(m.p_remis)} · <b>{prozent(m.p_gast)}</b> %</span>}
-                {s.markt && <span>Markt {prozent(s.markt.p_heim)} · {prozent(s.markt.p_remis)} · {prozent(s.markt.p_gast)} %</span>}
-                <span>Tabellen-Regel: {REGEL_TEXT[s.vergleich.tabellenplatz]}</span>
-                {s.ergebnis && <span>Ergebnis <b>{s.ergebnis.heim}:{s.ergebnis.gast}</b></span>}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-      <p class="quelle">Formel und Markt = Wahrscheinlichkeiten für Heimsieg · Remis · Auswärtssieg in Prozent (Markt: Durchschnitt der Buchmacher, ohne Marge). Modell {paket.spiele[0]?.modell?.version ?? "–"}. Form: S = Sieg, U = Unentschieden, N = Niederlage. Keine Wettempfehlung. Stand: {stand} Uhr. Quellen: OpenLigaDB (ODbL), The Odds API (Quoten), eigene Berechnung.</p>
+      <p class="leise klein">Der Punkt zeigt, zu welcher Seite die Formel tendiert. In der Mitte ist das Spiel offen. Wahrscheinlichkeiten immer in der Reihenfolge Heimsieg · Remis · Auswärtssieg.</p>
+
+      {tage.map((t) => (
+        <div class="spieltag-tag">
+          <h3 class="tag">{t.tag}</h3>
+          {t.zeiten.map((z) => (
+            <div class="anstoss">
+              {z.uhr && <p class="uhrzeit">{z.uhr}</p>}
+              <ol class="spiele">
+                {z.spiele.map((s) => {
+                  const m = s.modell;
+                  const k = m ? skala(s) : null;
+                  return (
+                    <li class="spiel einblenden">
+                      <div class="team heim" title={s.heim}>
+                        <Vereinsform name={s.heim} id={`${s.id}-h`} />
+                        <span class="name">{kurz(s.heim)}</span>
+                        <ul class="team-daten">
+                          <li>Tabellenplatz <b>{s.platz_heim}</b></li>
+                          <li>Form <b>{s.form_heim || "–"}</b></li>
+                        </ul>
+                      </div>
+                      {k ? (
+                        <div class="skala" role="img" aria-label={`${k.label}. Heimsieg ${prozent(m.p_heim)} Prozent, Remis ${prozent(m.p_remis)} Prozent, Auswärtssieg ${prozent(m.p_gast)} Prozent`}>
+                          <span class="rand links" aria-hidden="true">← stärker</span>
+                          <span class="rand rechts" aria-hidden="true">stärker →</span>
+                          <span class="achse"></span>
+                          <span class="mitte"></span>
+                          <span class="zone" style={`left:${k.zoneLinks}%;width:${k.zoneBreite}%`}></span>
+                          <span class="punkt-gross" style={`left:${k.pos}%`}></span>
+                          <span class="label" style={`left:clamp(5.5rem, ${k.pos}%, calc(100% - 5.5rem))`}>{k.label}</span>
+                        </div>
+                      ) : (
+                        <div class="skala leise klein">Noch keine Prognose</div>
+                      )}
+                      <div class="team gast" title={s.gast}>
+                        <Vereinsform name={s.gast} id={`${s.id}-g`} />
+                        <span class="name">{kurz(s.gast)}</span>
+                        <ul class="team-daten">
+                          <li>Tabellenplatz <b>{s.platz_gast}</b></li>
+                          <li>Form <b>{s.form_gast || "–"}</b></li>
+                        </ul>
+                      </div>
+                      <dl class="steckbrief">
+                        {s.erwartete_tore && (<><dt>Erwartete Tore</dt><dd>{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</dd></>)}
+                        {m && (<><dt>Wahrscheinlichkeiten (Formel)</dt><dd>{drei(m)}</dd></>)}
+                        {s.markt && (<><dt>Wahrscheinlichkeiten (Markt)</dt><dd>{drei(s.markt)}</dd></>)}
+                        <dt>Tabellen-Regel</dt><dd class="wort">{REGEL_TEXT[s.vergleich.tabellenplatz]}</dd>
+                        {s.ergebnis && (<><dt>Ergebnis</dt><dd><b>{s.ergebnis.heim} : {s.ergebnis.gast}</b></dd></>)}
+                      </dl>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          ))}
+        </div>
+      ))}
+
+      <p class="quelle">Formel = unser Modell ({paket.spiele[0]?.modell?.version ?? "–"}). Markt = Durchschnitt der Buchmacher, ohne Marge. Tabellen-Regel = der besser Platzierte gewinnt. Form: S = Sieg, U = Unentschieden, N = Niederlage (neuestes Spiel rechts). Vereinsfarben ohne Wappen, nur zur Orientierung. Keine Wettempfehlung. Stand: {stand} Uhr. Quellen: OpenLigaDB (ODbL), The Odds API (Quoten), eigene Berechnung.</p>
       {paket.hinweise.length > 0 && (
         <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
       )}
@@ -63,4 +90,21 @@ const saisonText = paket ? paket.saison.replace("-", "/") : "";
   </div>
 
   <NewsletterBox />
+
+  <script>
+    // Spiele beim Scrollen sanft einblenden. Ohne JavaScript oder bei „Bewegung reduzieren“ ist alles sofort sichtbar.
+    const spiele = document.querySelectorAll(".spiel.einblenden");
+    const ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!ruhig && "IntersectionObserver" in window) {
+      // Was beim Laden schon zu sehen ist, bleibt stehen (kein Flackern); nur der Rest gleitet herein.
+      spiele.forEach((s) => { if (s.getBoundingClientRect().top < window.innerHeight) s.classList.add("sichtbar"); });
+      document.documentElement.classList.add("anim");
+      const beob = new IntersectionObserver((eintraege) => {
+        for (const e of eintraege) {
+          if (e.isIntersecting) { e.target.classList.add("sichtbar"); beob.unobserve(e.target); }
+        }
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+      spiele.forEach((s) => beob.observe(s));
+    }
+  </script>
 </Basis>
