@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=6c8e0a746c942ae7 -->
+<!-- vorbericht-auto sha=9c41cf9a46491b69 -->
 # Die Formel sagt: Bayern vorn, Augsburg – Mainz offen
 
 *Vorbericht zum 10. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -50,7 +50,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Union Platz 16 (Form SUUUN) gegen Leipzig Platz 4 (Form SNSSS)
 - **Erwartete Tore:** 1,2 : 1,9
 - **Formel:** 21 % · 26 % · 53 % → Auswärtssieg
-- **Markt:** 18 % · 21 % · 60 % → Auswärtssieg
+- **Markt:** 19 % · 21 % · 60 % → Auswärtssieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
