@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=9c41cf9a46491b69 -->
+<!-- vorbericht-auto sha=399becf77b9a3d9d -->
 # Die Formel sagt: Bayern vorn, Augsburg – Mainz offen
 
 *Vorbericht zum 10. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -17,7 +17,7 @@ Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne 
 
 - **Leverkusen – Paderborn:** Formel 65 % · 23 % · 12 %, Markt 75 % · 15 % · 10 %
 - **Augsburg – Mainz:** Formel 39 % · 28 % · 33 %, Markt 35 % · 25 % · 40 %
-- **Bremen – HSV:** Formel 49 % · 27 % · 24 %, Markt 57 % · 22 % · 21 %
+- **Bremen – HSV:** Formel 49 % · 27 % · 24 %, Markt 56 % · 23 % · 21 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
 
@@ -142,7 +142,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Bremen Platz 6 (Form UUSSN) gegen HSV Platz 11 (Form SSNNS)
 - **Erwartete Tore:** 1,7 : 1,1
 - **Formel:** 49 % · 27 % · 24 % → Heimsieg
-- **Markt:** 57 % · 22 % · 21 % → Heimsieg
+- **Markt:** 56 % · 23 % · 21 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
