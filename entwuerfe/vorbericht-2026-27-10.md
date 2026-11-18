@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=399becf77b9a3d9d -->
+<!-- vorbericht-auto sha=0c8f815ffb4a1de9 -->
 # Die Formel sagt: Bayern vorn, Augsburg – Mainz offen
 
 *Vorbericht zum 10. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -15,9 +15,9 @@
 
 Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne Marge):
 
-- **Leverkusen – Paderborn:** Formel 65 % · 23 % · 12 %, Markt 75 % · 15 % · 10 %
+- **Leverkusen – Paderborn:** Formel 65 % · 23 % · 12 %, Markt 75 % · 15 % · 11 %
 - **Augsburg – Mainz:** Formel 39 % · 28 % · 33 %, Markt 35 % · 25 % · 40 %
-- **Bremen – HSV:** Formel 49 % · 27 % · 24 %, Markt 56 % · 23 % · 21 %
+- **Bremen – HSV:** Formel 49 % · 27 % · 24 %, Markt 57 % · 22 % · 21 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
 
@@ -62,7 +62,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Leverkusen Platz 5 (Form SSNNS) gegen Paderborn Platz 13 (Form NUSUU)
 - **Erwartete Tore:** 2,1 : 0,9
 - **Formel:** 65 % · 23 % · 12 % → Heimsieg
-- **Markt:** 75 % · 15 % · 10 % → Heimsieg
+- **Markt:** 75 % · 15 % · 11 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -74,7 +74,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Gladbach Platz 18 (Form NNSUN) gegen Dortmund Platz 2 (Form UUSUS)
 - **Erwartete Tore:** 1,1 : 1,9
 - **Formel:** 15 % · 24 % · 61 % → Auswärtssieg
-- **Markt:** 20 % · 22 % · 58 % → Auswärtssieg
+- **Markt:** 20 % · 22 % · 59 % → Auswärtssieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -86,7 +86,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Frankfurt Platz 10 (Form NSNSU) gegen Hoffenheim Platz 9 (Form NSSNS)
 - **Erwartete Tore:** 2,1 : 1,7
 - **Formel:** 43 % · 28 % · 28 % → Heimsieg
-- **Markt:** 41 % · 24 % · 35 % → Heimsieg
+- **Markt:** 40 % · 24 % · 35 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -98,7 +98,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Elversberg Platz 7 (Form NSNSN) gegen Freiburg Platz 3 (Form SNNSS)
 - **Erwartete Tore:** 1,7 : 1,6
 - **Formel:** 26 % · 28 % · 46 % → Auswärtssieg
-- **Markt:** 28 % · 25 % · 47 % → Auswärtssieg
+- **Markt:** 27 % · 25 % · 47 % → Auswärtssieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -142,7 +142,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Bremen Platz 6 (Form UUSSN) gegen HSV Platz 11 (Form SSNNS)
 - **Erwartete Tore:** 1,7 : 1,1
 - **Formel:** 49 % · 27 % · 24 % → Heimsieg
-- **Markt:** 56 % · 23 % · 21 % → Heimsieg
+- **Markt:** 57 % · 22 % · 21 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
