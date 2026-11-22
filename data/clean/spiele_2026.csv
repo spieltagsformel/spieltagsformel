@@ -87,8 +87,8 @@ id,saison,spieltag,anstoss_utc,anstoss_lokal,heim_id,heim,gast_id,gast,beendet,t
 83242,2026,10,2026-11-21T14:30:00Z,2026-11-21T15:30:00,87,Borussia Mönchengladbach,7,Borussia Dortmund,True,0,1,0,0
 83245,2026,10,2026-11-21T14:30:00Z,2026-11-21T15:30:00,198,SV 07 Elversberg,112,SC Freiburg,True,0,1,0,0
 83244,2026,10,2026-11-21T17:30:00Z,2026-11-21T18:30:00,9,FC Schalke 04,16,VfB Stuttgart,True,0,0,0,0
-83240,2026,10,2026-11-22T14:30:00Z,2026-11-22T15:30:00,95,FC Augsburg,81,1. FSV Mainz 05,False,,,,
-83243,2026,10,2026-11-22T16:30:00Z,2026-11-22T17:30:00,134,SV Werder Bremen,100,Hamburger SV,False,,,,
+83240,2026,10,2026-11-22T14:30:00Z,2026-11-22T15:30:00,95,FC Augsburg,81,1. FSV Mainz 05,True,3,1,2,0
+83243,2026,10,2026-11-22T16:30:00Z,2026-11-22T17:30:00,134,SV Werder Bremen,100,Hamburger SV,True,4,0,0,0
 83253,2026,11,2026-11-27T19:30:00Z,2026-11-27T20:30:00,134,SV Werder Bremen,87,Borussia Mönchengladbach,False,,,,
 83250,2026,11,2026-11-28T14:30:00Z,2026-11-28T15:30:00,81,1. FSV Mainz 05,80,1. FC Union Berlin,False,,,,
 83251,2026,11,2026-11-28T14:30:00Z,2026-11-28T15:30:00,100,Hamburger SV,40,FC Bayern München,False,,,,

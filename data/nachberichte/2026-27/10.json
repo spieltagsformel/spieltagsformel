@@ -1,0 +1,462 @@
+{
+ "saison": "2026-27",
+ "spieltag": 10,
+ "spiele": [
+  {
+   "id": 83237,
+   "heim": "FC Bayern München",
+   "gast": "1. FC Köln",
+   "tore": "1:1",
+   "ergebnis": "remis",
+   "regel": "heim",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.8239,
+     0.1393,
+     0.0368
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.1393,
+    "rps": 0.340082725
+   },
+   "markt": {
+    "p": [
+     0.8876,
+     0.0713,
+     0.0412
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.0713,
+    "rps": 0.39476148499999997
+   }
+  },
+  {
+   "id": 83238,
+   "heim": "Bayer 04 Leverkusen",
+   "gast": "SC Paderborn 07",
+   "tore": "4:0",
+   "ergebnis": "heim",
+   "regel": "heim",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.65,
+     0.2266,
+     0.1234
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.65,
+    "rps": 0.06886377999999999
+   },
+   "markt": {
+    "p": [
+     0.7403,
+     0.1491,
+     0.1106
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.7403,
+    "rps": 0.03983822500000002
+   }
+  },
+  {
+   "id": 83239,
+   "heim": "Eintracht Frankfurt",
+   "gast": "TSG Hoffenheim",
+   "tore": "1:0",
+   "ergebnis": "heim",
+   "regel": "remis",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.4342,
+     0.2812,
+     0.2846
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.4342,
+    "rps": 0.20056340000000006
+   },
+   "markt": {
+    "p": [
+     0.3914,
+     0.2378,
+     0.3708
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.3914,
+    "rps": 0.25394330000000004
+   }
+  },
+  {
+   "id": 83241,
+   "heim": "1. FC Union Berlin",
+   "gast": "RB Leipzig",
+   "tore": "1:5",
+   "ergebnis": "gast",
+   "regel": "gast",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.2072,
+     0.2646,
+     0.5282
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.5282,
+    "rps": 0.13276354
+   },
+   "markt": {
+    "p": [
+     0.1641,
+     0.1993,
+     0.6366
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.6366,
+    "rps": 0.079494185
+   }
+  },
+  {
+   "id": 83242,
+   "heim": "Borussia Mönchengladbach",
+   "gast": "Borussia Dortmund",
+   "tore": "0:1",
+   "ergebnis": "gast",
+   "regel": "gast",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.1459,
+     0.2396,
+     0.6145
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.6145,
+    "rps": 0.08494853
+   },
+   "markt": {
+    "p": [
+     0.1949,
+     0.2193,
+     0.5858
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.5858,
+    "rps": 0.104773825
+   }
+  },
+  {
+   "id": 83245,
+   "heim": "SV 07 Elversberg",
+   "gast": "SC Freiburg",
+   "tore": "0:1",
+   "ergebnis": "gast",
+   "regel": "gast",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.2616,
+     0.2777,
+     0.4607
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.4607,
+    "rps": 0.17963952500000002
+   },
+   "markt": {
+    "p": [
+     0.2689,
+     0.2584,
+     0.4727
+    ],
+    "tipp": "gast",
+    "treffer": true,
+    "p_ergebnis": 0.4727,
+    "rps": 0.17517624999999998
+   }
+  },
+  {
+   "id": 83244,
+   "heim": "FC Schalke 04",
+   "gast": "VfB Stuttgart",
+   "tore": "0:0",
+   "ergebnis": "remis",
+   "regel": "gast",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.2042,
+     0.2637,
+     0.5321
+    ],
+    "tipp": "gast",
+    "treffer": false,
+    "p_ergebnis": 0.2637,
+    "rps": 0.162414025
+   },
+   "markt": {
+    "p": [
+     0.2425,
+     0.2374,
+     0.5201
+    ],
+    "tipp": "gast",
+    "treffer": false,
+    "p_ergebnis": 0.2374,
+    "rps": 0.16465513
+   }
+  },
+  {
+   "id": 83240,
+   "heim": "FC Augsburg",
+   "gast": "1. FSV Mainz 05",
+   "tore": "3:1",
+   "ergebnis": "heim",
+   "regel": "gast",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.3899,
+     0.2849,
+     0.3252
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.3899,
+    "rps": 0.23898852499999998
+   },
+   "markt": {
+    "p": [
+     0.3587,
+     0.2445,
+     0.3968
+    ],
+    "tipp": "gast",
+    "treffer": false,
+    "p_ergebnis": 0.3587,
+    "rps": 0.284357965
+   }
+  },
+  {
+   "id": 83243,
+   "heim": "SV Werder Bremen",
+   "gast": "Hamburger SV",
+   "tore": "4:0",
+   "ergebnis": "heim",
+   "regel": "heim",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.4919,
+     0.2724,
+     0.2357
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.4919,
+    "rps": 0.15686005
+   },
+   "markt": {
+    "p": [
+     0.5928,
+     0.2192,
+     0.188
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.5928,
+    "rps": 0.10057792
+   }
+  }
+ ],
+ "zusammenfassung": {
+  "spiele": 9,
+  "formel": {
+   "n": 9,
+   "treffer": 7,
+   "rps": 0.1739026777777778,
+   "remis_getippt": 0
+  },
+  "markt": {
+   "n": 9,
+   "treffer": 6,
+   "rps": 0.17750869833333333,
+   "remis_getippt": 0
+  },
+  "regel": {
+   "n": 9,
+   "treffer": 5,
+   "remis_getippt": 1
+  },
+  "community": null,
+  "daneben": {
+   "id": 83237,
+   "heim": "FC Bayern München",
+   "gast": "1. FC Köln",
+   "tore": "1:1",
+   "ergebnis": "remis",
+   "regel": "heim",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.8239,
+     0.1393,
+     0.0368
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.1393,
+    "rps": 0.340082725
+   },
+   "markt": {
+    "p": [
+     0.8876,
+     0.0713,
+     0.0412
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.0713,
+    "rps": 0.39476148499999997
+   }
+  },
+  "volltreffer": {
+   "id": 83238,
+   "heim": "Bayer 04 Leverkusen",
+   "gast": "SC Paderborn 07",
+   "tore": "4:0",
+   "ergebnis": "heim",
+   "regel": "heim",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.65,
+     0.2266,
+     0.1234
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.65,
+    "rps": 0.06886377999999999
+   },
+   "markt": {
+    "p": [
+     0.7403,
+     0.1491,
+     0.1106
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.7403,
+    "rps": 0.03983822500000002
+   }
+  },
+  "ergebnisse": {
+   "heim": 4,
+   "remis": 2,
+   "gast": 3
+  }
+ },
+ "bilanz_seit_start": {
+  "spiele": 27,
+  "formel": {
+   "n": 27,
+   "treffer": 18,
+   "rps": 0.16980378722222222,
+   "remis_getippt": 0
+  },
+  "markt": {
+   "n": 27,
+   "treffer": 18,
+   "rps": 0.17394380722222225,
+   "remis_getippt": 0
+  },
+  "regel": {
+   "n": 27,
+   "treffer": 16,
+   "remis_getippt": 3
+  },
+  "community": null,
+  "daneben": {
+   "id": 83237,
+   "heim": "FC Bayern München",
+   "gast": "1. FC Köln",
+   "tore": "1:1",
+   "ergebnis": "remis",
+   "regel": "heim",
+   "regel_treffer": false,
+   "formel": {
+    "p": [
+     0.8239,
+     0.1393,
+     0.0368
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.1393,
+    "rps": 0.340082725
+   },
+   "markt": {
+    "p": [
+     0.8876,
+     0.0713,
+     0.0412
+    ],
+    "tipp": "heim",
+    "treffer": false,
+    "p_ergebnis": 0.0713,
+    "rps": 0.39476148499999997
+   }
+  },
+  "volltreffer": {
+   "id": 83228,
+   "heim": "Borussia Dortmund",
+   "gast": "SV 07 Elversberg",
+   "tore": "2:1",
+   "ergebnis": "heim",
+   "regel": "heim",
+   "regel_treffer": true,
+   "formel": {
+    "p": [
+     0.7378,
+     0.1876,
+     0.0745
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.7378,
+    "rps": 0.037156999999999996
+   },
+   "markt": {
+    "p": [
+     0.7332,
+     0.1559,
+     0.1108
+    ],
+    "tipp": "heim",
+    "treffer": true,
+    "p_ergebnis": 0.7332,
+    "rps": 0.041740525000000014
+   }
+  },
+  "ergebnisse": {
+   "heim": 13,
+   "remis": 6,
+   "gast": 8
+  },
+  "spieltage": 3
+ }
+}
