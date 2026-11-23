@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=e961ca486416d51c -->
+<!-- vorbericht-auto sha=ca8d18dc10d88415 -->
 # Die Formel sagt: Bayern vorn, Freiburg – Leipzig offen
 
 *Vorbericht zum 11. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -16,7 +16,7 @@
 Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne Marge):
 
 - **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 63 % · 21 % · 16 %
-- **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 40 % · 27 % · 33 %
+- **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 39 % · 27 % · 34 %
 - **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 23 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
@@ -50,7 +50,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Köln Platz 14 (Form NUUNU) gegen Elversberg Platz 9 (Form SNSNN)
 - **Erwartete Tore:** 1,7 : 1,3
 - **Formel:** 45 % · 28 % · 27 % → Heimsieg
-- **Markt:** 49 % · 24 % · 27 % → Heimsieg
+- **Markt:** 48 % · 25 % · 28 % → Heimsieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -86,7 +86,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Paderborn Platz 15 (Form USUUN) gegen Schalke Platz 16 (Form NUNNU)
 - **Erwartete Tore:** 1,0 : 0,8
 - **Formel:** 48 % · 27 % · 25 % → Heimsieg
-- **Markt:** 40 % · 27 % · 33 % → Heimsieg
+- **Markt:** 39 % · 27 % · 34 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -100,7 +100,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Stuttgart Platz 8 (Form NNSSU) gegen Frankfurt Platz 7 (Form SNSUS)
 - **Erwartete Tore:** 2,3 : 1,3
 - **Formel:** 51 % · 27 % · 22 % → Heimsieg
-- **Markt:** 56 % · 21 % · 23 % → Heimsieg
+- **Markt:** 55 % · 21 % · 24 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Topspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -116,7 +116,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Freiburg Platz 3 (Form NNSSS) gegen Leipzig Platz 4 (Form NSSSS)
 - **Erwartete Tore:** 1,7 : 1,7
 - **Formel:** 32 % · 28 % · 39 % → Auswärtssieg
-- **Markt:** 37 % · 24 % · 38 % → Auswärtssieg (knapp)
+- **Markt:** 37 % · 25 % · 39 % → Auswärtssieg (knapp)
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
