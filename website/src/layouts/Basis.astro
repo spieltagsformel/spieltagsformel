@@ -4,9 +4,13 @@ import "../styles/global.css";
 interface Props {
   titel: string;
   beschreibung?: string;
-  startseite?: boolean; // Startseite v3: dunkler Kopf, Inhalt in voller Breite
+  // Design v3 „Bühne“: „start“ und „kapitel“ = Inhalt in voller Breite mit eigenen Kapiteln,
+  // „text“ = Textspalte (höchstens 46rem) links im Raster.
+  art?: "start" | "kapitel" | "text";
+  // Dunkler Seitenkopf über dem Inhalt (ersetzt die h1 der Seite)
+  kopf?: { vorzeile?: string; vorzeileLink?: string; titel: string; text?: string };
 }
-const { titel, startseite = false, beschreibung = "Bundesliga in Zahlen: Unsere Formel sagt jeden Spieltag voraus – vor Anpfiff eingefroren, danach ehrlich abgerechnet." } = Astro.props;
+const { titel, art = "text", kopf, beschreibung = "Bundesliga in Zahlen: Unsere Formel sagt jeden Spieltag voraus – vor Anpfiff eingefroren, danach ehrlich abgerechnet." } = Astro.props;
 const seitentitel = titel === "Spieltagsformel" ? "Spieltagsformel – Bundesliga in Zahlen" : `${titel} · Spieltagsformel`;
 const pfad = Astro.url.pathname.replace(/\/$/, "") || "/";
 const menue = [
@@ -32,7 +36,7 @@ const menue = [
     <meta name="theme-color" content="#111111" />
   </head>
   <body>
-    <header class:list={["kopf", { invers: startseite }]}>
+    <header class="kopf invers">
       <div class="rahmen">
         <a class="logo" href="/" aria-label="Spieltagsformel – Startseite">
           <img class="hell" src="/logo/spieltagsformel-logo-hell.svg" alt="Spieltagsformel" width="175" height="40" />
@@ -45,10 +49,23 @@ const menue = [
         </nav>
       </div>
     </header>
-    <main class={startseite ? "voll" : "rahmen"}>
-      <slot />
-    </main>
-    <footer class:list={["fuss", { weit: startseite }]}>
+    {kopf && (
+      <section class="seitenkopf">
+        <div class="weit">
+          {kopf.vorzeile && (kopf.vorzeileLink
+            ? <p class="vorzeile"><a href={kopf.vorzeileLink}>{kopf.vorzeile}</a></p>
+            : <p class="vorzeile">{kopf.vorzeile}</p>)}
+          <h1 class="seiten-titel">{kopf.titel}</h1>
+          {kopf.text && <p class="seiten-text">{kopf.text}</p>}
+        </div>
+      </section>
+    )}
+    {art === "text" ? (
+      <main class="seite"><div class="weit"><div class="spalte"><slot /></div></div></main>
+    ) : (
+      <main class="voll"><slot /></main>
+    )}
+    <footer class="fuss breit">
       <div class="rahmen">
         <nav aria-label="Rechtliches">
           <a href="/newsletter">Newsletter</a>

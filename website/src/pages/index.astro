@@ -6,9 +6,9 @@ import Balken from "../components/Balken.astro";
 import Spielkarte from "../components/Spielkarte.astro";
 import Vereinsstreifen from "../components/Vereinsstreifen.astro";
 import {
-  neuestesPaket, nachTagen, kurz, werte, abstand, heldSpiel, markierungen, zeitraum, kurzAnstoss, komma3, WIDERSPRUCH_AB,
+  neuestesPaket, nachTagen, kurz, werte, abstand, heldSpiel, markierungen, zeitraum, kurzAnstoss, WIDERSPRUCH_AB,
 } from "../lib/daten.js";
-import { waechterStand } from "../lib/waechter.js";
+import Bilanz from "../components/Bilanz.astro";
 import { KIT_URL } from "../lib/newsletter.js";
 
 const paket = neuestesPaket();
@@ -36,17 +36,8 @@ if (a) {
 const heldF = held ? werte(held.modell) : null;
 const heldM = held ? werte(held.markt) : null;
 
-const w = waechterStand();
-const bilanz = w && w.gesamt?.formel?.n
-  ? [
-      { name: "Formel", b: w.gesamt.formel, klasse: "formel" },
-      { name: "Markt", b: w.gesamt.markt, klasse: "markt" },
-      ...(w.weitere?.["dc-0.2"] ? [{ name: "Vergleichsmodell", b: w.weitere["dc-0.2"], klasse: "vergleich" }] : []),
-    ].filter((x) => x.b)
-  : null;
-const vorn = bilanz && bilanz[1] && bilanz[0].b.rps < bilanz[1].b.rps;
 ---
-<Basis titel="Spieltagsformel" startseite>
+<Basis titel="Spieltagsformel" art="start">
   <section class="buehne" aria-labelledby="held-titel">
     <div class="weit">
       {paket && <p class="vorzeile">{paket.spieltag}. Spieltag, {zeitraum(paket.spiele)}</p>}
@@ -108,26 +99,13 @@ const vorn = bilanz && bilanz[1] && bilanz[0].b.rps < bilanz[1].b.rps;
     <section class="kapitel"><div class="weit"><p>Die erste Prognose erscheint hier, sobald das Datenpaket für den nächsten Spieltag vorliegt.</p></div></section>
   )}
 
-  {bilanz && (
-    <section class="kapitel grau" aria-labelledby="bilanz-titel">
-      <div class="weit">
-        <h2 id="bilanz-titel" class="kapitel-titel schmal">Wie gut rechnet die Formel bisher?</h2>
-        <p class="kapitel-text">{bilanz[0].b.n} Spiele mit Prognosen, die vor dem Anpfiff eingefroren waren. Der RPS misst, wie gut die Wahrscheinlichkeiten zum Ergebnis passten. Kleiner ist besser.</p>
-        <div class="bilanz-reihe">
-          {bilanz.map((x) => (
-            <div class={`bilanz-wert ${x.klasse}`}>
-              <p class="zahl bilanz-zahl">{komma3(x.b.rps)}</p>
-              <p class="bilanz-name">{x.name}</p>
-              <p class="leise">{x.b.treffer} von {x.b.n} Spielen richtig getippt</p>
-            </div>
-          ))}
-        </div>
-        <p class="bilanz-fazit">
-          {vorn ? "Der Vorsprung ist klein und kann Zufall sein." : "Im Moment liegt der Markt vorn."} Wir rechnen jeden Spieltag weiter, auch wenn es schlechter wird. <a href="/modell/logbuch">Zum Modell-Logbuch</a>
-        </p>
-      </div>
-    </section>
-  )}
+  <section class="kapitel grau" aria-labelledby="bilanz-titel">
+    <div class="weit">
+      <h2 id="bilanz-titel" class="kapitel-titel schmal">Wie gut rechnet die Formel bisher?</h2>
+      <p class="kapitel-text">Gezählt werden nur Spiele mit Prognosen, die vor dem Anpfiff eingefroren waren. Der RPS misst, wie gut die Wahrscheinlichkeiten zum Ergebnis passten. Kleiner ist besser.</p>
+      <Bilanz />
+    </div>
+  </section>
 
   <section class="kapitel tinte">
     <div class="weit zweispaltig">

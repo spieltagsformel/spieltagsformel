@@ -1,22 +1,33 @@
 ---
 import Basis from "../layouts/Basis.astro";
-import NewsletterBox from "../components/NewsletterBox.astro";
+import NewsletterBand from "../components/NewsletterBand.astro";
+
+const inhalt = [
+  { titel: "Kontostand", text: "Wie steht das rechnerische 100-€-Experiment? Kein echtes Geld, keine Wettempfehlung." },
+  { titel: "Die Zahl der Woche", text: "Eine Zahl aus dem Spieltag, ein Satz Einordnung." },
+  { titel: "Modell-Logbuch", text: "Was haben wir an der Formel geändert, und warum?" },
+  { titel: "Worauf wir achten", text: "Drei Beobachtungen für das kommende Wochenende." },
+];
 ---
-<Basis titel="Newsletter" beschreibung="Nachspielzeit: jeden Mittwoch der Kontostand des 100-€-Experiments, die Zahl der Woche und das Logbuch der Formel.">
-  <h1>Nachspielzeit</h1>
-  <p class="leise">Der Newsletter der Spieltagsformel. Jeden Mittwoch, kurz und ehrlich.</p>
+<Basis titel="Newsletter" art="kapitel" beschreibung="Nachspielzeit: jeden Mittwoch der Kontostand des 100-€-Experiments, die Zahl der Woche und das Logbuch der Formel."
+  kopf={{ vorzeile: "Newsletter", titel: "Nachspielzeit.", text: "Der Newsletter der Spieltagsformel. Jeden Mittwoch, kurz und ehrlich." }}>
 
-  <NewsletterBox />
+  <section class="kapitel" aria-labelledby="drin">
+    <div class="weit">
+      <h2 id="drin" class="kapitel-titel">Was drinsteht.</h2>
+      <div class="zwei-karten">
+        {inhalt.map((x) => (
+          <article class="karte">
+            <h3 class="karte-titel">{x.titel}</h3>
+            <p>{x.text}</p>
+          </article>
+        ))}
+      </div>
+      <h2 class="kapitel-titel klein-titel abstand-oben-gross">Was nicht drinsteht.</h2>
+      <p class="kapitel-text">Wett-Tipps, Gewinnversprechen und Werbung für Sportwetten. Werbelinks, falls es welche gibt, sind als Werbung gekennzeichnet.</p>
+      <p class="klein leise abstand-oben">Rein rechnerisches Experiment · keine Wettempfehlung · 18+ · Glücksspiel kann süchtig machen. Hilfe und Beratung: <a href="https://www.check-dein-spiel.de">check-dein-spiel.de</a></p>
+    </div>
+  </section>
 
-  <h2>Was drinsteht</h2>
-  <ul>
-    <li><b>Kontostand:</b> Wie steht das rechnerische 100-€-Experiment? Kein echtes Geld, keine Wettempfehlung.</li>
-    <li><b>Die Zahl der Woche:</b> eine Zahl, ein Satz Einordnung.</li>
-    <li><b>Modell-Logbuch:</b> Was haben wir an der Formel geändert, und warum?</li>
-    <li><b>Worauf wir achten:</b> drei Beobachtungen für das Wochenende.</li>
-  </ul>
-
-  <h2>Was nicht drinsteht</h2>
-  <p>Wett-Tipps, Gewinnversprechen und Werbung für Sportwetten. Werbelinks, falls es welche gibt, sind als Werbung gekennzeichnet.</p>
-  <p class="klein leise">Rein rechnerisches Experiment · keine Wettempfehlung · 18+ · Glücksspiel kann süchtig machen. Hilfe und Beratung: <a href="https://www.check-dein-spiel.de">check-dein-spiel.de</a></p>
+  <NewsletterBand titel="Jetzt kostenlos abonnieren." text="In etwa vier Minuten gelesen, jederzeit abbestellbar. Wir messen, welche Links in den Ausgaben angeklickt werden, nur als Statistik." />
 </Basis>

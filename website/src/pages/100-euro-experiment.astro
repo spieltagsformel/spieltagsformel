@@ -1,27 +1,66 @@
 ---
 import Basis from "../layouts/Basis.astro";
-import NewsletterBox from "../components/NewsletterBox.astro";
+import NewsletterBand from "../components/NewsletterBand.astro";
+
+const strategien = [
+  { kurz: "A", name: "Favoritenfan", klasse: "a", regel: "10 € fest auf den Favoriten der Formel, bei jedem Spiel." },
+  { kurz: "B", name: "Der Vorsichtige", klasse: "b", regel: "5 % des aktuellen Kontostands auf den Favoriten der Formel." },
+  { kurz: "C", name: "Value-Jäger", klasse: "c", regel: "Nur wenn die Formel eine Chance deutlich höher einschätzt als der Markt, mit kleinem Einsatz." },
+];
 ---
-<Basis titel="Das 100-€-Experiment" beschreibung="Ein rechnerisches Experiment ohne echtes Geld: Was wäre, wenn man der Formel folgen würde?">
-  <h1>Das 100-€-Experiment</h1>
-  <p class="leise">Ein reines Rechenexperiment ohne echtes Geld: Was würde aus 100 €, wenn man der Formel folgt?</p>
+<Basis titel="Das 100-€-Experiment" art="kapitel" beschreibung="Ein rechnerisches Experiment ohne echtes Geld: Was wäre, wenn man der Formel folgen würde?"
+  kopf={{ vorzeile: "Das 100-€-Experiment", titel: "100 € und eine Formel.", text: "Ein reines Rechenexperiment ohne echtes Geld: Was würde aus 100 €, wenn man der Formel folgt?" }}>
 
-  <div class="kasten hinweis">
-    <p><b>Kein echtes Geld, keine Wettempfehlung.</b> Wir setzen nichts ein und empfehlen keine Wetten. Das Experiment zeigt, wie schwer es ist, den Markt zu schlagen.</p>
-    <p class="klein">18+ · Glücksspiel kann süchtig machen. Hilfe und Beratung: <a href="https://www.check-dein-spiel.de">check-dein-spiel.de</a></p>
-  </div>
+  <section class="kapitel" aria-labelledby="konten">
+    <div class="weit">
+      <div class="kasten hinweis schmal-kasten">
+        <p><b>Kein echtes Geld, keine Wettempfehlung.</b> Wir setzen nichts ein und empfehlen keine Wetten. Das Experiment zeigt, wie schwer es ist, den Markt zu schlagen.</p>
+        <p class="klein">18+ · Glücksspiel kann süchtig machen. Hilfe und Beratung: <a href="https://www.check-dein-spiel.de">check-dein-spiel.de</a></p>
+      </div>
 
-  <h2>Die Regeln</h2>
-  <p>Start mit 100 € zum Wiederbeginn der Bundesliga nach der Winterpause. Gerechnet wird mit durchschnittlichen Marktquoten kurz vor Anpfiff.</p>
-  <ul>
-    <li><b>A · Favoritenfan:</b> 10 € fest auf den Favoriten der Formel.</li>
-    <li><b>B · Der Vorsichtige:</b> 5 % des aktuellen Kontostands auf den Favoriten der Formel.</li>
-    <li><b>C · Value-Jäger:</b> nur wenn die Formel eine Chance deutlich höher einschätzt als der Markt, mit kleinem Einsatz.</li>
-  </ul>
-  <p>Zum Vergleich laufen zwei Referenzkonten mit je 100 € Start und festen 10 € pro Spiel mit: eines nach der Tabellenplatz-Regel und eines nach dem Community-Tipp. Fällt ein Konto unter 10 €, ist es pleite. <a href="https://github.com/spieltagsformel/spieltagsformel/blob/main/VERGLEICHSMASSSTAEBE.md">Alle Regeln</a></p>
+      <h2 id="konten" class="kapitel-titel abstand-oben-gross">Drei Konten, drei Strategien.</h2>
+      <p class="kapitel-text">Jedes Konto startet mit 100 € zum Wiederbeginn der Bundesliga nach der Winterpause. Gerechnet wird mit den durchschnittlichen Marktquoten kurz vor Anpfiff.</p>
+      <div class="drei-karten">
+        {strategien.map((s) => (
+          <article class={`karte konto ${s.klasse}`}>
+            <p class="konto-kopf"><span class="konto-buchstabe">{s.kurz}</span><span class="karte-titel">{s.name}</span></p>
+            <p>{s.regel}</p>
+            <div class="konto-stand">
+              <span class="leise klein">Kontostand</span>
+              <span class="zahl konto-zahl">100,00 €</span>
+              <span class="leise klein">Start nach der Winterpause</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <h2>Kontostand</h2>
-  <p class="leise">Das Experiment startet mit dem ersten Spieltag nach der Winterpause. Ab dann steht hier jede Woche der aktuelle Kontostand.</p>
+  <section class="kapitel grau" aria-labelledby="vergleichskonten">
+    <div class="weit">
+      <h2 id="vergleichskonten" class="kapitel-titel">Und zum Vergleich.</h2>
+      <p class="kapitel-text">Zwei Referenzkonten laufen mit, je 100 € Start und feste 10 € pro Spiel. So sieht man, ob die Formel mehr kann als einfache Faustregeln.</p>
+      <div class="zwei-karten">
+        <article class="karte weiss">
+          <h3 class="karte-titel">Tabellen-Regel</h3>
+          <p>Setzt immer auf den besser Platzierten, bei einem Platz Abstand auf Remis.</p>
+        </article>
+        <article class="karte weiss">
+          <h3 class="karte-titel">Community</h3>
+          <p>Setzt auf die Mehrheit unserer Abstimmung vor dem Spieltag. Spiele mit weniger als 10 Stimmen werden nicht gewertet.</p>
+        </article>
+      </div>
+      <p class="kapitel-text">Fällt ein Konto unter 10 €, ist es pleite und setzt nicht mehr. Den Spieltag halten wir fest. <a href="https://github.com/spieltagsformel/spieltagsformel/blob/main/VERGLEICHSMASSSTAEBE.md">Alle Regeln</a></p>
+    </div>
+  </section>
 
-  <NewsletterBox text="Den Kontostand bekommst du jeden Mittwoch per E-Mail, dazu eine Zahl der Woche und das Logbuch der Formel. Kostenlos und jederzeit abbestellbar." />
+  <section class="kapitel" aria-labelledby="kontostand">
+    <div class="weit">
+      <h2 id="kontostand" class="kapitel-titel">Kontostand.</h2>
+      <p class="kapitel-text">Das Experiment startet mit dem ersten Spieltag nach der Winterpause. Ab dann steht hier jede Woche der Verlauf aller fünf Konten, mit Rendite und größtem Rückgang.</p>
+      <p class="klein leise abstand-oben">Rechnerisches Experiment ohne echtes Geld. 18+ · Glücksspiel kann süchtig machen. Hilfe: <a href="https://www.check-dein-spiel.de">check-dein-spiel.de</a></p>
+    </div>
+  </section>
+
+  <NewsletterBand text="Den Kontostand bekommst du jeden Mittwoch per E-Mail, dazu eine Zahl der Woche und das Logbuch der Formel. Kostenlos und jederzeit abbestellbar." />
 </Basis>
