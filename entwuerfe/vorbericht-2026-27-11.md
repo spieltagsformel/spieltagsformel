@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=ca8d18dc10d88415 -->
+<!-- vorbericht-auto sha=2fcb8a5374b54226 -->
 # Die Formel sagt: Bayern vorn, Freiburg – Leipzig offen
 
 *Vorbericht zum 11. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -15,9 +15,9 @@
 
 Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne Marge):
 
-- **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 63 % · 21 % · 16 %
+- **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 64 % · 20 % · 16 %
 - **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 39 % · 27 % · 34 %
-- **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 23 %
+- **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 24 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
 
@@ -62,7 +62,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Mainz Platz 13 (Form SNNNN) gegen Union Platz 17 (Form UUUNN)
 - **Erwartete Tore:** 2,0 : 1,1
 - **Formel:** 50 % · 27 % · 23 % → Heimsieg
-- **Markt:** 63 % · 21 % · 16 % → Heimsieg
+- **Markt:** 64 % · 20 % · 16 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -116,7 +116,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Freiburg Platz 3 (Form NNSSS) gegen Leipzig Platz 4 (Form NSSSS)
 - **Erwartete Tore:** 1,7 : 1,7
 - **Formel:** 32 % · 28 % · 39 % → Auswärtssieg
-- **Markt:** 37 % · 25 % · 39 % → Auswärtssieg (knapp)
+- **Markt:** 36 % · 25 % · 40 % → Auswärtssieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -130,7 +130,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Hoffenheim Platz 11 (Form SSNSN) gegen Augsburg Platz 10 (Form NUNNS)
 - **Erwartete Tore:** 2,1 : 1,5
 - **Formel:** 48 % · 27 % · 25 % → Heimsieg
-- **Markt:** 56 % · 21 % · 23 % → Heimsieg
+- **Markt:** 56 % · 21 % · 24 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
