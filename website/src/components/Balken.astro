@@ -1,0 +1,16 @@
+---
+// 1X2-Balken in den Diagrammfarben der Marke: Heimsieg, Remis, Auswärtssieg.
+interface Props {
+  werte: number[];        // [Heim, Remis, Gast] in ganzen Prozent
+  wer: string;            // „Formel“ oder „Markt“ (für Screenreader)
+  groesse?: "gross" | "mittel" | "klein";
+}
+const { werte, wer, groesse = "mittel" } = Astro.props;
+const min = groesse === "klein" ? 13 : 11;
+const klassen = ["heim", "remis", "gast"];
+---
+<div class={`balken ${groesse}`} role="img" aria-label={`${wer}: Heimsieg ${werte[0]} Prozent, Remis ${werte[1]} Prozent, Auswärtssieg ${werte[2]} Prozent`}>
+  {werte.map((w, i) => (
+    <span class={`seg ${klassen[i]}`} style={`width:${w}%`} aria-hidden="true">{w >= min ? `${w} %` : ""}</span>
+  ))}
+</div>

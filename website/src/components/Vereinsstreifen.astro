@@ -1,0 +1,10 @@
+---
+// Vereinsfarben als schmaler Längsstreifen, ohne Wappen – nur zur Orientierung.
+import { verein } from "../lib/vereinsfarben.js";
+interface Props { name: string; gross?: boolean }
+const { name, gross = false } = Astro.props;
+const { farben } = verein(name);
+---
+<span class:list={["streifen", { gross }]} aria-hidden="true">
+  {farben.map((f) => <span style={`background:${f}`}></span>)}
+</span>

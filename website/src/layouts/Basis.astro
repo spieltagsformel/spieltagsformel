@@ -4,14 +4,16 @@ import "../styles/global.css";
 interface Props {
   titel: string;
   beschreibung?: string;
+  startseite?: boolean; // Startseite v3: dunkler Kopf, Inhalt in voller Breite
 }
-const { titel, beschreibung = "Bundesliga in Zahlen: Unsere Formel sagt jeden Spieltag voraus – vor Anpfiff eingefroren, danach ehrlich abgerechnet." } = Astro.props;
+const { titel, startseite = false, beschreibung = "Bundesliga in Zahlen: Unsere Formel sagt jeden Spieltag voraus – vor Anpfiff eingefroren, danach ehrlich abgerechnet." } = Astro.props;
 const seitentitel = titel === "Spieltagsformel" ? "Spieltagsformel – Bundesliga in Zahlen" : `${titel} · Spieltagsformel`;
 const pfad = Astro.url.pathname.replace(/\/$/, "") || "/";
 const menue = [
   { href: "/", text: "Spieltag" },
   { href: "/modell", text: "Modell" },
   { href: "/100-euro-experiment", text: "100-€-Experiment" },
+  { href: "/newsletter", text: "Newsletter" },
 ];
 ---
 <!doctype html>
@@ -30,7 +32,7 @@ const menue = [
     <meta name="theme-color" content="#111111" />
   </head>
   <body>
-    <header class="kopf">
+    <header class:list={["kopf", { invers: startseite }]}>
       <div class="rahmen">
         <a class="logo" href="/" aria-label="Spieltagsformel – Startseite">
           <img class="hell" src="/logo/spieltagsformel-logo-hell.svg" alt="Spieltagsformel" width="175" height="40" />
@@ -43,10 +45,10 @@ const menue = [
         </nav>
       </div>
     </header>
-    <main class="rahmen">
+    <main class={startseite ? "voll" : "rahmen"}>
       <slot />
     </main>
-    <footer class="fuss">
+    <footer class:list={["fuss", { weit: startseite }]}>
       <div class="rahmen">
         <nav aria-label="Rechtliches">
           <a href="/newsletter">Newsletter</a>
