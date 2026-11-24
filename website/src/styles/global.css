@@ -19,6 +19,7 @@
   --auf-invers: #ffffff;
   --heim: #2f5bff;
   --remis: #111111;
+  --auf-remis: #ffffff;
   --gast: #ff5a5f;
   --markt: #5a5a5a;
   --schrift: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -39,6 +40,7 @@
     --flaeche-invers: #f5f5f5;
     --auf-invers: #111111;
     --remis: #bdbdbd;
+    --auf-remis: #111111;
   }
 }
 
@@ -82,65 +84,9 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
 .kasten > :last-child { margin-bottom: 0; }
 .hinweis { border-left: 4px solid var(--akzent); }
 
-/* Spieltag: Kräfteverhältnis (Entwurf B) */
-.spiele { list-style: none; margin: 1.25rem 0; padding: 0; }
-.spiel { display: grid; grid-template-columns: 9.5rem 1fr 9.5rem; align-items: center; gap: 0.5rem 1.25rem;
-  padding: 1.25rem 0; border-top: 1px solid var(--linie); }
-.spiel:last-child { border-bottom: 1px solid var(--linie); }
-.team { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; line-height: 1.2; }
-.team.gast { text-align: right; }
-.team small { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.75rem; letter-spacing: 0;
-  color: var(--text-leise); margin-top: 0.2rem; }
-.skala { position: relative; height: 4rem; }
-.skala .achse { position: absolute; top: 1.85rem; left: 0; right: 0; height: 2px; background: var(--linie); }
-.skala .mitte { position: absolute; top: 1.3rem; left: 50%; width: 2px; height: 1.2rem; margin-left: -1px; background: var(--text-leise); opacity: 0.45; }
-.skala .zone { position: absolute; top: 1.85rem; height: 2px; background: var(--akzent); }
-.skala .punkt-gross { position: absolute; top: 1.2rem; width: 1.4rem; height: 1.4rem; margin-left: -0.7rem; border-radius: 50%;
-  background: var(--akzent-flaeche); box-shadow: 0 0 0 4px var(--grund); }
-.skala .label { position: absolute; top: 2.85rem; transform: translateX(-50%); font-size: 0.8125rem; font-weight: 600; white-space: nowrap; }
-.skala .rand { position: absolute; top: 0; font-family: var(--mono); font-size: 0.6875rem; color: var(--text-leise); }
-.skala .rand.links { left: 0; } .skala .rand.rechts { right: 0; }
-.meta { grid-column: 1 / -1; display: flex; justify-content: center; gap: 0.4rem 1.25rem; flex-wrap: wrap;
-  font-size: 0.8125rem; color: var(--text-leise); }
-.meta b { color: var(--text); font-family: var(--mono); font-weight: 700; }
-@media (max-width: 640px) {
-  .spiel { grid-template-columns: 1fr 1fr; }
-  .team { font-size: 1.0625rem; }
-  .skala { grid-column: 1 / -1; grid-row: 2; }
-  .meta { justify-content: flex-start; }
-}
-
-/* Spieltag v2: Gliederung nach Tagen und Anstoßzeiten */
-.spieltag-tag { margin-top: 2rem; }
-.spieltag-tag .tag { font-weight: 800; font-size: 1.25rem; margin: 0 0 0.25rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--text); }
-.uhrzeit { font-family: var(--mono); font-weight: 700; font-size: 0.9375rem; margin: 1rem 0 0; }
-.anstoss .spiele { margin: 0.25rem 0 0; }
-.anstoss .spiel:last-child { border-bottom: 0; }
-
-/* Team-Spalte: Vereinsform, Name, Tabellenplatz und Form */
-.team { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-.team.gast { align-items: flex-end; }
+/* Vereinsform (Design v2, derzeit nicht auf der Startseite) */
 .vereinsform { display: block; width: 2rem; height: auto; }
 .vereinsform .umriss { stroke: var(--text); stroke-opacity: 0.35; stroke-width: 1; }
-.team-daten { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-weight: 400; font-size: 0.75rem;
-  letter-spacing: 0; color: var(--text-leise); line-height: 1.5; }
-.team-daten b { color: var(--text); font-weight: 700; }
-
-/* Steckbrief unter der Skala */
-.steckbrief { grid-column: 1 / -1; display: grid; grid-template-columns: max-content max-content; justify-content: center;
-  gap: 0.15rem 1.25rem; margin: 0.25rem 0 0; font-size: 0.8125rem; }
-.steckbrief dt { color: var(--text-leise); }
-.steckbrief dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; }
-.steckbrief dd.wort { font-family: var(--schrift); font-weight: 600; }
-
-/* Einblenden beim Scrollen (nur mit JavaScript und ohne „Bewegung reduzieren“) */
-@media (prefers-reduced-motion: no-preference) {
-  .anim .spiel.einblenden { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-  .anim .spiel.einblenden.sichtbar { opacity: 1; transform: none; }
-}
-@media (max-width: 640px) {
-  .steckbrief { justify-content: start; grid-template-columns: 1fr max-content; }
-}
 
 .quelle { font-size: 0.8125rem; color: var(--text-leise); margin-top: 1rem; }
 
@@ -180,3 +126,136 @@ table.bilanz td:not(:first-child), table.bilanz th:not(:first-child) { font-fami
 .logbuch table { display: block; overflow-x: auto; }
 table.bilanz td, table.bilanz th, .logbuch td, .logbuch th { white-space: nowrap; }
 .logbuch td:first-child { white-space: normal; min-width: 7rem; }
+
+/* ------------------------------------------------------------------
+   Startseite v3 „Bühne“ (Entwurf A, freigegeben 24.11.2026)
+   Kapitel wechseln die Fläche: Tinte (Hero) → Papier (Spiele) → Grau (Bilanz) → Tinte (Experiment, Newsletter).
+   ------------------------------------------------------------------ */
+main.voll { padding: 0; }
+.weit { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+
+/* Kopf auf Tinte */
+.kopf.invers { background: #111111; border-bottom-color: #111111; }
+.kopf.invers .rahmen, .fuss.weit .rahmen { max-width: 1180px; padding-left: 2rem; padding-right: 2rem; }
+.kopf.invers .logo .hell { display: none; }
+.kopf.invers .logo .dunkel { display: block; }
+.kopf.invers .nav a { color: #f5f5f5; }
+.kopf.invers .nav a:hover, .kopf.invers .nav a[aria-current="page"] { color: #7d97ff; }
+
+/* 1X2-Balken */
+.balken { display: flex; gap: 2px; height: 1.625rem; }
+.balken.gross { height: 2.75rem; }
+.balken .seg { display: flex; align-items: center; justify-content: center; min-width: 0; overflow: hidden; border-radius: 4px;
+  font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.75rem; white-space: nowrap; }
+.balken.gross .seg { font-size: 1rem; }
+.seg.heim { background: var(--heim); color: #ffffff; }
+.seg.remis { background: var(--remis); color: var(--auf-remis); }
+.seg.gast { background: var(--gast); color: #111111; }
+.legende-farben { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.legende-farben > span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.legende-farben i { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 2px; }
+.legende-farben i.heim { background: var(--heim); }
+.legende-farben i.remis { background: var(--remis); }
+.legende-farben i.gast { background: var(--gast); }
+.dunkel-auf-hell { font-size: 0.875rem; color: var(--text-leise); margin: 1.25rem 0 0; }
+
+/* Vereinsstreifen */
+.streifen { display: inline-flex; flex-direction: column; flex: none; width: 10px; height: 30px; border-radius: 2px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(127, 127, 127, 0.55); }
+.streifen > span { flex: 1; }
+.streifen.gross { width: 12px; height: 34px; }
+
+/* Hero */
+@media (prefers-color-scheme: dark) { .buehne, .kapitel.tinte { border-bottom: 1px solid #34343a; } .kapitel.tinte { border-top: 1px solid #34343a; } }
+.buehne { background: #111111; color: #f5f5f5; padding: 4.5rem 0 6rem; text-align: center;
+  --remis: #bdbdbd; --auf-remis: #111111; --text-leise: #b5b5b5; }
+.vorzeile { margin: 0 0 1.5rem; font-weight: 600; color: #b5b5b5; }
+.held-titel { font-weight: 800; font-size: clamp(2.75rem, 7.4vw, 6.75rem); line-height: 0.98; letter-spacing: -0.035em;
+  max-width: 11ch; margin: 0 auto; }
+.held-unter { margin: 1.75rem auto 0; max-width: 34em; font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.45; color: #d9d9d9; }
+.held-unter .zahl { color: #ffffff; font-weight: 700; }
+.duell { max-width: calc(900px + 4rem); margin-top: 4rem; display: flex; flex-direction: column; gap: 1.25rem; text-align: left; }
+.duell-kopf { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-weight: 800; font-size: clamp(1.25rem, 2.4vw, 1.75rem); }
+.duell-kopf .verein { display: inline-flex; align-items: center; gap: 0.75rem; }
+.duell-kopf .zahl { font-size: 0.9375rem; font-weight: 400; }
+.duell-zeile { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; align-items: center; font-weight: 600; }
+.duell .balken.gross { height: 4rem; }
+.duell .balken.gross .seg { font-size: 1.375rem; }
+.legende { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; font-size: 0.875rem; color: #b5b5b5; }
+.held-links { margin-top: 3.5rem; display: flex; flex-wrap: wrap; gap: 1.75rem; justify-content: center; align-items: center; }
+.held-links .knopf, .tinte .knopf { min-height: 48px; display: inline-flex; align-items: center; }
+.link-hell { color: #7d97ff; font-weight: 600; }
+.link-hell:hover { color: #a9baff; }
+.link-leise { color: inherit; }
+
+/* Kapitel */
+.kapitel { padding: 6rem 0 6.5rem; }
+.kapitel.grau { background: var(--grund-2); }
+.kapitel.tinte { background: #111111; color: #f5f5f5; --text-leise: #b5b5b5; }
+.kapitel.tinte p { color: #d9d9d9; font-size: 1.125rem; line-height: 1.55; }
+.kapitel.tinte p.klein { font-size: 0.8125rem; color: #b5b5b5; }
+.kapitel-titel { margin: 0; font-weight: 800; font-size: clamp(2.125rem, 4.6vw, 3.75rem); line-height: 1.02; letter-spacing: -0.03em; }
+.kapitel-titel.schmal { max-width: 14ch; }
+.kapitel-titel.klein-titel { font-size: clamp(1.875rem, 3.6vw, 2.75rem); line-height: 1.05; margin-bottom: 1.25rem; }
+.kapitel-text { margin: 1.25rem 0 0; max-width: 38em; font-size: 1.125rem; line-height: 1.55; color: var(--text-leise); }
+.zweispaltig { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+/* Spielkarten */
+.tag-block { margin-top: 3.5rem; }
+.tag-titel { margin: 0 0 1.25rem; font-weight: 800; font-size: 1.625rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--text); }
+.karten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.karte { background: var(--grund-2); border-radius: 16px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.karte-kopf { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; min-height: 1.75rem; }
+.karte .uhr { font-size: 0.875rem; font-weight: 700; color: var(--text-leise); }
+.pille { font-size: 0.8125rem; font-weight: 600; padding: 0.25rem 0.625rem; border-radius: 9999px; background: var(--flaeche-invers); color: var(--auf-invers); }
+.pille.ergebnis { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--text); }
+.paarung { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.75rem; align-items: start; }
+.paarung .verein { display: flex; align-items: center; gap: 0.625rem; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.015em; line-height: 1.1; min-width: 0; }
+.paarung .verein.gast { justify-content: flex-end; text-align: right; }
+.platz { display: block; margin-top: 0.25rem; font-weight: 400; font-size: 0.8125rem; letter-spacing: 0; color: var(--text-leise); }
+.zeile { display: flex; flex-direction: column; gap: 0.375rem; }
+.zeile-name { font-size: 0.875rem; font-weight: 600; }
+.satz { margin: 0.125rem 0 0; font-size: 1.0625rem; line-height: 1.45; }
+.fakten { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 1rem 1.75rem; padding-top: 1rem; border-top: 1px solid var(--linie); align-items: start; }
+.fakten .k { display: block; font-size: 0.8125rem; color: var(--text-leise); margin-bottom: 0.25rem; }
+.gross-zahl { font-weight: 700; font-size: 1.375rem; }
+.fakten .wort { font-weight: 600; font-size: 0.9375rem; }
+.formen { display: flex; flex-wrap: wrap; gap: 0.375rem 0.875rem; }
+.form { display: inline-flex; gap: 3px; }
+.fq { width: 20px; height: 20px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.6875rem; font-weight: 700; }
+.fq.S { background: var(--flaeche-invers); color: var(--auf-invers); }
+.fq.U { background: var(--linie); color: var(--text); }
+.fq.N { background: var(--grund); color: var(--text); box-shadow: inset 0 0 0 1px var(--text-leise); }
+#spiele .quelle { margin-top: 2.5rem; line-height: 1.5; }
+
+/* Bilanz */
+.bilanz-reihe { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 3.5rem; }
+.bilanz-wert { border-top: 3px solid var(--markt); padding-top: 1.25rem; }
+.bilanz-wert.formel { border-top-color: var(--akzent-flaeche); }
+.bilanz-wert.vergleich { border-top-color: var(--linie); }
+.bilanz-wert p { margin: 0; }
+.bilanz-zahl { font-weight: 700; font-size: clamp(3rem, 6vw, 4.75rem); line-height: 1; letter-spacing: -0.03em; color: var(--text-leise); }
+.bilanz-wert.formel .bilanz-zahl { color: var(--text); }
+.bilanz-name { font-weight: 800; font-size: 1.25rem; margin: 0.875rem 0 0.25rem !important; }
+.bilanz-fazit { margin: 3rem 0 0; font-size: 1.125rem; line-height: 1.55; max-width: 38em; }
+
+@media (max-width: 900px) {
+  .karten { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .weit, .kopf.invers .rahmen, .fuss.weit .rahmen { padding-left: 1rem; padding-right: 1rem; }
+  .kopf.invers .nav { gap: 0.25rem 1rem; }
+  .buehne { padding: 3rem 0 4.5rem; }
+  .duell { margin-top: 3rem; }
+  .duell-zeile { grid-template-columns: 1fr; gap: 0.375rem; }
+  .duell .balken.gross { height: 3.25rem; }
+  .duell .balken.gross .seg { font-size: 1.0625rem; }
+  .kapitel { padding: 4rem 0 4.5rem; }
+  .karte { padding: 1.25rem; gap: 0.875rem; }
+  .paarung .verein { font-size: 1.1875rem; }
+  .fakten { grid-template-columns: auto minmax(0, 1fr); gap: 0.875rem 1.25rem; }
+  .fakten .formfeld { grid-column: 1 / -1; }
+  .bilanz-reihe { grid-template-columns: 1fr; gap: 1.75rem; }
+  .zweispaltig { grid-template-columns: 1fr; gap: 3rem; }
+}

@@ -110,3 +110,99 @@ export function skala(spiel) {
   }
   return { pos, label, zoneLinks: Math.min(pos, 50), zoneBreite: Math.abs(pos - 50) };
 }
+
+// ---------------------------------------------------------------------------
+// Startseite v3 „Bühne“ (Entwurf A, freigegeben 24.11.2026)
+
+const AUSGANG = ["heim", "remis", "gast"];
+
+/** [Heim, Remis, Gast] in ganzen Prozent, oder null. */
+export function werte(f) {
+  return f ? [prozent(f.p_heim), prozent(f.p_remis), prozent(f.p_gast)] : null;
+}
+
+/** Ausgang mit dem größten Abstand zwischen Markt und Formel (d = Markt − Formel, Prozentpunkte). */
+export function abstand(s) {
+  const F = werte(s.modell);
+  const M = werte(s.markt);
+  if (!F || !M) return null;
+  let i = 0;
+  for (let k = 1; k < 3; k++) if (Math.abs(M[k] - F[k]) > Math.abs(M[i] - F[i])) i = k;
+  return { i, ausgang: AUSGANG[i], d: M[i] - F[i], F, M };
+}
+
+/** Das Spiel für den Hero: größter Abstand Formel–Markt; ohne Marktwerte das erste Spiel mit Prognose. */
+export function heldSpiel(spiele) {
+  const mit = spiele.filter((s) => abstand(s));
+  if (mit.length) return mit.reduce((a, b) => (Math.abs(abstand(b).d) > Math.abs(abstand(a).d) ? b : a));
+  return spiele.find((s) => s.modell) ?? null;
+}
+
+export const WIDERSPRUCH_AB = 8; // Prozentpunkte
+
+/** Zeitraum des Spieltags: „vom 27. bis 29. November“ bzw. „am 5. Dezember“. */
+export function zeitraum(spiele) {
+  const zeiten = spiele.map((s) => s.anstoss_utc).filter(Boolean).sort();
+  if (!zeiten.length) return "";
+  const T = (iso, opt) => new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", ...opt }).format(new Date(iso));
+  const [a, b] = [zeiten[0], zeiten[zeiten.length - 1]];
+  const ta = T(a, { day: "numeric", month: "long" });
+  const tb = T(b, { day: "numeric", month: "long" });
+  if (ta === tb) return `am ${ta}`;
+  const ma = T(a, { month: "long" });
+  return ma === T(b, { month: "long" }) ? `vom ${T(a, { day: "numeric" })}. bis ${tb}` : `vom ${ta} bis ${tb}`;
+}
+
+/** „Sa, 15:30“ */
+export function kurzAnstoss(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const wt = new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", weekday: "short" }).format(d).replace(".", "");
+  return `${wt}, ${UHR.format(d)}`;
+}
+
+/** Ein Satz zur Einordnung eines Spiels (Formel gegen Markt). */
+export function einordnung(s) {
+  const F = werte(s.modell);
+  if (!F) return "";
+  const H = kurz(s.heim);
+  const G = kurz(s.gast);
+  const fav = F.indexOf(Math.max(...F));
+  const vorn = fav === 1 ? "Die Formel hält ein Remis für am wahrscheinlichsten" : `Die Formel sieht ${fav === 0 ? H : G} vorn`;
+  const a = abstand(s);
+  if (!a) return `${vorn}.`;
+  const dH = a.M[0] - F[0];
+  const dG = a.M[2] - F[2];
+  if (Math.abs(dH) < 3 && Math.abs(dG) < 3) return `${vorn}, und der Markt sieht es fast genauso.`;
+  const [k, wer, m, f, d] = Math.abs(dH) >= Math.abs(dG) ? [0, H, a.M[0], F[0], dH] : [2, G, a.M[2], F[2], dG];
+  if (k === fav) {
+    return d > 0
+      ? `${vorn}. Der Markt sieht ${wer} noch deutlicher vorn: ${m} statt ${f} Prozent.`
+      : `${vorn}. Der Markt ist bei ${wer} vorsichtiger: ${m} statt ${f} Prozent.`;
+  }
+  return d > 0
+    ? `${vorn}. Der Markt traut ${wer} mehr zu: ${m} statt ${f} Prozent.`
+    : `${vorn}. Der Markt traut ${wer} weniger zu: ${m} statt ${f} Prozent.`;
+}
+
+/** Markierungen für besondere Spiele: { [id]: "Topspiel" | … }, jedes Spiel höchstens eine. */
+export function markierungen(spiele) {
+  const mit = spiele.filter((s) => s.modell);
+  const out = {};
+  const setze = (s, text) => { if (s && !out[s.id]) out[s.id] = text; };
+  const maxF = (s) => Math.max(...werte(s.modell));
+  const plaetze = spiele.filter((s) => s.platz_heim && s.platz_gast);
+  if (plaetze.length) setze(plaetze.reduce((a, b) => (b.platz_heim + b.platz_gast < a.platz_heim + a.platz_gast ? b : a)), "Topspiel");
+  const held = heldSpiel(spiele);
+  if (held && abstand(held) && Math.abs(abstand(held).d) >= WIDERSPRUCH_AB) setze(held, "Größter Widerspruch");
+  if (mit.length) {
+    setze(mit.reduce((a, b) => (maxF(b) > maxF(a) ? b : a)), "Klarster Favorit");
+    setze(mit.reduce((a, b) => (maxF(b) < maxF(a) ? b : a)), "Offenstes Spiel");
+  }
+  return out;
+}
+
+/** Zahl mit drei Nachkommastellen und Komma (RPS, Brier). */
+export function komma3(x) {
+  return x.toFixed(3).replace(".", ",");
+}

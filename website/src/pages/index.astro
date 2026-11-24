@@ -1,110 +1,148 @@
 ---
+// Startseite v3 „Bühne“ (Entwurf A, freigegeben 24.11.2026): Hero mit der Geschichte des Spieltags,
+// danach je Spiel eine Karte mit Formel, Markt und erwarteten Toren, die Bilanz und Experiment/Newsletter.
 import Basis from "../layouts/Basis.astro";
-import NewsletterBox from "../components/NewsletterBox.astro";
-import Vereinsform from "../components/Vereinsform.astro";
-import { neuestesPaket, nachTagen, drei, komma, skala, kurz, prozent, REGEL_TEXT } from "../lib/daten.js";
+import Balken from "../components/Balken.astro";
+import Spielkarte from "../components/Spielkarte.astro";
+import Vereinsstreifen from "../components/Vereinsstreifen.astro";
+import {
+  neuestesPaket, nachTagen, kurz, werte, abstand, heldSpiel, markierungen, zeitraum, kurzAnstoss, komma3, WIDERSPRUCH_AB,
+} from "../lib/daten.js";
+import { waechterStand } from "../lib/waechter.js";
+import { KIT_URL } from "../lib/newsletter.js";
 
 const paket = neuestesPaket();
 const stand = paket ? new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", dateStyle: "medium", timeStyle: "short" }).format(new Date(paket.erstellt)) : null;
-const saisonText = paket ? paket.saison.replace("-", "/") : "";
 const tage = paket ? nachTagen(paket.spiele) : [];
+const marken = paket ? markierungen(paket.spiele) : {};
+const anzahl = paket ? paket.spiele.length : 0;
+const ZAHLWORT = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn"];
+const anzahlWort = ZAHLWORT[anzahl] ?? String(anzahl);
+
+// Hero: das Spiel mit dem größten Abstand zwischen Formel und Markt
+const held = paket ? heldSpiel(paket.spiele) : null;
+const a = held ? abstand(held) : null;
+const H = held ? kurz(held.heim) : "";
+const G = held ? kurz(held.gast) : "";
+let titel = paket ? `${paket.spieltag}. Spieltag` : "Bundesliga in Zahlen";
+let unter = null;
+if (a) {
+  const widerspruch = Math.abs(a.d) >= WIDERSPRUCH_AB;
+  titel = widerspruch ? "Die Formel widerspricht dem Markt." : "Formel und Markt sind sich weitgehend einig.";
+  const wort = a.F[a.i] < a.M[a.i] ? "nur" : "sogar";
+  const wie = a.i === 0 ? `Der Markt gibt ${H} gegen ${G}` : a.i === 2 ? `Der Markt gibt ${G} bei ${H}` : `Der Markt gibt einem Remis zwischen ${H} und ${G}`;
+  unter = { start: widerspruch ? `Am deutlichsten bei ${H} gegen ${G}. ` : "Der größte Unterschied: ", wie, markt: a.M[a.i], wort, formel: a.F[a.i] };
+}
+const heldF = held ? werte(held.modell) : null;
+const heldM = held ? werte(held.markt) : null;
+
+const w = waechterStand();
+const bilanz = w && w.gesamt?.formel?.n
+  ? [
+      { name: "Formel", b: w.gesamt.formel, klasse: "formel" },
+      { name: "Markt", b: w.gesamt.markt, klasse: "markt" },
+      ...(w.weitere?.["dc-0.2"] ? [{ name: "Vergleichsmodell", b: w.weitere["dc-0.2"], klasse: "vergleich" }] : []),
+    ].filter((x) => x.b)
+  : null;
+const vorn = bilanz && bilanz[1] && bilanz[0].b.rps < bilanz[1].b.rps;
 ---
-<Basis titel="Spieltagsformel">
-  <h1>Bundesliga in Zahlen</h1>
-  <p class="leise">Die Formel sagt jeden Spieltag voraus. Wir frieren die Prognosen vor dem Anpfiff ein und rechnen danach ehrlich ab – auch wenn sie danebenliegt.</p>
+<Basis titel="Spieltagsformel" startseite>
+  <section class="buehne" aria-labelledby="held-titel">
+    <div class="weit">
+      {paket && <p class="vorzeile">{paket.spieltag}. Spieltag, {zeitraum(paket.spiele)}</p>}
+      <h1 id="held-titel" class="held-titel">{titel}</h1>
+      {unter ? (
+        <p class="held-unter">{unter.start}{unter.wie} <span class="zahl">{unter.markt} %</span>, die Formel {unter.wort} <span class="zahl">{unter.formel} %</span>.</p>
+      ) : (
+        <p class="held-unter">Die Formel sagt jeden Spieltag voraus. Wir frieren die Prognosen vor dem Anpfiff ein und rechnen danach ehrlich ab, auch wenn sie danebenliegt.</p>
+      )}
+    </div>
+    {held && heldF && (
+      <div class="weit duell">
+        <div class="duell-kopf">
+          <span class="verein"><Vereinsstreifen name={held.heim} gross />{H}</span>
+          <span class="zahl leise">{kurzAnstoss(held.anstoss_utc)}</span>
+          <span class="verein">{G}<Vereinsstreifen name={held.gast} gross /></span>
+        </div>
+        <div class="duell-zeile"><span>Formel</span><Balken werte={heldF} wer="Formel" groesse="gross" /></div>
+        {heldM && <div class="duell-zeile"><span class="leise">Markt</span><Balken werte={heldM} wer="Markt" groesse="gross" /></div>}
+        <div class="legende">
+          <span class="legende-farben">
+            <span><i class="heim"></i>Heimsieg</span><span><i class="remis"></i>Remis</span><span><i class="gast"></i>Auswärtssieg</span>
+          </span>
+          {held.markt?.buchmacher && <span>Markt: Durchschnitt von {held.markt.buchmacher} Buchmachern, ohne Marge</span>}
+        </div>
+      </div>
+    )}
+    <div class="weit held-links">
+      {paket && <a class="knopf" href="#spiele">{anzahl === 9 ? "Alle neun Spiele" : "Alle Spiele"}</a>}
+      <a class="link-hell" href="/modell">Warum die Formel anders rechnet</a>
+    </div>
+  </section>
 
   {paket ? (
-    <section aria-labelledby="spieltag">
-      <h2 id="spieltag">{paket.spieltag}. Spieltag {saisonText}: Die Formel sagt …</h2>
-      <p class="leise klein">Der Punkt zeigt, zu welcher Seite die Formel tendiert. In der Mitte ist das Spiel offen. Wahrscheinlichkeiten immer in der Reihenfolge Heimsieg · Remis · Auswärtssieg.</p>
+    <section id="spiele" class="kapitel" aria-labelledby="spiele-titel">
+      <div class="weit">
+        <h2 id="spiele-titel" class="kapitel-titel">Alle {anzahlWort === "neun" ? "neun Spiele" : "Spiele"}.</h2>
+        <p class="kapitel-text">Für jedes Spiel: was die Formel rechnet, was der Markt erwartet und wie viele Tore wir erwarten.</p>
+        <p class="legende-farben dunkel-auf-hell" aria-hidden="true">
+          <span><i class="heim"></i>Heimsieg</span><span><i class="remis"></i>Remis</span><span><i class="gast"></i>Auswärtssieg</span>
+        </p>
+        {tage.map((t) => (
+          <div class="tag-block">
+            <h3 class="tag-titel">{t.tag}</h3>
+            <div class="karten">
+              {t.zeiten.flatMap((z) => z.spiele.map((s) => (
+                <Spielkarte s={s} uhr={z.uhr} markierung={marken[s.id]} />
+              )))}
+            </div>
+          </div>
+        ))}
+        <p class="quelle">Formel = unser Modell ({paket.spiele[0]?.modell?.version ?? "–"}). Markt = Durchschnitt der Buchmacher, ohne Marge. Erwartete Tore aus dem Vergleichsmodell (Dixon-Coles). Form: S Sieg, U Unentschieden, N Niederlage. Tabellen-Regel: Der besser Platzierte gewinnt, bei einem Platz Abstand Remis. Vereinsfarben ohne Wappen, nur zur Orientierung. Keine Wettempfehlung. Stand: {stand} Uhr. Quellen: OpenLigaDB (ODbL), The Odds API (Quoten), eigene Berechnung.</p>
+        {paket.hinweise.length > 0 && (
+          <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
+        )}
+      </div>
+    </section>
+  ) : (
+    <section class="kapitel"><div class="weit"><p>Die erste Prognose erscheint hier, sobald das Datenpaket für den nächsten Spieltag vorliegt.</p></div></section>
+  )}
 
-      {tage.map((t) => (
-        <div class="spieltag-tag">
-          <h3 class="tag">{t.tag}</h3>
-          {t.zeiten.map((z) => (
-            <div class="anstoss">
-              {z.uhr && <p class="uhrzeit">{z.uhr}</p>}
-              <ol class="spiele">
-                {z.spiele.map((s) => {
-                  const m = s.modell;
-                  const k = m ? skala(s) : null;
-                  return (
-                    <li class="spiel einblenden">
-                      <div class="team heim" title={s.heim}>
-                        <Vereinsform name={s.heim} id={`${s.id}-h`} />
-                        <span class="name">{kurz(s.heim)}</span>
-                        <ul class="team-daten">
-                          <li>Tabellenplatz <b>{s.platz_heim}</b></li>
-                          <li>Form <b>{s.form_heim || "–"}</b></li>
-                        </ul>
-                      </div>
-                      {k ? (
-                        <div class="skala" role="img" aria-label={`${k.label}. Heimsieg ${prozent(m.p_heim)} Prozent, Remis ${prozent(m.p_remis)} Prozent, Auswärtssieg ${prozent(m.p_gast)} Prozent`}>
-                          <span class="rand links" aria-hidden="true">← stärker</span>
-                          <span class="rand rechts" aria-hidden="true">stärker →</span>
-                          <span class="achse"></span>
-                          <span class="mitte"></span>
-                          <span class="zone" style={`left:${k.zoneLinks}%;width:${k.zoneBreite}%`}></span>
-                          <span class="punkt-gross" style={`left:${k.pos}%`}></span>
-                          <span class="label" style={`left:clamp(5.5rem, ${k.pos}%, calc(100% - 5.5rem))`}>{k.label}</span>
-                        </div>
-                      ) : (
-                        <div class="skala leise klein">Noch keine Prognose</div>
-                      )}
-                      <div class="team gast" title={s.gast}>
-                        <Vereinsform name={s.gast} id={`${s.id}-g`} />
-                        <span class="name">{kurz(s.gast)}</span>
-                        <ul class="team-daten">
-                          <li>Tabellenplatz <b>{s.platz_gast}</b></li>
-                          <li>Form <b>{s.form_gast || "–"}</b></li>
-                        </ul>
-                      </div>
-                      <dl class="steckbrief">
-                        {s.erwartete_tore && (<><dt>Erwartete Tore</dt><dd>{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</dd></>)}
-                        {m && (<><dt>Wahrscheinlichkeiten (Formel)</dt><dd>{drei(m)}</dd></>)}
-                        {s.markt && (<><dt>Wahrscheinlichkeiten (Markt)</dt><dd>{drei(s.markt)}</dd></>)}
-                        <dt>Tabellen-Regel</dt><dd class="wort">{REGEL_TEXT[s.vergleich.tabellenplatz]}</dd>
-                        {s.ergebnis && (<><dt>Ergebnis</dt><dd><b>{s.ergebnis.heim} : {s.ergebnis.gast}</b></dd></>)}
-                      </dl>
-                    </li>
-                  );
-                })}
-              </ol>
+  {bilanz && (
+    <section class="kapitel grau" aria-labelledby="bilanz-titel">
+      <div class="weit">
+        <h2 id="bilanz-titel" class="kapitel-titel schmal">Wie gut rechnet die Formel bisher?</h2>
+        <p class="kapitel-text">{bilanz[0].b.n} Spiele mit Prognosen, die vor dem Anpfiff eingefroren waren. Der RPS misst, wie gut die Wahrscheinlichkeiten zum Ergebnis passten. Kleiner ist besser.</p>
+        <div class="bilanz-reihe">
+          {bilanz.map((x) => (
+            <div class={`bilanz-wert ${x.klasse}`}>
+              <p class="zahl bilanz-zahl">{komma3(x.b.rps)}</p>
+              <p class="bilanz-name">{x.name}</p>
+              <p class="leise">{x.b.treffer} von {x.b.n} Spielen richtig getippt</p>
             </div>
           ))}
         </div>
-      ))}
-
-      <p class="quelle">Formel = unser Modell ({paket.spiele[0]?.modell?.version ?? "–"}). Markt = Durchschnitt der Buchmacher, ohne Marge. Tabellen-Regel = der besser Platzierte gewinnt. Form: S = Sieg, U = Unentschieden, N = Niederlage (neuestes Spiel rechts). Vereinsfarben ohne Wappen, nur zur Orientierung. Keine Wettempfehlung. Stand: {stand} Uhr. Quellen: OpenLigaDB (ODbL), The Odds API (Quoten), eigene Berechnung.</p>
-      {paket.hinweise.length > 0 && (
-        <div class="kasten hinweis klein">{paket.hinweise.map((h) => <p>{h}</p>)}</div>
-      )}
+        <p class="bilanz-fazit">
+          {vorn ? "Der Vorsprung ist klein und kann Zufall sein." : "Im Moment liegt der Markt vorn."} Wir rechnen jeden Spieltag weiter, auch wenn es schlechter wird. <a href="/modell/logbuch">Zum Modell-Logbuch</a>
+        </p>
+      </div>
     </section>
-  ) : (
-    <p>Die erste Prognose erscheint hier, sobald das Datenpaket für den nächsten Spieltag vorliegt.</p>
   )}
 
-  <div class="kasten">
-    <h3 style="margin-top:0">Wie messen wir die Formel?</h3>
-    <p>Jede Prognose wird vor Anpfiff mit Zeitstempel gespeichert. Danach vergleichen wir sie mit einer einfachen Regel (der besser Platzierte gewinnt), mit der Einschätzung unserer Community und mit dem Markt. <a href="/modell">Mehr zum Modell</a></p>
-  </div>
-
-  <NewsletterBox />
-
-  <script>
-    // Spiele beim Scrollen sanft einblenden. Ohne JavaScript oder bei „Bewegung reduzieren“ ist alles sofort sichtbar.
-    const spiele = document.querySelectorAll(".spiel.einblenden");
-    const ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!ruhig && "IntersectionObserver" in window) {
-      // Was beim Laden schon zu sehen ist, bleibt stehen (kein Flackern); nur der Rest gleitet herein.
-      spiele.forEach((s) => { if (s.getBoundingClientRect().top < window.innerHeight) s.classList.add("sichtbar"); });
-      document.documentElement.classList.add("anim");
-      const beob = new IntersectionObserver((eintraege) => {
-        for (const e of eintraege) {
-          if (e.isIntersecting) { e.target.classList.add("sichtbar"); beob.unobserve(e.target); }
-        }
-      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
-      spiele.forEach((s) => beob.observe(s));
-    }
-  </script>
+  <section class="kapitel tinte">
+    <div class="weit zweispaltig">
+      <div>
+        <h2 class="kapitel-titel klein-titel">100 € und eine Formel.</h2>
+        <p>Was würde aus 100 €, wenn man der Formel folgt? Ab dem ersten Spieltag nach der Winterpause rechnen wir es jede Woche durch. Ohne echtes Geld.</p>
+        <p><a class="link-hell" href="/100-euro-experiment">Die Regeln des Experiments</a></p>
+        <p class="klein leise">Rechnerisches Experiment ohne echtes Geld. 18+ · Glücksspiel kann süchtig machen. Hilfe: <a class="link-leise" href="https://www.check-dein-spiel.de/">check-dein-spiel.de</a></p>
+      </div>
+      <div>
+        <h2 class="kapitel-titel klein-titel">Nachspielzeit, jeden Mittwoch.</h2>
+        <p>Kontostand, Zahl der Woche und das Logbuch der Formel. In etwa vier Minuten gelesen, kostenlos, jederzeit abbestellbar.</p>
+        <p><a class="knopf" href={KIT_URL} rel="noopener">Kostenlos abonnieren</a></p>
+        <p class="klein leise">Du kommst auf eine Seite unseres Versanddienstleisters Kit (USA) und bekommst zuerst eine E-Mail zur Bestätigung. Mehr in der <a class="link-leise" href="/datenschutz">Datenschutzerklärung</a>.</p>
+      </div>
+    </div>
+  </section>
 </Basis>

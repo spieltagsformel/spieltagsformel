@@ -1,0 +1,65 @@
+---
+import Balken from "./Balken.astro";
+import Vereinsstreifen from "./Vereinsstreifen.astro";
+import { werte, einordnung, kurz, komma, REGEL_TEXT } from "../lib/daten.js";
+
+interface Props { s: any; markierung?: string; uhr: string }
+const { s, markierung, uhr } = Astro.props;
+const F = werte(s.modell);
+const M = werte(s.markt);
+const satz = einordnung(s);
+const WORT = { S: "Sieg", U: "Unentschieden", N: "Niederlage" };
+const form = (txt) => (txt || "").split("").filter((l) => WORT[l]);
+---
+<article class="karte" aria-label={`${s.heim} gegen ${s.gast}`}>
+  <div class="karte-kopf">
+    <span class="zahl uhr">{uhr}</span>
+    {s.ergebnis ? (
+      <span class="pille ergebnis">Ergebnis <span class="zahl">{s.ergebnis.heim} : {s.ergebnis.gast}</span></span>
+    ) : markierung && <span class="pille">{markierung}</span>}
+  </div>
+  <div class="paarung">
+    <span class="verein" title={s.heim}>
+      <Vereinsstreifen name={s.heim} />
+      <span>{kurz(s.heim)}{s.platz_heim && <span class="platz">{s.platz_heim}. Platz</span>}</span>
+    </span>
+    <span class="verein gast" title={s.gast}>
+      <span>{kurz(s.gast)}{s.platz_gast && <span class="platz">{s.platz_gast}. Platz</span>}</span>
+      <Vereinsstreifen name={s.gast} />
+    </span>
+  </div>
+  {F ? (
+    <div class="zeile">
+      <span class="zeile-name">Formel</span>
+      <Balken werte={F} wer="Formel" groesse="gross" />
+    </div>
+  ) : (
+    <p class="leise">Noch keine Prognose.</p>
+  )}
+  {M && (
+    <div class="zeile">
+      <span class="zeile-name leise">Markt</span>
+      <Balken werte={M} wer="Markt" groesse="klein" />
+    </div>
+  )}
+  {satz && <p class="satz">{satz}</p>}
+  <div class="fakten">
+    {s.erwartete_tore && (
+      <span><span class="k">Erwartete Tore</span><span class="zahl gross-zahl">{komma(s.erwartete_tore.heim)} : {komma(s.erwartete_tore.gast)}</span></span>
+    )}
+    {s.vergleich?.tabellenplatz && (
+      <span><span class="k">Tabellen-Regel</span><span class="wort">{REGEL_TEXT[s.vergleich.tabellenplatz]}</span></span>
+    )}
+    {(s.form_heim || s.form_gast) && (
+      <span class="formfeld"><span class="k">Form, neuestes Spiel rechts</span>
+        <span class="formen">
+          {[[s.heim, s.form_heim], [s.gast, s.form_gast]].map(([wer, txt]) => form(txt).length > 0 && (
+            <span class="form" role="img" aria-label={`${kurz(wer)}: ${form(txt).map((l) => WORT[l]).join(", ")}`}>
+              {form(txt).map((l) => <span class={`fq ${l}`} aria-hidden="true">{l}</span>)}
+            </span>
+          ))}
+        </span>
+      </span>
+    )}
+  </div>
+</article>
