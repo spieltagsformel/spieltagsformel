@@ -1,0 +1,38 @@
+---
+import Basis from "../../layouts/Basis.astro";
+import { Content as Logbuch } from "../../../../MODELL-LOGBUCH.md";
+import { waechterStand } from "../../lib/waechter.js";
+
+const w = waechterStand();
+const k = (x) => x.toFixed(3).replace(".", ",");
+const zeilen = w ? [["Formel", w.gesamt.formel], ["Markt", w.gesamt.markt],
+  ...Object.entries(w.weitere || {}).map(([n, b]) => [n === "dc-0.2" ? "Dixon-Coles v0.2" : n, b])].filter(([, b]) => b) : [];
+---
+<Basis titel="Modell-Logbuch" beschreibung="Jede Beobachtung und jede Änderung an der Formel – mit Datum, Grund und Wirkung. Dazu die laufende Bilanz gegen Markt und Vergleichsmodell.">
+  <p class="klein"><a href="/modell">← Das Modell</a></p>
+  <h1>Modell-Logbuch</h1>
+  <p class="leise">Jede Beobachtung und jede Änderung an der Formel – mit Datum, Grund und Wirkung. Nach einem einzelnen Spieltag ändern wir nichts: Erst mehrere Spieltage zeigen, ob etwas Zufall ist oder ein Muster.</p>
+
+  {w && (
+    <section aria-labelledby="bilanz">
+      <h2 id="bilanz">Aktuelle Bilanz {w.saison.replace("-", "/")}</h2>
+      <p class="leise">{w.spiele} Spiele, alle Prognosen vor Anpfiff eingefroren. RPS und Brier: kleiner ist besser.</p>
+      <div class="tabelle-rahmen">
+        <table class="bilanz">
+          <thead><tr><th>Modell</th><th>RPS</th><th>Brier</th><th>Treffer</th></tr></thead>
+          <tbody>
+            {zeilen.map(([name, b]) => (
+              <tr><td>{name}</td><td>{k(b.rps)}</td><td>{k(b.brier)}</td><td>{b.treffer}/{b.n}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein leise">Wird nach jedem Spieltag automatisch aktualisiert. Wenige Spiele bedeuten viel Zufall – die Bilanz zählt erst über viele Spieltage.</p>
+    </section>
+  )}
+
+  <h2>Einträge</h2>
+  <article class="logbuch">
+    <Logbuch />
+  </article>
+</Basis>
