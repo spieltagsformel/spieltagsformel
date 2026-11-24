@@ -38,7 +38,8 @@ def auswerten(paket, spiele_saison):
             p = _probs(feld)
             if p:
                 z[name] = {"p": p, "tipp": _tipp(p), "treffer": _tipp(p) == erg,
-                           "p_ergebnis": p[ERG.index(erg)], "rps": metriken.rps(p, erg)}
+                           "p_ergebnis": p[ERG.index(erg)], "rps": metriken.rps(p, erg),
+                           "brier": metriken.brier(p, erg)}
         community = s["vergleich"].get("community")
         if community:
             z["community"] = {"tipp": community, "treffer": community == erg}
@@ -54,6 +55,7 @@ def zusammenfassung(zeilen):
             return None
         return {"n": len(mit), "treffer": sum(z[name]["treffer"] for z in mit),
                 "rps": sum(z[name]["rps"] for z in mit) / len(mit) if "rps" in mit[0][name] else None,
+                "brier": sum(z[name]["brier"] for z in mit) / len(mit) if "brier" in mit[0][name] else None,
                 "remis_getippt": sum(1 for z in mit if z[name]["tipp"] == "remis")}
     regel = {"n": n, "treffer": sum(z["regel_treffer"] for z in zeilen),
              "remis_getippt": sum(1 for z in zeilen if z["regel"] == "remis")}
