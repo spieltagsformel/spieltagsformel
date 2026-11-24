@@ -253,6 +253,15 @@ def cmd_vorbericht(args):
     print(f"Vorbericht-Entwurf geschrieben: {pfad}")
 
 
+def cmd_waechter(args):
+    from . import waechter
+    saison_txt = f"{args.saison}-{str(args.saison + 1)[-2:]}"
+    d = waechter.lauf(saison_txt, args.saison)
+    print(f"Modell-Wächter {saison_txt}: {d['spiele']} Spiele, {len(d['meldungen'])} Meldung(en)")
+    for m in d["meldungen"]:
+        print(f"  {m['art']}: {m['text']}")
+
+
 def cmd_apifootball_test(args):
     from . import apifootball
     schluessel = os.environ.get("API_FOOTBALL_KEY", "")
@@ -291,6 +300,9 @@ def main(argv=None):
     v.add_argument("--spieltag", default="auto", help="Zahl oder 'auto'")
     v.add_argument("--neu", action="store_true", help="auch bearbeitete oder begonnene Entwürfe überschreiben")
     v.set_defaults(func=cmd_vorbericht)
+    w = sub.add_parser("waechter", help="Modell-Wächter: Bilanz, Kalibrierung, Warnungen")
+    w.add_argument("--saison", type=int, required=True)
+    w.set_defaults(func=cmd_waechter)
     t = sub.add_parser("apifootball-test", help="API-Football-Zugang prüfen (3 Abrufe, nur Zusammenfassung)")
     t.add_argument("--saison", type=int, required=True)
     t.set_defaults(func=cmd_apifootball_test)
