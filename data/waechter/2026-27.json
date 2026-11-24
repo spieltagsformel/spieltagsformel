@@ -1,0 +1,92 @@
+{
+ "saison": "2026-27",
+ "spiele": 27,
+ "gesamt": {
+  "formel": {
+   "n": 27,
+   "rps": 0.16980378722222222,
+   "brier": 0.5178874659259259,
+   "treffer": 18,
+   "remis_vorhergesagt": 0.2573
+  },
+  "markt": {
+   "n": 27,
+   "rps": 0.17394380722222225,
+   "brier": 0.5266153477777779,
+   "treffer": 18,
+   "remis_vorhergesagt": 0.2152703703703704
+  }
+ },
+ "letzte_3": {
+  "formel": {
+   "n": 27,
+   "rps": 0.16980378722222222,
+   "brier": 0.5178874659259259,
+   "treffer": 18,
+   "remis_vorhergesagt": 0.2573
+  },
+  "markt": {
+   "n": 27,
+   "rps": 0.17394380722222225,
+   "brier": 0.5266153477777779,
+   "treffer": 18,
+   "remis_vorhergesagt": 0.2152703703703704
+  }
+ },
+ "weitere": {
+  "dc-0.2": {
+   "n": 27,
+   "rps": 0.17772611000000002,
+   "brier": 0.5311176681481482,
+   "treffer": 17,
+   "remis_vorhergesagt": 0.22722222222222221
+  }
+ },
+ "kalibrierung": [
+  {
+   "von": 0.0,
+   "bis": 0.2,
+   "n": 14,
+   "vorhergesagt": 0.14665714285714285,
+   "eingetreten": 0.07142857142857142
+  },
+  {
+   "von": 0.2,
+   "bis": 0.4,
+   "n": 45,
+   "vorhergesagt": 0.2817622222222222,
+   "eingetreten": 0.24444444444444444
+  },
+  {
+   "von": 0.4,
+   "bis": 0.6,
+   "n": 16,
+   "vorhergesagt": 0.510275,
+   "eingetreten": 0.625
+  },
+  {
+   "von": 0.6,
+   "bis": 0.8,
+   "n": 5,
+   "vorhergesagt": 0.6558400000000001,
+   "eingetreten": 1.0
+  },
+  {
+   "von": 0.8,
+   "bis": 1.0,
+   "n": 1,
+   "vorhergesagt": 0.8239,
+   "eingetreten": 0.0
+  }
+ ],
+ "meldungen": [],
+ "schwellen": {
+  "min_spiele_bilanz": 27,
+  "rps_rueckstand": 0.015,
+  "rps_rueckstand_kurz": 0.03,
+  "kalib_min_n": 15,
+  "kalib_abweichung": 0.15,
+  "remis_min_spiele": 45,
+  "remis_abweichung": 0.08
+ }
+}

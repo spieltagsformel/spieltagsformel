@@ -69,12 +69,14 @@ jobs:
         run: python -m pipeline.run vorbericht --saison "$SAISON" --spieltag auto
       - name: Nachbericht für den letzten beendeten Spieltag
         run: python -m pipeline.run nachbericht --saison "$SAISON" --spieltag letzter
+      - name: Modell-Wächter (Bilanz, Kalibrierung, Warnungen)
+        run: python -m pipeline.run waechter --saison "$SAISON"
       - name: Ergebnis einchecken
         run: |
           git config user.name "spieltagsformel-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Nur Ordner hinzufügen, die es gibt (Nachbericht-Entwürfe entstehen erst nach dem ersten beendeten Spieltag)
-          for ordner in data/clean data/spieltage data/nachberichte entwuerfe grafik/ausgabe; do
+          for ordner in data/clean data/spieltage data/nachberichte data/waechter entwuerfe grafik/ausgabe; do
             if [ -e "$ordner" ]; then git add "$ordner"; fi
           done
           git diff --cached --quiet && echo "Keine Änderungen" && exit 0
