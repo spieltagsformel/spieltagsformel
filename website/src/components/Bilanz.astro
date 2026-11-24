@@ -1,0 +1,37 @@
+---
+// Laufende Bilanz aus dem Modell-Wächter: RPS und Treffer von Formel, Markt und Vergleichsmodell.
+import { waechterStand } from "../lib/waechter.js";
+import { komma3 } from "../lib/daten.js";
+
+interface Props { fazit?: boolean; brier?: boolean }
+const { fazit = true, brier = false } = Astro.props;
+const w = waechterStand();
+const werte = w && w.gesamt?.formel?.n
+  ? [
+      { name: "Formel", b: w.gesamt.formel, klasse: "formel" },
+      { name: "Markt", b: w.gesamt.markt, klasse: "markt" },
+      ...(w.weitere?.["dc-0.2"] ? [{ name: "Vergleichsmodell", b: w.weitere["dc-0.2"], klasse: "vergleich" }] : []),
+    ].filter((x) => x.b)
+  : null;
+const vorn = werte && werte[1] && werte[0].b.rps < werte[1].b.rps;
+---
+{werte ? (
+  <>
+    <div class="bilanz-reihe">
+      {werte.map((x) => (
+        <div class={`bilanz-wert ${x.klasse}`}>
+          <p class="zahl bilanz-zahl">{komma3(x.b.rps)}</p>
+          <p class="bilanz-name">{x.name}</p>
+          <p class="leise">{x.b.treffer} von {x.b.n} Spielen richtig getippt{brier && <>, Brier <span class="zahl">{komma3(x.b.brier)}</span></>}</p>
+        </div>
+      ))}
+    </div>
+    {fazit && (
+      <p class="bilanz-fazit">
+        {vorn ? "Der Vorsprung ist klein und kann Zufall sein." : "Im Moment liegt der Markt vorn."} Wir rechnen jeden Spieltag weiter, auch wenn es schlechter wird. <a href="/modell/logbuch">Zum Modell-Logbuch</a>
+      </p>
+    )}
+  </>
+) : (
+  <p class="leise">Die Bilanz erscheint, sobald die ersten Spiele mit eingefrorener Prognose abgerechnet sind.</p>
+)}

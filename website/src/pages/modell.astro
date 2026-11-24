@@ -1,28 +1,112 @@
 ---
 import Basis from "../layouts/Basis.astro";
+import Balken from "../components/Balken.astro";
+import Bilanz from "../components/Bilanz.astro";
+import NewsletterBand from "../components/NewsletterBand.astro";
+import { neuestesPaket, heldSpiel, werte, kurz } from "../lib/daten.js";
+import logbuchText from "../../../MODELL-LOGBUCH.md?raw";
+
+// Beispiel für Schritt 3: eine echte Prognose aus dem aktuellen Datenpaket
+const paket = neuestesPaket();
+const beispiel = paket ? heldSpiel(paket.spiele) : null;
+const beispielF = beispiel ? werte(beispiel.modell) : null;
+
+// Neuester Eintrag im Logbuch (erste Überschrift „## Datum · Titel“)
+const neu = (logbuchText.match(/^## (.+)$/m) || [])[1] || "";
+const [neuDatum, neuTitel] = neu.includes(" · ") ? neu.split(" · ") : ["", neu];
 ---
-<Basis titel="Das Modell" beschreibung="Wie die Spieltagsformel rechnet, womit wir sie vergleichen und wie wir die Prognosen messen.">
-  <h1>Das Modell</h1>
-  <p class="leise">Kurz gesagt: Jedes Team hat eine Stärke, die sich nach jedem Spiel verändert. Daraus berechnen wir für jedes Spiel die Wahrscheinlichkeiten für Heimsieg, Remis und Auswärtssieg.</p>
+<Basis titel="Das Modell" art="kapitel" beschreibung="Wie die Spieltagsformel rechnet, womit wir sie vergleichen und wie wir die Prognosen messen."
+  kopf={{ vorzeile: "Das Modell", titel: "So rechnet die Formel.", text: "Jedes Team hat eine Stärke, die sich nach jedem Spiel verändert. Daraus berechnen wir für jedes Spiel, wie wahrscheinlich Heimsieg, Remis und Auswärtssieg sind." }}>
 
-  <h2>So rechnet die Formel</h2>
-  <p><b>Hauptmodell: Elo (Version 0.1).</b> Siege gegen starke Gegner bringen viele Punkte, Niederlagen gegen schwache kosten viele. Der Heimvorteil ist eingerechnet, deutliche Siege zählen etwas mehr. Zu Beginn jeder Saison rücken alle Teams ein Stück zur Mitte, Aufsteiger starten etwas niedriger.</p>
-  <p><b>Vergleichsmodell: Dixon-Coles (Version 0.2).</b> Ein Poisson-Modell, das Tore statt Ergebnisse vorhersagt. Daraus stammen die erwarteten Tore. Es läuft mit, bis es das Hauptmodell nachweislich schlägt.</p>
+  <section class="kapitel" aria-labelledby="schritte">
+    <div class="weit">
+      <h2 id="schritte" class="kapitel-titel">In vier Schritten.</h2>
+      <ol class="schritte">
+        <li>
+          <h3>Ergebnisse sammeln</h3>
+          <p>Nach jedem Spieltag holen wir alle Ergebnisse der Bundesliga aus OpenLigaDB. Für die Startwerte haben wir die Spiele seit 2019 eingerechnet.</p>
+        </li>
+        <li>
+          <h3>Stärke anpassen</h3>
+          <p>Siege gegen starke Gegner bringen viele Punkte, Niederlagen gegen schwache kosten viele. Deutliche Siege zählen etwas mehr, der Heimvorteil ist eingerechnet.</p>
+        </li>
+        <li>
+          <h3>Wahrscheinlichkeiten rechnen</h3>
+          <p>Aus der Stärke beider Teams werden drei Zahlen, die zusammen 100 % ergeben.</p>
+          {beispiel && beispielF && (
+            <figure class="beispiel">
+              <figcaption>{kurz(beispiel.heim)} gegen {kurz(beispiel.gast)}, aktueller Spieltag</figcaption>
+              <Balken werte={beispielF} wer="Formel" />
+            </figure>
+          )}
+        </li>
+        <li>
+          <h3>Einfrieren und abrechnen</h3>
+          <p>Vor dem Anpfiff speichern wir jede Prognose mit Zeitstempel im öffentlichen Repository. Danach ändert sie niemand mehr, auch wir nicht. Nach dem Spiel wird abgerechnet.</p>
+        </li>
+      </ol>
 
-  <h2>Womit wir sie vergleichen</h2>
-  <ul>
-    <li><b>Tabellenplatz-Regel:</b> Der besser Platzierte gewinnt. Liegen beide Teams nur einen Platz auseinander, gilt Remis. Grundlage ist die Tabelle vor dem Spieltag. Diese Regel ist festgeschrieben und wird nicht nachträglich verändert.</li>
-    <li><b>Community-Tipp:</b> Vor jedem Spieltag stimmt unsere Community über alle Spiele ab (Heim, Remis oder Gast). Es zählt die Mehrheit, bei Gleichstand gilt Remis; Spiele mit weniger als 10 Stimmen werden nicht gewertet. Stimmen nach dem ersten Anpfiff zählen nicht.</li>
-    <li><b>Markt:</b> Durchschnittliche Quoten kurz vor Anpfiff, ohne Buchmacher-Marge umgerechnet in Wahrscheinlichkeiten.</li>
-  </ul>
-  <p class="klein leise">Alle Regeln im Detail, seit 24.11.2026 eingefroren: <a href="https://github.com/spieltagsformel/spieltagsformel/blob/main/VERGLEICHSMASSSTAEBE.md">Vergleichsmaßstäbe (Version 1.0)</a>.</p>
+      <div class="zwei-karten">
+        <article class="karte">
+          <p class="pille">Hauptmodell</p>
+          <h3 class="karte-titel">Elo, Version 0.1</h3>
+          <p>Ein Wert pro Team, der nach jedem Spiel steigt oder fällt. Zu Beginn jeder Saison rücken alle Teams ein Stück zur Mitte, Aufsteiger starten etwas niedriger.</p>
+        </article>
+        <article class="karte">
+          <p class="pille hell">Vergleichsmodell</p>
+          <h3 class="karte-titel">Dixon-Coles, Version 0.2</h3>
+          <p>Ein Poisson-Modell, das Tore statt Ergebnisse vorhersagt. Daraus stammen die erwarteten Tore. Es läuft mit, bis es das Hauptmodell nachweislich schlägt.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <h2>Wie wir messen</h2>
-  <p>Jede Prognose wird vor Anpfiff mit Zeitstempel im öffentlichen Repository gespeichert und danach nicht mehr verändert. Gemessen wird mit der Trefferquote und mit dem Ranked Probability Score (RPS), der auch bewertet, wie sicher sich ein Modell war.</p>
-  <div class="kasten hinweis">
-    <p><b>Ehrlich gesagt:</b> Wir starten ohne Rückrechnung auf vergangene Saisons. Die Bilanz der Formel entsteht live, Spieltag für Spieltag – mit allen Treffern und allen Fehlern.</p>
-  </div>
+  <section class="kapitel grau" aria-labelledby="vergleich">
+    <div class="weit">
+      <h2 id="vergleich" class="kapitel-titel">Womit wir sie vergleichen.</h2>
+      <p class="kapitel-text">Eine Prognose ist nur so gut wie ihr Vergleich. Deshalb muss sich die Formel an drei Maßstäben messen lassen, deren Regeln vorher feststehen.</p>
+      <div class="drei-karten">
+        <article class="karte weiss">
+          <h3 class="karte-titel">Tabellenplatz-Regel</h3>
+          <p>Der besser Platzierte gewinnt. Liegen beide Teams nur einen Platz auseinander, gilt Remis. Grundlage ist die Tabelle vor dem Spieltag.</p>
+        </article>
+        <article class="karte weiss">
+          <h3 class="karte-titel">Community-Tipp</h3>
+          <p>Vor jedem Spieltag stimmt unsere Community über alle Spiele ab. Es zählt die Mehrheit, bei Gleichstand gilt Remis. Spiele mit weniger als 10 Stimmen werden nicht gewertet, Stimmen nach dem ersten Anpfiff zählen nicht.</p>
+        </article>
+        <article class="karte weiss">
+          <h3 class="karte-titel">Markt</h3>
+          <p>Durchschnittliche Quoten kurz vor Anpfiff, ohne die Marge der Buchmacher in Wahrscheinlichkeiten umgerechnet. Der härteste Maßstab.</p>
+        </article>
+      </div>
+      <p class="klein leise abstand-oben">Alle Regeln im Detail, seit 24.11.2026 eingefroren: <a href="https://github.com/spieltagsformel/spieltagsformel/blob/main/VERGLEICHSMASSSTAEBE.md">Vergleichsmaßstäbe (Version 1.0)</a>.</p>
+    </div>
+  </section>
 
-  <h2>Modell-Logbuch</h2>
-  <p class="leise">Hier dokumentieren wir jede Änderung am Modell – mit Datum, Grund und Wirkung. <a href="/modell/logbuch">Zum Logbuch mit der aktuellen Bilanz</a>.</p>
+  <section class="kapitel" aria-labelledby="messen">
+    <div class="weit">
+      <h2 id="messen" class="kapitel-titel">Wie wir messen.</h2>
+      <p class="kapitel-text">Wir zählen, wie oft die Formel richtig lag. Wichtiger ist der RPS (Ranked Probability Score): Er bewertet auch, wie sicher sich ein Modell war. Kleiner ist besser.</p>
+      <Bilanz fazit={false} />
+      <div class="kasten hinweis abstand-oben schmal-kasten">
+        <p><b>Ehrlich gesagt:</b> Wir starten ohne Rückrechnung auf vergangene Saisons. Die Bilanz der Formel entsteht live, Spieltag für Spieltag, mit allen Treffern und allen Fehlern.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="kapitel grau" aria-labelledby="logbuch">
+    <div class="weit">
+      <h2 id="logbuch" class="kapitel-titel">Das Logbuch.</h2>
+      <p class="kapitel-text">Jede Beobachtung und jede Änderung an der Formel steht im Logbuch, mit Datum, Grund und Wirkung.</p>
+      {neuTitel && (
+        <a class="karte weiss logbuch-teaser" href="/modell/logbuch">
+          {neuDatum && <span class="leise klein">Neuester Eintrag, {neuDatum}</span>}
+          <span class="karte-titel">{neuTitel}</span>
+          <span class="link-text">Zum Logbuch mit der aktuellen Bilanz</span>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <NewsletterBand text="Jeden Mittwoch: was die Formel richtig hatte, was nicht, und was wir am Modell geändert haben. Kostenlos, jederzeit abbestellbar." />
 </Basis>

@@ -1,0 +1,21 @@
+---
+// Newsletter-Kapitel auf Tinte (Design v3), mit Hinweis auf Kit und Datenschutz.
+import { KIT_URL } from "../lib/newsletter.js";
+interface Props { titel?: string; text?: string }
+const {
+  titel = "Nachspielzeit, jeden Mittwoch.",
+  text = "Kontostand, Zahl der Woche und das Logbuch der Formel. In etwa vier Minuten gelesen, kostenlos, jederzeit abbestellbar.",
+} = Astro.props;
+---
+<section class="kapitel tinte" aria-labelledby="nl-band">
+  <div class="weit band">
+    <div>
+      <h2 id="nl-band" class="kapitel-titel klein-titel">{titel}</h2>
+      <p>{text}</p>
+    </div>
+    <div>
+      <p><a class="knopf" href={KIT_URL} rel="noopener">Kostenlos abonnieren</a></p>
+      <p class="klein leise">Du kommst auf eine Seite unseres Versanddienstleisters Kit (USA) und bekommst zuerst eine E-Mail zur Bestätigung. Mehr in der <a class="link-leise" href="/datenschutz">Datenschutzerklärung</a>.</p>
+    </div>
+  </div>
+</section>
