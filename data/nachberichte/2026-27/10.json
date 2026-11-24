@@ -19,7 +19,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.1393,
-    "rps": 0.340082725
+    "rps": 0.340082725,
+    "brier": 1.42096994
    },
    "markt": {
     "p": [
@@ -30,7 +31,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.0713,
-    "rps": 0.39476148499999997
+    "rps": 0.39476148499999997,
+    "brier": 1.6520148899999998
    }
   },
   {
@@ -50,7 +52,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.65,
-    "rps": 0.06886377999999999
+    "rps": 0.06886377999999999,
+    "brier": 0.18907511999999999
    },
    "markt": {
     "p": [
@@ -61,7 +64,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.7403,
-    "rps": 0.03983822500000002
+    "rps": 0.03983822500000002,
+    "brier": 0.10190726000000003
    }
   },
   {
@@ -81,7 +85,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.4342,
-    "rps": 0.20056340000000006
+    "rps": 0.20056340000000006,
+    "brier": 0.4802002400000001
    },
    "markt": {
     "p": [
@@ -92,7 +97,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.3914,
-    "rps": 0.25394330000000004
+    "rps": 0.25394330000000004,
+    "brier": 0.56443544
    }
   },
   {
@@ -112,7 +118,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.5282,
-    "rps": 0.13276354
+    "rps": 0.13276354,
+    "brier": 0.33554024
    },
    "markt": {
     "p": [
@@ -123,7 +130,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.6366,
-    "rps": 0.079494185
+    "rps": 0.079494185,
+    "brier": 0.19870885999999996
    }
   },
   {
@@ -143,7 +151,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.6145,
-    "rps": 0.08494853
+    "rps": 0.08494853,
+    "brier": 0.22730521999999997
    },
    "markt": {
     "p": [
@@ -154,7 +163,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.5858,
-    "rps": 0.104773825
+    "rps": 0.104773825,
+    "brier": 0.25764014
    }
   },
   {
@@ -174,7 +184,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.4607,
-    "rps": 0.17963952500000002
+    "rps": 0.17963952500000002,
+    "brier": 0.43639634000000005
    },
    "markt": {
     "p": [
@@ -185,7 +196,8 @@
     "tipp": "gast",
     "treffer": true,
     "p_ergebnis": 0.4727,
-    "rps": 0.17517624999999998
+    "rps": 0.17517624999999998,
+    "brier": 0.41712306
    }
   },
   {
@@ -205,7 +217,8 @@
     "tipp": "gast",
     "treffer": false,
     "p_ergebnis": 0.2637,
-    "rps": 0.162414025
+    "rps": 0.162414025,
+    "brier": 0.8669657399999999
    },
    "markt": {
     "p": [
@@ -216,7 +229,8 @@
     "tipp": "gast",
     "treffer": false,
     "p_ergebnis": 0.2374,
-    "rps": 0.16465513
+    "rps": 0.16465513,
+    "brier": 0.9108690199999999
    }
   },
   {
@@ -236,7 +250,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.3899,
-    "rps": 0.23898852499999998
+    "rps": 0.23898852499999998,
+    "brier": 0.55914506
    },
    "markt": {
     "p": [
@@ -247,7 +262,8 @@
     "tipp": "gast",
     "treffer": false,
     "p_ergebnis": 0.3587,
-    "rps": 0.284357965
+    "rps": 0.284357965,
+    "brier": 0.62849618
    }
   },
   {
@@ -267,7 +283,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.4919,
-    "rps": 0.15686005
+    "rps": 0.15686005,
+    "brier": 0.38792185999999995
    },
    "markt": {
     "p": [
@@ -278,7 +295,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.5928,
-    "rps": 0.10057792
+    "rps": 0.10057792,
+    "brier": 0.24920448
    }
   }
  ],
@@ -288,12 +306,14 @@
    "n": 9,
    "treffer": 7,
    "rps": 0.1739026777777778,
+   "brier": 0.5448355288888889,
    "remis_getippt": 0
   },
   "markt": {
    "n": 9,
    "treffer": 6,
    "rps": 0.17750869833333333,
+   "brier": 0.5533777033333334,
    "remis_getippt": 0
   },
   "regel": {
@@ -319,7 +339,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.1393,
-    "rps": 0.340082725
+    "rps": 0.340082725,
+    "brier": 1.42096994
    },
    "markt": {
     "p": [
@@ -330,7 +351,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.0713,
-    "rps": 0.39476148499999997
+    "rps": 0.39476148499999997,
+    "brier": 1.6520148899999998
    }
   },
   "volltreffer": {
@@ -350,7 +372,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.65,
-    "rps": 0.06886377999999999
+    "rps": 0.06886377999999999,
+    "brier": 0.18907511999999999
    },
    "markt": {
     "p": [
@@ -361,7 +384,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.7403,
-    "rps": 0.03983822500000002
+    "rps": 0.03983822500000002,
+    "brier": 0.10190726000000003
    }
   },
   "ergebnisse": {
@@ -376,12 +400,14 @@
    "n": 27,
    "treffer": 18,
    "rps": 0.16980378722222222,
+   "brier": 0.5178874659259259,
    "remis_getippt": 0
   },
   "markt": {
    "n": 27,
    "treffer": 18,
    "rps": 0.17394380722222225,
+   "brier": 0.5266153477777779,
    "remis_getippt": 0
   },
   "regel": {
@@ -407,7 +433,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.1393,
-    "rps": 0.340082725
+    "rps": 0.340082725,
+    "brier": 1.42096994
    },
    "markt": {
     "p": [
@@ -418,7 +445,8 @@
     "tipp": "heim",
     "treffer": false,
     "p_ergebnis": 0.0713,
-    "rps": 0.39476148499999997
+    "rps": 0.39476148499999997,
+    "brier": 1.6520148899999998
    }
   },
   "volltreffer": {
@@ -438,7 +466,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.7378,
-    "rps": 0.037156999999999996
+    "rps": 0.037156999999999996,
+    "brier": 0.10949284999999999
    },
    "markt": {
     "p": [
@@ -449,7 +478,8 @@
     "tipp": "heim",
     "treffer": true,
     "p_ergebnis": 0.7332,
-    "rps": 0.041740525000000014
+    "rps": 0.041740525000000014,
+    "brier": 0.10776369000000002
    }
   },
   "ergebnisse": {

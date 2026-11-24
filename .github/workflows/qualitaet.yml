@@ -1,0 +1,34 @@
+name: Qualitätsprüfung
+
+# Läuft bei jedem Pull Request, der Entwürfe oder die Website ändert.
+# Rotes Kreuz = vor dem Merge beheben. Regeln: QUALITAETSPRUEFUNG.md
+on:
+  pull_request:
+    paths:
+      - "entwuerfe/**"
+      - "website/src/**"
+      - "pipeline/qualitaet.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # volle Historie: frühere Stände der Datenpakete zählen als Quelle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Geänderte Dateien prüfen
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" > geaendert.txt
+          else
+            echo "--alle" > geaendert.txt
+          fi
+          echo "Geprüfte Dateien:"; cat geaendert.txt
+          xargs -a geaendert.txt -d '\n' python -m pipeline.qualitaet
