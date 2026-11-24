@@ -167,3 +167,16 @@ main.rahmen { padding-top: 2rem; padding-bottom: 3rem; }
 .knopf { display: inline-block; font-weight: 600; color: var(--auf-akzent); background: var(--akzent-flaeche);
   border-radius: 6px; padding: 0.7rem 1.2rem; text-decoration: none; }
 .knopf:hover { filter: brightness(1.08); text-decoration: none; }
+
+/* Logbuch und Bilanz-Tabelle */
+.tabelle-rahmen { overflow-x: auto; }
+table.bilanz, .logbuch table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; margin: 0.5rem 0 1rem; }
+table.bilanz th, table.bilanz td, .logbuch th, .logbuch td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--linie, rgba(127,127,127,0.3)); }
+table.bilanz td:not(:first-child), table.bilanz th:not(:first-child) { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+/* Titel und Einleitung der Markdown-Datei stehen schon oben auf der Seite */
+.logbuch > h1:first-child, .logbuch > h1:first-child + p, .logbuch > h1:first-child + p + p { display: none; }
+.logbuch h2 { font-size: 1.125rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--linie, rgba(127,127,127,0.3)); }
+.logbuch p, .logbuch li { overflow-wrap: anywhere; }
+.logbuch table { display: block; overflow-x: auto; }
+table.bilanz td, table.bilanz th, .logbuch td, .logbuch th { white-space: nowrap; }
+.logbuch td:first-child { white-space: normal; min-width: 7rem; }
