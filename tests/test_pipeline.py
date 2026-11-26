@@ -488,3 +488,17 @@ class NachberichtKnapp(unittest.TestCase):
         t = nachbericht.text(paket, zeilen, nachbericht.zusammenfassung(zeilen))
         self.assertIn("praktisch ein Unentschieden", t)
         self.assertIn("Ein einzelner Spieltag sagt wenig", t)
+
+
+def test_vorbericht_aufstellung_nur_freitag_sonst_ausfaelle():
+    """Entscheidung 26.11.2026: voraussichtliche Aufstellung nur beim Freitagsspiel, sonst nur sichere Ausfälle."""
+    from pipeline import vorbericht
+    basis = {"heim": "SV Werder Bremen", "gast": "Borussia Mönchengladbach", "platz_heim": 6, "platz_gast": 18,
+             "form_heim": "SSNUS", "form_gast": "NNUSN", "vergleich": {"tabellenplatz": "heim"},
+             "modell": {"p_heim": 0.5, "p_remis": 0.27, "p_gast": 0.23}}
+    freitag = vorbericht._spielblock({**basis, "anstoss_lokal": "2026-11-27T20:30:00+01:00"}, lambda n: n.split()[-1])
+    samstag = vorbericht._spielblock({**basis, "anstoss_lokal": "2026-11-28T15:30:00+01:00"}, lambda n: n.split()[-1])
+    assert sum("Voraussichtliche Aufstellung" in z for z in freitag) == 2
+    assert not any("Voraussichtliche Aufstellung" in z for z in samstag)
+    assert any(z.startswith("- **Fehlen sicher:**") for z in freitag)
+    assert any(z.startswith("- **Fehlen sicher:**") for z in samstag)
