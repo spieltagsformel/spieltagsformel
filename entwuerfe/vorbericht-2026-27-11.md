@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=cac9b30d37c8b318 -->
+<!-- vorbericht-auto sha=2c48321b90f7cb38 -->
 # Die Formel sagt: Bayern vorn, Freiburg – Leipzig offen
 
 *Vorbericht zum 11. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -15,7 +15,7 @@
 
 Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne Marge):
 
-- **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 63 % · 20 % · 16 %
+- **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 64 % · 20 % · 16 %
 - **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 39 % · 27 % · 34 %
 - **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 24 %
 
@@ -34,7 +34,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Bremen Platz 6 (Form USSNS) gegen Gladbach Platz 18 (Form NSUNN)
 - **Erwartete Tore:** 1,9 : 1,2
 - **Formel:** 50 % · 27 % · 23 % → Heimsieg
-- **Markt:** 55 % · 23 % · 23 % → Heimsieg
+- **Markt:** 55 % · 23 % · 22 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Freitagsspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
@@ -62,7 +62,7 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Mainz Platz 13 (Form SNNNN) gegen Union Platz 17 (Form UUUNN)
 - **Erwartete Tore:** 2,0 : 1,1
 - **Formel:** 50 % · 27 % · 23 % → Heimsieg
-- **Markt:** 63 % · 20 % · 16 % → Heimsieg
+- **Markt:** 64 % · 20 % · 16 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
 - **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
