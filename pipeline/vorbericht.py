@@ -1,6 +1,6 @@
 """Vorbericht: Textentwurf (Markdown) für den nächsten Spieltag aus dem Datenpaket.
 
-Alle Zahlen stammen aus dem Datenpaket. Was nicht im Paket steht (TV-Sender, Aufstellungen,
+Alle Zahlen stammen aus dem Datenpaket. Was nicht im Paket steht (TV-Sender, Aufstellung beim Freitagsspiel, sichere Ausfälle,
 Kontext), wird als [PRÜFEN: …] bzw. [AUS DER REDAKTION: …] markiert – nichts wird geschätzt.
 """
 import hashlib
@@ -104,8 +104,14 @@ def _spielblock(s, kurz):
         z.append(f"- **Markt:** {_drei(m)} → {WORT[t]}" + (" (knapp)" if knapp else ""))
     z.append(f"- **Tabellen-Regel:** {WORT[s['vergleich']['tabellenplatz']]}")
     z.append(f"- **Wo läuft das Spiel?** {tv_hinweis(_zeit(s))}")
-    z.append("- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]")
-    z += ["", "[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]", ""]
+    # Aufstellungen sind vorher meist nicht bekannt: nur beim Freitagsspiel die voraussichtliche Elf,
+    # sonst nur Spieler, die sicher fehlen (Verletzung mit bestätigter Ausfallzeit, Sperre). Entscheidung 26.11.2026.
+    t = _zeit(s)
+    if t is not None and t.weekday() == 4:
+        z.append(f"- **Voraussichtliche Aufstellung {h}:** [PRÜFEN: eigene Zusammenstellung aus mindestens zwei Quellen, verlinkt]")
+        z.append(f"- **Voraussichtliche Aufstellung {g}:** [PRÜFEN: eigene Zusammenstellung aus mindestens zwei Quellen, verlinkt]")
+    z.append(f"- **Fehlen sicher:** {h}: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · {g}: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]")
+    z += ["", "[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]", ""]
     return z
 
 
