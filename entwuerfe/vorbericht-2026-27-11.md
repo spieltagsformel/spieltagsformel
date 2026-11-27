@@ -1,4 +1,4 @@
-<!-- vorbericht-auto sha=2c48321b90f7cb38 -->
+<!-- vorbericht-auto sha=eed33e38df6e84a1 -->
 # Die Formel sagt: Bayern vorn, Freiburg – Leipzig offen
 
 *Vorbericht zum 11. Spieltag 2026/27 · Titel ist ein Vorschlag – [AUS DER REDAKTION: anpassen oder übernehmen]*
@@ -16,8 +16,8 @@
 Hier sieht die Formel das Spiel anders als die Buchmacher im Durchschnitt (ohne Marge):
 
 - **Mainz – Union:** Formel 50 % · 27 % · 23 %, Markt 64 % · 20 % · 16 %
-- **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 39 % · 27 % · 34 %
-- **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 24 %
+- **Paderborn – Schalke:** Formel 48 % · 27 % · 25 %, Markt 37 % · 27 % · 35 %
+- **Hoffenheim – Augsburg:** Formel 48 % · 27 % · 25 %, Markt 56 % · 21 % · 23 %
 
 [AUS DER REDAKTION: Wem traust du hier mehr – und warum?]
 
@@ -34,12 +34,14 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Bremen Platz 6 (Form USSNS) gegen Gladbach Platz 18 (Form NSUNN)
 - **Erwartete Tore:** 1,9 : 1,2
 - **Formel:** 50 % · 27 % · 23 % → Heimsieg
-- **Markt:** 55 % · 23 % · 22 % → Heimsieg
+- **Markt:** 57 % · 22 % · 21 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Freitagsspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Voraussichtliche Aufstellung Bremen:** [PRÜFEN: eigene Zusammenstellung aus mindestens zwei Quellen, verlinkt]
+- **Voraussichtliche Aufstellung Gladbach:** [PRÜFEN: eigene Zusammenstellung aus mindestens zwei Quellen, verlinkt]
+- **Fehlen sicher:** Bremen: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Gladbach: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 ### Samstag, 28. November
 
@@ -53,9 +55,9 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Markt:** 48 % · 25 % · 27 % → Heimsieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Köln: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Elversberg: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 #### Mainz – Union
 
@@ -65,33 +67,33 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Markt:** 64 % · 20 % · 16 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Mainz: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Union: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 #### HSV – Bayern
 
 - **Tabelle:** HSV Platz 12 (Form SNNSN) gegen Bayern Platz 2 (Form SSUSU)
 - **Erwartete Tore:** 1,1 : 2,8
 - **Formel:** 7 % · 18 % · 75 % → Auswärtssieg
-- **Markt:** 10 % · 14 % · 76 % → Auswärtssieg
+- **Markt:** 10 % · 15 % · 75 % → Auswärtssieg
 - **Tabellen-Regel:** Auswärtssieg
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** HSV: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Bayern: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 #### Paderborn – Schalke
 
 - **Tabelle:** Paderborn Platz 15 (Form USUUN) gegen Schalke Platz 16 (Form NUNNU)
 - **Erwartete Tore:** 1,0 : 0,8
 - **Formel:** 48 % · 27 % · 25 % → Heimsieg
-- **Markt:** 39 % · 27 % · 34 % → Heimsieg
+- **Markt:** 37 % · 27 % · 35 % → Heimsieg (knapp)
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Einzelspiel), DAZN (Konferenz) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Paderborn: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Schalke: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 **18:30 Uhr**
 
@@ -100,12 +102,12 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Stuttgart Platz 8 (Form NNSSU) gegen Frankfurt Platz 7 (Form SNSUS)
 - **Erwartete Tore:** 2,3 : 1,3
 - **Formel:** 51 % · 27 % · 22 % → Heimsieg
-- **Markt:** 54 % · 21 % · 24 % → Heimsieg
+- **Markt:** 53 % · 21 % · 26 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich Sky/WOW (Topspiel) [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Stuttgart: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Frankfurt: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 ### Sonntag, 29. November
 
@@ -119,9 +121,9 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Markt:** 35 % · 25 % · 40 % → Auswärtssieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Freiburg: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Leipzig: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 **17:30 Uhr**
 
@@ -130,12 +132,12 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Tabelle:** Hoffenheim Platz 11 (Form SSNSN) gegen Augsburg Platz 10 (Form NUNNS)
 - **Erwartete Tore:** 2,1 : 1,5
 - **Formel:** 48 % · 27 % · 25 % → Heimsieg
-- **Markt:** 56 % · 21 % · 24 % → Heimsieg
+- **Markt:** 56 % · 21 % · 23 % → Heimsieg
 - **Tabellen-Regel:** Remis
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Hoffenheim: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Augsburg: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 **19:30 Uhr**
 
@@ -147,9 +149,9 @@ Wahrscheinlichkeiten in der Reihenfolge Heimsieg · Remis · Auswärtssieg.
 - **Markt:** 45 % · 24 % · 31 % → Heimsieg
 - **Tabellen-Regel:** Heimsieg
 - **Wo läuft das Spiel?** voraussichtlich DAZN [PRÜFEN: Ansetzung und mögliches Free-TV-Spiel]
-- **Voraussichtliche Aufstellungen:** [PRÜFEN: Quelle verlinken, nicht abschreiben]
+- **Fehlen sicher:** Dortmund: [PRÜFEN: nur bestätigte Ausfälle mit Quelle] · Leverkusen: [PRÜFEN: nur bestätigte Ausfälle mit Quelle]
 
-[AUS DER REDAKTION: ein Satz Kontext – Ausfälle, Serie, Bedeutung]
+[AUS DER REDAKTION: ein Satz Kontext – Serie, Bedeutung]
 
 ## So rechnen wir
 
